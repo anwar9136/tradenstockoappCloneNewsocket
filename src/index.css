@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-gray-50 text-gray-900;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .btn-trading {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 shadow-lg;
+  }
+  
+  .btn-success {
+    @apply bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-900 font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+  }
+  
+  .input-trading {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white;
+  }
+  
+  .card-trading {
+    @apply bg-white rounded-xl shadow-lg border border-gray-200;
+  }
+  
+  .card-dark {
+    @apply bg-slate-800 rounded-xl shadow-lg border border-slate-700 text-white;
+  }
+  
+  .text-trading-primary {
+    @apply text-blue-600;
+  }
+  
+  .text-trading-success {
+    @apply text-green-600;
+  }
+  
+  .text-trading-danger {
+    @apply text-red-600;
+  }
+  
+  .bg-trading-gradient {
+    background: linear-gradient(135deg, #0ea5e9 0%, #22c55e 100%);
+  }
+  
+  .bg-dark-gradient {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  }
+  
+  .bg-bull-gradient {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  }
+  
+  .bg-bear-gradient {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+}

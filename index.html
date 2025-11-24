@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Android WebView compatibility -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>TradeStocko - Trading Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Polyfills for older Android browsers -->
+    <script>
+      // Polyfill for Promise (Android 4.4 and below)
+      if (typeof Promise === 'undefined') {
+        document.write('<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"><\/script>');
+      }
+      // Polyfill for fetch (Android 4.4 and below)
+      if (typeof fetch === 'undefined') {
+        document.write('<script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.js"><\/script>');
+      }
+      // Polyfill for Object.assign (Android 4.4 and below)
+      if (typeof Object.assign !== 'function') {
+        Object.assign = function(target) {
+          if (target == null) {
+            throw new TypeError('Cannot convert undefined or null to object');
+          }
+          var to = Object(target);
+          for (var index = 1; index < arguments.length; index++) {
+            var nextSource = arguments[index];
+            if (nextSource != null) {
+              for (var nextKey in nextSource) {
+                if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                  to[nextKey] = nextSource[nextKey];
+                }
+              }
+            }
+          }
+          return to;
+        };
+      }
+      // Polyfill for Array.from (Android 4.4 and below)
+      if (!Array.from) {
+        Array.from = function(arrayLike) {
+          return Array.prototype.slice.call(arrayLike);
+        };
+      }
+      // Polyfill for String.includes (Android 4.4 and below)
+      if (!String.prototype.includes) {
+        String.prototype.includes = function(search, start) {
+          if (typeof start !== 'number') {
+            start = 0;
+          }
+          if (start + search.length > this.length) {
+            return false;
+          } else {
+            return this.indexOf(search, start) !== -1;
+          }
+        };
+      }
+      // Polyfill for Array.includes (Android 4.4 and below)
+      if (!Array.prototype.includes) {
+        Array.prototype.includes = function(searchElement) {
+          var O = Object(this);
+          var len = parseInt(O.length) || 0;
+          if (len === 0) {
+            return false;
+          }
+          var n = parseInt(arguments[1]) || 0;
+          var k;
+          if (n >= 0) {
+            k = n;
+          } else {
+            k = len + n;
+            if (k < 0) k = 0;
+          }
+          function sameValueZero(x, y) {
+            return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
+          }
+          for (; k < len; k++) {
+            if (sameValueZero(O[k], searchElement)) {
+              return true;
+            }
+          }
+          return false;
+        };
+      }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- Modern browsers will load this -->
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- Legacy browsers will load polyfills and legacy bundle automatically via @vitejs/plugin-legacy -->
+  </body>
+</html>
