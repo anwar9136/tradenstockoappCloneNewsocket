@@ -374,7 +374,7 @@ const Registration = () => {
           Phone Number
         </label>
         <div className="flex">
-          <div className="flex items-center justify-center px-3 sm:px-4 rounded-l-lg border border-r-0 border-white/5 bg-black/40 text-white text-xs sm:text-sm font-medium">
+          <div className="flex items-center justify-center px-4 sm:px-4 py-5 sm:py-3 rounded-l-lg border border-r-0 border-white/5 bg-black/40 text-white text-lg sm:text-sm font-medium" style={{ fontSize: '18px' }}>
             +91
           </div>
           <input
@@ -385,7 +385,7 @@ const Registration = () => {
             onKeyDown={() => handleKeyDown('mobile')}
             onFocus={() => setFocusedField('mobile')}
             onBlur={() => setFocusedField(null)}
-            className="flex-1 pl-3 sm:pl-4 pr-3 sm:pr-4 py-2.5 sm:py-3 rounded-r-lg transition-all duration-300 text-white font-medium focus:outline-none registration-input text-sm sm:text-base"
+            className="flex-1 pl-4 sm:pl-4 pr-4 sm:pr-4 py-5 sm:py-3 rounded-r-lg transition-all duration-300 text-white font-medium focus:outline-none registration-input text-lg sm:text-base"
             style={{
               background: focusedField === 'mobile' ? 'rgba(30, 58, 138, 0.3)' : 'rgba(0, 0, 0, 0.5)',
               border: typingFlash === 'mobile' 
@@ -394,6 +394,7 @@ const Registration = () => {
                   ? '1px solid #3b82f6' 
                   : '1px solid rgba(255, 255, 255, 0.05)',
               borderLeft: 'none',
+              fontSize: '18px',
               boxShadow: typingFlash === 'mobile'
                 ? '0 0 0 1px rgba(255, 255, 255, 0.8), 0 0 15px rgba(255, 255, 255, 0.4)'
                 : focusedField === 'mobile' 
@@ -438,7 +439,7 @@ const Registration = () => {
   const renderStep2 = () => (
     <div className={`space-y-4 sm:space-y-6 transition-all duration-[400ms] ease-in-out ${stepTransition ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
       <div className="text-center mb-4">
-        <p className="text-slate-400 text-sm">Enter the OTP sent to <span className="text-white font-medium">+91 {formData.mobile}</span></p>
+        <p className="text-slate-400 text-xs sm:text-sm px-2">Enter the OTP sent to <span className="text-white font-medium">+91 {formData.mobile}</span></p>
       </div>
 
       <div className="relative">
@@ -1174,16 +1175,16 @@ const Registration = () => {
         </div>
 
         {/* Right Side (60% - Form Side) - Glass Card */}
-        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 relative pt-20 sm:pt-24 lg:pt-0">
+        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 relative pt-20 sm:pt-24 lg:pt-0 pb-8 sm:pb-12">
           {/* Mobile Header - Logo and Headline */}
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2 lg:hidden z-10 w-full max-w-md px-4">
-            <div className="flex items-center justify-center space-x-2 mb-4">
-              <img src={logo} alt="TradeNstocko Logo" className="w-8 h-8 rounded-lg object-contain" />
-              <span className="text-white font-semibold text-base tracking-tight">Tradenstocko</span>
+          <div className="absolute top-2 sm:top-4 left-1/2 transform -translate-x-1/2 lg:hidden z-10 w-full max-w-md px-4">
+            <div className="flex items-center justify-center space-x-2 mb-3 sm:mb-4">
+              <img src={logo} alt="TradeNstocko Logo" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain" />
+              <span className="text-white font-semibold text-sm sm:text-base tracking-tight">Tradenstocko</span>
             </div>
-            <div className="text-center mb-4">
+            <div className="text-center mb-3 sm:mb-4">
               <h1 
-                className="text-3xl sm:text-4xl font-bold mb-2"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1.5 sm:mb-2"
                 style={{ 
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   letterSpacing: '-0.04em',
@@ -1208,11 +1209,11 @@ const Registration = () => {
             </div>
             
             {/* Mobile Step Indicator - Horizontal */}
-            <div className="flex items-center justify-center space-x-3 mb-4">
+            <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-3 sm:mb-4">
               {[1, 2, 3, 4].map((step) => (
                 <div key={step} className="flex items-center">
                   <div 
-                    className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ${
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-300 ${
                       currentStep >= step 
                         ? step === 4 
                           ? 'bg-emerald-500 text-white' 
@@ -1224,7 +1225,7 @@ const Registration = () => {
                   </div>
                   {step < 4 && (
                     <div 
-                      className={`w-6 h-0.5 mx-1 transition-all duration-300 ${
+                      className={`w-4 sm:w-6 h-0.5 mx-0.5 sm:mx-1 transition-all duration-300 ${
                         currentStep > step ? 'bg-blue-500' : 'bg-slate-700'
                       }`}
                     ></div>
@@ -1289,7 +1290,7 @@ const Registration = () => {
           {/* Gradient Border Wrapper with Spotlight Effect */}
           <div 
             ref={glassCardRef}
-            className={`w-full max-w-md transition-all duration-1000 relative mt-32 sm:mt-36 lg:mt-0 ${
+            className={`w-full max-w-md mx-auto transition-all duration-1000 relative mt-28 sm:mt-32 md:mt-36 lg:mt-0 ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
               style={{
@@ -1306,8 +1307,7 @@ const Registration = () => {
             {/* Glass Card Inner with Noise Texture */}
             <div 
               ref={formRef}
-              className="w-full h-full rounded-[19px] sm:rounded-[21px] lg:rounded-[23px] relative overflow-hidden"
-              className="glass-card-padding"
+              className="w-full h-full rounded-[19px] sm:rounded-[21px] lg:rounded-[23px] relative overflow-hidden glass-card-padding"
               style={{
                 backdropFilter: 'blur(40px)',
                 backgroundColor: 'rgba(20, 25, 35, 0.6)',
@@ -1466,15 +1466,27 @@ const Registration = () => {
           }
         }
 
-        @media (min-width: 640px) {
+        @media (min-width: 640px) and (max-width: 1023px) {
           .glass-card-padding {
             padding: 32px !important;
           }
         }
 
         @media (min-width: 1024px) {
+
           .glass-card-padding {
             padding: 48px !important;
+          }
+        }
+
+        /* Ensure no horizontal overflow on mobile */
+        @media (max-width: 640px) {
+          body {
+            overflow-x: hidden;
+          }
+          
+          .registration-input {
+            font-size: 16px !important; /* Prevents zoom on iOS */
           }
         }
       `}</style>
