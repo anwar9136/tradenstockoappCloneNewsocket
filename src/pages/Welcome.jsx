@@ -130,9 +130,9 @@ const Welcome = () => {
       </header>
 
       {/* Main Content - Vertical Stack on Mobile */}
-      <main className="relative z-10 pt-16 sm:pt-20 md:pt-22 lg:pt-24 pb-4 sm:pb-6 px-4 sm:px-6" style={{ minHeight: '100dvh', height: '100dvh', overflow: 'hidden' }}>
-        <div className="max-w-6xl mx-auto h-full flex flex-col">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center lg:items-start flex-1">
+      <main className="relative z-10 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-20 sm:pb-24 px-4 sm:px-6" style={{ minHeight: '100dvh' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 md:gap-12 items-center lg:items-start">
             {/* Hero Text Section - Center on Mobile, Left on Desktop */}
             <div 
               className={`w-full text-center lg:text-left transition-all duration-1000 mobile-order-1 lg:order-none ${
@@ -170,7 +170,6 @@ const Welcome = () => {
                     letterSpacing: '0.05em',
                     color: '#CBD5E1',
                     marginBottom: '0',
-                    marginTop: '8px',
                     maxWidth: '100%',
                   }}
                 >
@@ -179,17 +178,17 @@ const Welcome = () => {
               </div>
               
               {/* Action Buttons - Inside text section on Desktop, separate on Mobile */}
-              <div className="w-full mobile-order-3 lg:order-none lg:mt-4 hidden lg:block">
-                <div className="space-y-3 w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
+              <div className="w-full mobile-order-3 lg:order-none lg:mt-6 hidden lg:block">
+                <div className="space-y-4 w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
                   {/* Primary CTA - Neon Gradient with Gem Effect */}
                   <button
                     onClick={handleRegister}
-                    className="w-full md:w-auto group relative overflow-hidden bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 hover:scale-105 btn-primary-gem text-sm"
+                    className="w-full md:w-auto group relative overflow-hidden bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 btn-primary-gem"
                     style={{
                       boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
                     }}
                   >
-                    <UserPlus className="w-4 h-4 flex-shrink-0" />
+                    <UserPlus className="w-5 h-5 flex-shrink-0" />
                     <span>Open New Account</span>
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
                   </button>
@@ -197,9 +196,9 @@ const Welcome = () => {
                   {/* Secondary CTA - Glass Button */}
                   <button
                     onClick={handleLogin}
-                    className="w-full md:w-auto backdrop-blur-xl bg-white/5 border border-white/20 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center space-x-2 hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)] text-sm"
+                    className="w-full md:w-auto backdrop-blur-xl bg-white/5 border border-white/20 text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                   >
-                    <LogIn className="w-4 h-4 flex-shrink-0" />
+                    <LogIn className="w-5 h-5 flex-shrink-0" />
                     <span>Login</span>
                   </button>
                 </div>
@@ -448,7 +447,7 @@ const Welcome = () => {
         }
         @media (min-width: 1024px) {
           .phone-scale-wrapper {
-            transform: scale(0.75) translateY(-30px);
+            transform: scale(0.75) translateY(-95px);
           }
           .phone-float {
             animation: phoneFloat 6s ease-in-out infinite;

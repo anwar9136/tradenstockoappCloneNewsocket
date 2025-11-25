@@ -297,7 +297,7 @@ const Login = () => {
       ></div>
 
       {/* Back Button - Top Left - Simplified */}
-      <div className="absolute top-6 left-6 z-50">
+      <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-50">
         <button
           onClick={() => navigate('/welcome')}
           className="flex items-center text-[#6B7280] hover:text-white transition-colors"
@@ -372,7 +372,7 @@ const Login = () => {
         </div>
 
         {/* Right Side (40% - Focus Side) - Glass Card */}
-        <div className="flex-1 flex items-center justify-center p-6 lg:p-12 relative">
+        <div className="flex-1 flex items-center justify-center p-4 sm:p-6 lg:p-12 relative pt-16 sm:pt-20 lg:pt-0">
           {/* Stage Light - Deep Blue Orb behind the card (top-right) */}
           <div 
             className="absolute inset-0 flex items-center justify-center pointer-events-none"
@@ -445,7 +445,7 @@ const Login = () => {
 
           {/* Gradient Border Wrapper */}
           <div 
-            className={`w-full max-w-md transition-all duration-1000 relative ${
+            className={`w-full max-w-md mx-auto transition-all duration-1000 relative ${
               isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             } ${shakeError ? 'animate-shake' : ''}`}
             style={{
@@ -459,11 +459,10 @@ const Login = () => {
             {/* Glass Card Inner with Noise Texture - Holographic */}
             <div 
               ref={formRef}
-              className="w-full h-full rounded-[23px] relative overflow-hidden"
+              className="w-full h-full rounded-[23px] relative overflow-hidden login-card-padding"
               style={{
                 backdropFilter: 'blur(40px)',
                 backgroundColor: 'rgba(20, 25, 35, 0.4)',
-                padding: '48px',
                 boxShadow: `
                   inset 1px 1px 0px 0px rgba(255, 255, 255, 0.1),
                   inset -1px -1px 0px 0px rgba(0, 0, 0, 0.4),
@@ -490,13 +489,13 @@ const Login = () => {
                 }}
               ></div>
             {/* Mobile Logo & Title */}
-            <div className="lg:hidden text-center mb-8 relative z-10">
-              <div className="flex items-center justify-center space-x-3 mb-6">
-                <img src={logo} alt="TradeNstocko Logo" className="w-10 h-10 rounded-lg object-contain" />
-                <span className="text-white font-semibold text-lg tracking-tight">Tradenstocko</span>
+            <div className="lg:hidden text-center mb-6 sm:mb-8 relative z-10">
+              <div className="flex items-center justify-center space-x-2 sm:space-x-3 mb-4 sm:mb-6">
+                <img src={logo} alt="TradeNstocko Logo" className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-contain" />
+                <span className="text-white font-semibold text-base sm:text-lg tracking-tight">Tradenstocko</span>
               </div>
               <h1 
-                className="text-4xl font-bold mb-2"
+                className="text-3xl sm:text-4xl font-bold mb-2"
                 style={{ 
                   fontFamily: 'system-ui, -apple-system, sans-serif',
                   letterSpacing: '-0.04em',
@@ -507,7 +506,7 @@ const Login = () => {
                 Trade Smarter<span style={{ color: '#22c55e' }}>.</span>
               </h1>
               <h2 
-                className="text-3xl font-bold mb-4"
+                className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4"
                 style={{
                   background: 'linear-gradient(to bottom, #FFFFFF 0%, #22c55e 100%)',
                   WebkitBackgroundClip: 'text',
@@ -525,18 +524,18 @@ const Login = () => {
             </div>
 
             {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-6 relative z-10">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 relative z-10">
               {/* Username Field */}
               <div className="relative">
                 <div 
-                  className={`absolute left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
+                  className={`absolute left-3 sm:left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
                     focusedField === 'username' ? 'text-white' : 'text-slate-400'
                   }`}
                   style={{
                     filter: focusedField === 'username' ? 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))' : 'none',
                   }}
                 >
-                  <User className="w-4 h-4" style={{ width: '18px', height: '18px' }} />
+                  <User className="w-4 h-4 sm:w-5 sm:h-5" style={{ width: '16px', height: '16px' }} />
                 </div>
                 <input
                   type="text"
@@ -546,11 +545,11 @@ const Login = () => {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('username')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full pl-12 pr-4 rounded-lg transition-all duration-300 text-white font-medium focus:outline-none relative login-input"
+                  className="w-full pl-10 sm:pl-12 pr-4 rounded-lg transition-all duration-300 text-white font-medium focus:outline-none relative login-input"
                   style={{
                     background: focusedField === 'username' ? '#111827' : 'rgba(5, 7, 10, 0.6)',
                     border: focusedField === 'username' ? '1px solid #3b82f6' : '1px solid rgba(255, 255, 255, 0.05)',
-                    padding: '12px 16px 12px 40px',
+                    padding: '14px 16px 14px 36px',
                     boxShadow: focusedField === 'username' 
                       ? '0 0 0 1px #3b82f6, 0 0 15px rgba(59, 130, 246, 0.4)' 
                       : 'inset 0px 2px 4px 0px rgba(0, 0, 0, 0.5)',
@@ -563,14 +562,14 @@ const Login = () => {
               {/* Password Field */}
               <div className="relative">
                 <div 
-                  className={`absolute left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
+                  className={`absolute left-3 sm:left-3 top-1/2 transform -translate-y-1/2 transition-all duration-300 ${
                     focusedField === 'password' ? 'text-white' : 'text-slate-400'
                   }`}
                   style={{
                     filter: focusedField === 'password' ? 'drop-shadow(0 0 8px rgba(59, 130, 246, 0.6))' : 'none',
                   }}
                 >
-                  <Lock className="w-4 h-4" style={{ width: '18px', height: '18px' }} />
+                  <Lock className="w-4 h-4 sm:w-5 sm:h-5" style={{ width: '16px', height: '16px' }} />
                 </div>
                 <input
                   type={showPassword ? "text" : "password"}
@@ -580,11 +579,11 @@ const Login = () => {
                   onChange={handleInputChange}
                   onFocus={() => setFocusedField('password')}
                   onBlur={() => setFocusedField(null)}
-                  className="w-full pl-12 pr-12 rounded-lg transition-all duration-300 text-white font-medium focus:outline-none relative login-input"
+                  className="w-full pl-10 sm:pl-12 pr-10 sm:pr-12 rounded-lg transition-all duration-300 text-white font-medium focus:outline-none relative login-input"
                   style={{
                     background: focusedField === 'password' ? '#111827' : 'rgba(5, 7, 10, 0.6)',
                     border: focusedField === 'password' ? '1px solid #3b82f6' : '1px solid rgba(255, 255, 255, 0.05)',
-                    padding: '12px 40px 12px 40px',
+                    padding: '14px 36px 14px 36px',
                     boxShadow: focusedField === 'password' 
                       ? '0 0 0 1px #3b82f6, 0 0 15px rgba(59, 130, 246, 0.4)' 
                       : 'inset 0px 2px 4px 0px rgba(0, 0, 0, 0.5)',
@@ -595,9 +594,9 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
+                  className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white transition-colors"
                 >
-                  {showPassword ? <Eye className="w-5 h-5" /> : <EyeOff className="w-5 h-5" />}
+                  {showPassword ? <Eye className="w-4 h-4 sm:w-5 sm:h-5" /> : <EyeOff className="w-4 h-4 sm:w-5 sm:h-5" />}
                 </button>
               </div>
 
@@ -605,7 +604,7 @@ const Login = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-xl text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
+                className="w-full py-3.5 sm:py-4 rounded-xl text-white transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed relative overflow-hidden group"
                 style={{
                   background: 'linear-gradient(to bottom, #22c55e, #15803d)',
                   boxShadow: 'inset 0px 1px 0px 0px rgba(255, 255, 255, 0.4)',
@@ -618,10 +617,10 @@ const Login = () => {
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
-                    <span>Signing in...</span>
+                    <span className="text-sm sm:text-base">Signing in...</span>
                   </div>
                 ) : (
-                  <span style={{ fontWeight: 700, fontSize: '17px' }}>Log In</span>
+                  <span style={{ fontWeight: 700, fontSize: '16px' }} className="sm:text-[17px]">Log In</span>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
               </button>
@@ -677,6 +676,32 @@ const Login = () => {
         .login-input {
           font-size: 14px;
           color: white;
+        }
+        
+        /* Mobile-specific padding for login card */
+        @media (max-width: 640px) {
+          .login-card-padding {
+            padding: 24px !important;
+          }
+        }
+        
+        @media (min-width: 640px) and (max-width: 1023px) {
+          .login-card-padding {
+            padding: 32px !important;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .login-card-padding {
+            padding: 48px !important;
+          }
+        }
+        
+        /* Prevent zoom on iOS input focus */
+        @media (max-width: 640px) {
+          .login-input {
+            font-size: 16px !important;
+          }
         }
       `}</style>
     </div>
