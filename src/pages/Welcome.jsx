@@ -176,33 +176,6 @@ const Welcome = () => {
                   Experience institutional-grade execution with the simplicity of a modern app.
                 </p>
               </div>
-              
-              {/* Action Buttons - Below phone on Mobile, Inside text section on Desktop */}
-              <div className="w-full mobile-order-3 lg:order-none buttons-gap-reduce" style={{ marginTop: '24px' }}>
-                <div className="space-y-4 w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
-                  {/* Primary CTA - Neon Gradient with Gem Effect */}
-                  <button
-                    onClick={handleRegister}
-                    className="w-full md:w-auto group relative overflow-hidden bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 btn-primary-gem"
-                    style={{
-                      boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
-                    }}
-                  >
-                    <UserPlus className="w-5 h-5 flex-shrink-0" />
-                    <span>Open New Account</span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                  </button>
-
-                  {/* Secondary CTA - Glass Button */}
-                  <button
-                    onClick={handleLogin}
-                    className="w-full md:w-auto backdrop-blur-xl bg-white/5 border border-white/20 text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
-                  >
-                    <LogIn className="w-5 h-5 flex-shrink-0" />
-                    <span>Login</span>
-                  </button>
-                </div>
-              </div>
             </div>
 
             {/* 3D Floating Smartphone Mockup - Middle on Mobile, Right on Desktop */}
@@ -334,6 +307,33 @@ const Welcome = () => {
                 </div>
               </div>
             </div>
+
+            {/* Action Buttons - Below phone on Mobile, Inside text section on Desktop */}
+            <div className="w-full mobile-order-3 lg:order-none lg:col-span-1 buttons-gap-reduce">
+              <div className="space-y-4 w-full max-w-md mx-auto lg:max-w-none lg:mx-0">
+                {/* Primary CTA - Neon Gradient with Gem Effect */}
+                <button
+                  onClick={handleRegister}
+                  className="w-full md:w-auto group relative overflow-hidden bg-gradient-to-r from-[#3B82F6] to-[#06B6D4] text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:scale-105 btn-primary-gem"
+                  style={{
+                    boxShadow: '0 0 20px rgba(59, 130, 246, 0.4)',
+                  }}
+                >
+                  <UserPlus className="w-5 h-5 flex-shrink-0" />
+                  <span>Open New Account</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                </button>
+
+                {/* Secondary CTA - Glass Button */}
+                <button
+                  onClick={handleLogin}
+                  className="w-full md:w-auto backdrop-blur-xl bg-white/5 border border-white/20 text-white font-semibold py-5 px-8 rounded-xl transition-all duration-300 flex items-center justify-center space-x-3 hover:bg-white/10 hover:border-white/40 hover:shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                >
+                  <LogIn className="w-5 h-5 flex-shrink-0" />
+                  <span>Login</span>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </main>
@@ -431,6 +431,9 @@ const Welcome = () => {
         @media (max-width: 1023px) {
           .phone-float {
             animation: phoneFloatMobile 6s ease-in-out infinite;
+          }
+          .buttons-gap-reduce {
+            margin-top: 0 !important;
           }
         }
         @keyframes glow {
