@@ -944,21 +944,21 @@ const MarketWatch = () => {
                   {/* Plus Button - Glowing Orb Effect with Soft Pulsating Glow */}
                   <button
                     onClick={handleSearchModalOpen}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full transition-all duration-200 flex-shrink-0 premium-pulsing-orb flex items-center justify-center"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full transition-all duration-200 flex-shrink-0 flex items-center justify-center"
                     style={{
-                      background: 'radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 1), rgba(14, 116, 144, 1))',
-                      boxShadow: '0 0 12px rgba(59, 130, 246, 0.5), 0 0 20px rgba(14, 116, 144, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                      background: 'linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(14, 116, 144, 1))',
+                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = '0 0 16px rgba(59, 130, 246, 0.7), 0 0 28px rgba(14, 116, 144, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
                       e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = '0 0 12px rgba(59, 130, 246, 0.5), 0 0 20px rgba(14, 116, 144, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
                       e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                     }}
                   >
-                    <Plus className="w-4 h-4 text-white" style={{ filter: 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.8))' }} />
+                    <Plus className="w-4 h-4 text-white" />
                   </button>
                 </div>
               </div>
@@ -1026,7 +1026,6 @@ const MarketWatch = () => {
                     className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full"
                     style={{
                       background: 'linear-gradient(90deg, rgba(59, 130, 246, 1), rgba(6, 182, 212, 1))',
-                      boxShadow: '0 0 8px rgba(59, 130, 246, 0.6)',
                       animation: 'slideIn 0.2s ease-out',
                     }}
                   />
@@ -1038,7 +1037,7 @@ const MarketWatch = () => {
       </div>
 
       {/* Phase 2: Market Watch Table - Dominant Glassmorphism Panel */}
-      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-20 premium-scrollbar" style={{ 
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-4 sm:pb-4 premium-scrollbar" style={{ 
         transform: 'translateZ(0)', 
         minHeight: 0,
         WebkitOverflowScrolling: 'touch',
@@ -1049,7 +1048,7 @@ const MarketWatch = () => {
             <div className="relative w-12 h-12 mb-4">
               <div className="absolute inset-0 border-3 border-app-border rounded-full"></div>
               <div className="absolute inset-0 border-3 border-app-blue border-t-transparent rounded-full animate-spin"></div>
-            </div>
+                </div>
             <p className="text-app-text-primary text-sm font-medium">Loading market data...</p>
           </div>
         ) : filteredSymbols.length > 0 ? (
@@ -1058,7 +1057,7 @@ const MarketWatch = () => {
             style={{
               background: 'rgba(255, 255, 255, 0.04)',
               border: '1px solid rgba(255, 255, 255, 0.08)',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(74, 144, 226, 0.05)',
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6)',
             }}
           >
             {/* Noise Texture Overlay */}
@@ -1073,7 +1072,7 @@ const MarketWatch = () => {
             ></div>
             {/* Table Headers - Desktop Only (Mobile uses card layout) */}
             <div 
-              className="hidden sm:block sticky top-0 z-20 px-3 py-3 border-b"
+              className="hidden sm:block sticky top-0 z-20 px-4 py-3.5 border-b"
               style={{
                 background: 'rgba(0, 0, 0, 0.4)',
                 backdropFilter: 'blur(20px)',
@@ -1082,7 +1081,7 @@ const MarketWatch = () => {
               }}
             >
               {/* Desktop: All columns */}
-              <div className="grid grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] gap-1 text-xs uppercase relative z-10" style={{ 
+              <div className="grid grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] gap-2 text-sm uppercase relative z-10" style={{ 
                 fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                 fontWeight: 600,
                 letterSpacing: '0.05em',
@@ -1270,7 +1269,7 @@ const MarketWatch = () => {
               return (
                 <div
                   key={symbol.SymbolToken}
-                  className="sm:grid sm:grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] sm:gap-1 px-3 sm:px-3 py-3 sm:py-2.5 border-b transition-all duration-150 cursor-pointer group touch-manipulation relative"
+                  className="sm:grid sm:grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] sm:gap-2 px-4 sm:px-4 py-4 sm:py-4 border-b transition-all duration-150 cursor-pointer group touch-manipulation relative"
                   onClick={() => handleSymbolClick(symbol)}
                   style={{
                     fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
@@ -1294,12 +1293,12 @@ const MarketWatch = () => {
                   }}
                 >
                   {/* Mobile Layout - Card Style */}
-                  <div className="sm:hidden space-y-2.5">
+                  <div className="sm:hidden space-y-3">
                     {/* Top Row: Symbol, Ask, Bid */}
-                    <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-start justify-between gap-3">
                       {/* Symbol Section */}
                       <div className="flex-1 min-w-0">
-                        <div className="flex items-center gap-1.5 flex-wrap mb-1">
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
                           <span 
                             className="text-sm text-white font-semibold"
                             style={{
@@ -1331,10 +1330,10 @@ const MarketWatch = () => {
                       </div>
                       
                       {/* Ask and Bid Buttons */}
-                      <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
                         {/* ASK Button */}
                         <div 
-                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[70px]"
+                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
                           style={{
                             background: 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)',
                             border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -1356,7 +1355,7 @@ const MarketWatch = () => {
                         
                         {/* BID Button */}
                         <div 
-                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[70px]"
+                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
                           style={{
                             background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 100%)',
                             border: '1px solid rgba(255, 255, 255, 0.15)',
@@ -1378,72 +1377,80 @@ const MarketWatch = () => {
                       </div>
                     </div>
                     
-                    {/* Bottom Row: Chg, High, Low, Ltp */}
-                    <div className="flex items-center justify-between gap-3 pt-1.5 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.05)' }}>
-                      <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-gray-400" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>Chg:</span>
-                        <span className="text-[10px] font-medium" style={{ 
+                    {/* Bottom Row: Chg, High, Low, Ltp - Stacked Labels */}
+                    <div className="flex items-stretch justify-between gap-3 pt-2 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.625rem',
+                          fontSize: '0.5625rem',
+                          textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>Chg</span>
+                        <span className="text-[11px] font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.6875rem',
                           color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
                           textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
                         }}>
                           {chgDisplay}
                         </span>
                       </div>
                       
-                      <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-gray-400" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>H:</span>
-                        <span className="text-[10px] text-white font-medium" style={{ 
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.625rem',
+                          fontSize: '0.5625rem',
                           textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>High</span>
+                        <span className="text-[11px] text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.6875rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
                         }}>
                           {highDisplay}
                         </span>
                       </div>
                       
-                      <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-gray-400" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>L:</span>
-                        <span className="text-[10px] text-white font-medium" style={{ 
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.625rem',
+                          fontSize: '0.5625rem',
                           textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>Low</span>
+                        <span className="text-[11px] text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.6875rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
                         }}>
                           {lowDisplay}
                         </span>
                       </div>
                       
-                      <div className="flex items-center gap-1">
-                        <span className="text-[10px] text-gray-400" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>Ltp:</span>
-                        <span className="text-[10px] text-white font-medium" style={{ 
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.625rem',
+                          fontSize: '0.5625rem',
                           textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>LTP</span>
+                        <span className="text-[11px] text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.6875rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
                         }}>
                           {ltpDisplay}
                         </span>
@@ -1459,9 +1466,9 @@ const MarketWatch = () => {
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       textRendering: 'optimizeLegibility',
                     }}>
-                        <div className="flex items-center gap-1 flex-wrap">
+                        <div className="flex items-center gap-2 flex-wrap">
                         <span 
-                            className="text-sm text-white font-semibold"
+                            className="text-base text-white font-semibold"
                           style={{
                             color: '#FFFFFF',
                             fontWeight: 600,
@@ -1473,12 +1480,12 @@ const MarketWatch = () => {
                         </span>
                         {formattedDate && (
                           <span 
-                              className="text-xs px-2 py-0.5 rounded-full transition-all duration-200"
+                              className="text-xs px-2 py-1 rounded-full transition-all duration-200"
                             style={{
                               background: '#1A3C6B',
                               color: '#FFFFFF',
                               fontWeight: 500,
-                              fontSize: '0.625rem',
+                              fontSize: '0.6875rem',
                               boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
                               fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                               textRendering: 'optimizeLegibility',
@@ -1488,19 +1495,19 @@ const MarketWatch = () => {
                           </span>
                         )}
                       </div>
-                      <div className="mt-1 flex items-center gap-1.5">
-                        <span className="text-[10px] pr-1" style={{ 
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <span className="text-xs pr-1" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 400,
                           color: '#8090A0',
-                          fontSize: '0.65rem',
+                          fontSize: '0.75rem',
                           textRendering: 'optimizeLegibility',
                         }}>{symbol.ExchangeType}</span>
-                        <span className="text-[10px]" style={{ 
+                        <span className="text-xs" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 400,
                           color: '#8090A0',
-                          fontSize: '0.65rem',
+                          fontSize: '0.75rem',
                           textRendering: 'optimizeLegibility',
                         }}>Lot: {symbol.Lotsize}</span>
                       </div>
@@ -1510,14 +1517,14 @@ const MarketWatch = () => {
                     {/* ASK Column - Green Button */}
                   <div className="text-center flex items-center justify-center relative z-10">
                     <div 
-                      className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
+                      className="px-3 py-2.5 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
                       style={{
                           background: 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)',
                           border: '1px solid rgba(255, 255, 255, 0.15)',
                           boxShadow: '0 2px 10px rgba(46, 204, 113, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                         }}
                       >
-                        <span className="text-white text-xs whitespace-nowrap block text-center font-bold" style={{ 
+                        <span className="text-white text-sm whitespace-nowrap block text-center font-bold" style={{ 
                         fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 700,
                         color: '#FFFFFF',
@@ -1534,14 +1541,14 @@ const MarketWatch = () => {
                     {/* BID Column - Red Button */}
                   <div className="text-center flex items-center justify-center relative z-10">
                     <div 
-                      className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
+                      className="px-3 py-2.5 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
                       style={{
                           background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 100%)',
                           border: '1px solid rgba(255, 255, 255, 0.15)',
                           boxShadow: '0 2px 10px rgba(231, 76, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                         }}
                       >
-                        <span className="text-white text-xs whitespace-nowrap block text-center font-bold" style={{ 
+                        <span className="text-white text-sm whitespace-nowrap block text-center font-bold" style={{ 
                         fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 700,
                         color: '#FFFFFF',
@@ -1557,7 +1564,7 @@ const MarketWatch = () => {
                   
                   {/* LTP Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1571,7 +1578,7 @@ const MarketWatch = () => {
                   
                   {/* CHG Column - Professional Text with Color - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
@@ -1585,7 +1592,7 @@ const MarketWatch = () => {
                   
                   {/* HIGH Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1599,7 +1606,7 @@ const MarketWatch = () => {
                   
                   {/* LOW Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1613,7 +1620,7 @@ const MarketWatch = () => {
                   
                   {/* OPEN Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1627,7 +1634,7 @@ const MarketWatch = () => {
                   
                   {/* CLOSE Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1641,7 +1648,7 @@ const MarketWatch = () => {
                   
                   {/* OL (Open Interest) Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1655,7 +1662,7 @@ const MarketWatch = () => {
                   
                   {/* VOLUME Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1698,15 +1705,15 @@ const MarketWatch = () => {
               className="px-6 sm:px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 touch-manipulation"
               style={{
                 background: 'linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(6, 182, 212, 1))',
-                boxShadow: '0 0 20px rgba(59, 130, 246, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
                 color: 'white',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 30px rgba(59, 130, 246, 0.6), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
               }}
             >
               Clear Search
@@ -1738,15 +1745,15 @@ const MarketWatch = () => {
               className="px-6 sm:px-8 py-3 rounded-xl font-semibold text-sm transition-all duration-200 touch-manipulation"
               style={{
                 background: 'linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(6, 182, 212, 1))',
-                boxShadow: '0 0 20px rgba(59, 130, 246, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
                 color: 'white',
                 fontFamily: 'system-ui, -apple-system, sans-serif',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 30px rgba(59, 130, 246, 0.6), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
+                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
+                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
               }}
             >
               Add Symbols
@@ -1836,7 +1843,7 @@ const MarketWatch = () => {
                   style={{
                     background: 'rgba(20, 25, 35, 0.4)',
                     border: '1px solid rgba(255, 255, 255, 0.1)',
-                    boxShadow: '0 0 20px rgba(59, 130, 246, 0.2), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)',
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)',
                     fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                     fontWeight: 400,
                     textRendering: 'optimizeLegibility',
@@ -1847,11 +1854,11 @@ const MarketWatch = () => {
                   }}
                   onFocus={(e) => {
                     e.target.style.border = '1px solid rgba(59, 130, 246, 0.5)';
-                    e.target.style.boxShadow = '0 0 25px rgba(59, 130, 246, 0.4), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)';
+                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.4), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)';
                   }}
                   onBlur={(e) => {
                     e.target.style.border = '1px solid rgba(255, 255, 255, 0.1)';
-                    e.target.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.2), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)';
+                    e.target.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 2px 0px rgba(0, 0, 0, 0.3)';
                   }}
                 />
               </div>
@@ -1893,7 +1900,7 @@ const MarketWatch = () => {
                         onMouseEnter={(e) => {
                           if (!isSelected) {
                             e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                            e.currentTarget.style.boxShadow = 'inset 0 0 20px rgba(59, 130, 246, 0.1)';
+                            e.currentTarget.style.boxShadow = 'inset 0 1px 0 0 rgba(255, 255, 255, 0.05)';
                           }
                         }}
                         onMouseLeave={(e) => {
@@ -1943,7 +1950,7 @@ const MarketWatch = () => {
                               style={{
                                 background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(6, 182, 212, 0.2))',
                                 border: '1px solid rgba(34, 197, 94, 0.3)',
-                                boxShadow: '0 0 15px rgba(34, 197, 94, 0.3)',
+                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                               }}
                             >
                               <Check className="w-4 h-4" />
@@ -1954,14 +1961,14 @@ const MarketWatch = () => {
                               className="p-2 rounded-xl transition-all duration-200"
                               style={{
                                 background: 'linear-gradient(135deg, rgba(6, 182, 212, 1), rgba(59, 130, 246, 1))',
-                                boxShadow: '0 0 20px rgba(6, 182, 212, 0.5), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
+                                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)',
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.boxShadow = '0 0 30px rgba(6, 182, 212, 0.7), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
+                                e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.3)';
                                 e.currentTarget.style.transform = 'scale(1.1)';
                               }}
                               onMouseLeave={(e) => {
-                                e.currentTarget.style.boxShadow = '0 0 20px rgba(6, 182, 212, 0.5), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
+                                e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2)';
                                 e.currentTarget.style.transform = 'scale(1)';
                               }}
                             >
@@ -2055,19 +2062,6 @@ const MarketWatch = () => {
           animation: gridParallax 40s linear infinite;
         }
         
-        /* Premium Pulsing Orb - Soft, Ethereal Glow */
-        @keyframes premiumPulse {
-          0%, 100% {
-            box-shadow: 0 0 12px rgba(59, 130, 246, 0.5), 0 0 20px rgba(14, 116, 144, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-          }
-          50% {
-            box-shadow: 0 0 16px rgba(59, 130, 246, 0.6), 0 0 28px rgba(14, 116, 144, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-          }
-        }
-        
-        .premium-pulsing-orb {
-          animation: premiumPulse 3s ease-in-out infinite;
-        }
         
         /* Ultra-Minimalist Scrollbar - Responsive */
         .premium-scrollbar::-webkit-scrollbar {
@@ -2085,7 +2079,6 @@ const MarketWatch = () => {
         
         .premium-scrollbar::-webkit-scrollbar-thumb:hover {
           background: rgba(74, 144, 226, 0.6);
-          box-shadow: 0 0 4px rgba(74, 144, 226, 0.4);
         }
         
         /* Firefox scrollbar */

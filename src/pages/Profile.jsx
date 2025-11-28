@@ -779,23 +779,23 @@ const Profile = () => {
   };
 
   return (
-    <div className="h-screen bg-app-bg text-app-text-primary flex flex-col overflow-hidden">
-      {/* Top Header - Sticky */}
-      <div className="flex-shrink-0 sticky top-0 z-40 bg-app-surface border-b border-app-border px-4 py-3">
-        <div className="flex justify-between items-center">
-          <h1 className="text-lg font-semibold text-app-text-primary">{user?.ClientName || 'User'}</h1>
-          <Bell className="w-5 h-5 text-app-text-secondary" />
-        </div>
-      </div>
-
-      {/* KYC Incomplete Alert */}
-      {showKycIncompleteAlert && (
-        <div className="flex-shrink-0 bg-app-red text-white px-2 py-1 text-center font-medium text-xs">
-          Please complete your kyc
-        </div>
-      )}
-
+    <div className="h-screen bg-app-bg text-app-text-primary flex flex-col">
       <div className="flex-1 overflow-y-auto pb-20">
+        {/* Top Header - Sticky */}
+        <div className="sticky top-0 z-40 bg-app-surface border-b border-app-border px-4 py-3">
+          <div className="flex justify-between items-center">
+            <h1 className="text-lg font-semibold text-app-text-primary">{user?.ClientName || 'User'}</h1>
+            <Bell className="w-5 h-5 text-app-text-secondary" />
+          </div>
+        </div>
+
+        {/* KYC Incomplete Alert */}
+        {showKycIncompleteAlert && (
+          <div className="bg-app-red text-white px-2 py-1 text-center font-medium text-xs sticky top-[52px] z-40">
+            Please complete your kyc
+          </div>
+        )}
+
         <div className="max-w-lg mx-auto px-4 py-3">
         {/* User Info Card */}
         <div className="bg-app-surface rounded-xl border border-app-border p-4 mb-3 shadow-app-card">
@@ -854,7 +854,7 @@ const Profile = () => {
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
       }}>
-        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-1 sm:px-2 py-2 sm:py-3" style={{
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
         }}>
           <div className="flex justify-around items-center">
@@ -862,7 +862,7 @@ const Profile = () => {
               <button
                 key={item.id}
                 onClick={() => handleTabClick(item.id)}
-                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+                className={`flex flex-col items-center py-1.5 px-2 sm:py-2 sm:px-4 rounded-xl transition-all duration-200 ${
                   item.id === 'profile' ? 'bg-app-blue/10' : ''
                 }`}
                 style={{
@@ -870,11 +870,11 @@ const Profile = () => {
                 }}
               >
                 <item.icon 
-                  className={`w-7 h-7 mb-1 transition-colors ${
+                  className={`w-5 h-5 sm:w-7 sm:h-7 mb-0.5 sm:mb-1 transition-colors ${
                     item.id === 'profile' ? 'text-app-blue' : 'text-app-text-tertiary'
                   }`}
                 />
-                <span className={`text-xs font-medium transition-colors ${
+                <span className={`text-[10px] sm:text-xs font-medium transition-colors ${
                   item.id === 'profile' ? 'text-app-blue' : 'text-app-text-tertiary'
                 }`}>
                   {item.label}

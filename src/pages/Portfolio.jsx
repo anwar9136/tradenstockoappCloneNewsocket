@@ -1686,23 +1686,23 @@ const Portfolio = () => {
       <div className="space-y-3">
         {activeOrders.map((order, index) => (
           <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
-            <div className="flex justify-between items-start mb-2">
-              <div>
-                <h4 className="text-app-text-primary font-semibold">{order.scriptName}</h4>
-                <p className="text-app-text-secondary text-sm">{order.exchange}</p>
+            <div className="flex justify-between items-start mb-2 gap-2">
+              <div className="flex-1 min-w-0">
+                <h4 className="text-app-text-primary font-semibold text-sm sm:text-base truncate">{order.scriptName}</h4>
+                <p className="text-app-text-secondary text-xs sm:text-sm">{order.exchange}</p>
                 {order.isStopLossOrder && (
                   <p className="text-orange-400 text-xs font-medium">Stop Loss Order</p>
                 )}
               </div>
-              <div className="text-right">
-                <div className={`font-semibold ${order.OrderCategory === 'SELL' ? 'text-app-red' : 'text-app-green'}`}>
+              <div className="text-right flex-shrink-0">
+                <div className={`font-semibold text-xs sm:text-sm ${order.OrderCategory === 'SELL' ? 'text-app-red' : 'text-app-green'}`}>
                   {order.orderCategoryDisplay} {(() => {
                     // If Lot is "0", 0, or missing, display selectedlotsize instead
                     const lotValue = order.Lot === "0" || order.Lot === 0 || !order.Lot ? order.selectedlotsize : order.Lot;
                     return lotValue || order.selectedlotsize || '0';
                   })()} @ {order.isFX ? '' : '₹'}{order.isFX ? (order.orderPriceUSD ? parseFloat(order.orderPriceUSD).toFixed(5) : '0.00000') : (order.OrderPrice ? parseFloat(order.OrderPrice).toFixed(2) : '0.00')}
                 </div>
-                <div className={`text-sm font-medium trading-price ${
+                <div className={`text-xs sm:text-sm font-medium trading-price ${
                   order.awaitingFxRate ? 'text-app-text-secondary' : (order.profitLoss || 0) >= 0 ? 'text-app-green' : 'text-app-red'
                 }`}>
                   {order.awaitingFxRate
@@ -1729,8 +1729,8 @@ const Portfolio = () => {
               </div>
             )}
             
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-app-text-secondary">
+            <div className="flex justify-between items-center gap-2">
+              <div className="text-xs sm:text-sm text-app-text-secondary flex-shrink-0">
                 CMP: <span className="text-app-text-primary font-medium trading-price">
                   {order.awaitingFxRate && order.isFX
                     ? 'Updating...'
@@ -1742,16 +1742,16 @@ const Portfolio = () => {
                   }
                 </span>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex gap-2 flex-shrink-0">
                 <button
                   onClick={() => handleSLTPClick(order)}
-                  className="bg-app-blue hover:bg-app-blue-hover text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                  className="bg-app-blue hover:bg-app-blue-hover text-white px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap"
                 >
                   SL/TP
                 </button>
                 <button
                   onClick={() => closeTrade(order)}
-                  className="bg-app-red hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
+                  className="bg-app-red hover:bg-red-600 text-white px-2 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap"
                 >
                   Close
                 </button>
@@ -1783,25 +1783,25 @@ const Portfolio = () => {
       </div>
 
       {/* Balance Summary */}
-      <div className="flex-shrink-0 bg-app-surface rounded-t-2xl border-b border-app-border px-4 py-4">
-        <div className="grid grid-cols-4 gap-4">
+      <div className="flex-shrink-0 bg-app-surface rounded-t-2xl border-b border-app-border px-3 sm:px-4 py-3 sm:py-4">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
           <div className="text-center">
-            <p className="text-app-text-secondary text-md mb-1">Balance</p>
-            <p className="text-app-text-primary font-bold text-xs trading-price">{balanceData.ledgerBalance.toLocaleString()}</p>
+            <p className="text-app-text-secondary text-[10px] sm:text-xs mb-1">Balance</p>
+            <p className="text-app-text-primary font-bold text-xs sm:text-sm trading-price">{balanceData.ledgerBalance.toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <p className="text-app-text-secondary text-md mb-1">Margin</p>
-            <p className="text-app-text-primary font-bold text-xs trading-price">{Math.round(balanceData.marginAvailable).toLocaleString()}</p>
+            <p className="text-app-text-secondary text-[10px] sm:text-xs mb-1">Margin</p>
+            <p className="text-app-text-primary font-bold text-xs sm:text-sm trading-price">{Math.round(balanceData.marginAvailable).toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <p className="text-app-text-secondary text-md mb-1">P/L</p>
-            <p className={`font-bold text-xs trading-price ${balanceData.activePL >= 0 ? 'text-app-green' : 'text-app-red'}`}>
+            <p className="text-app-text-secondary text-[10px] sm:text-xs mb-1">P/L</p>
+            <p className={`font-bold text-xs sm:text-sm trading-price ${balanceData.activePL >= 0 ? 'text-app-green' : 'text-app-red'}`}>
               {balanceData.activePL >= 0 ? '+' : ''}{balanceData.activePL.toFixed(2)}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-app-text-secondary text-md mb-1">M2M</p>
-            <p className="text-app-text-primary font-bold text-xs trading-price">{Math.round(balanceData.m2m).toLocaleString()}</p>
+            <p className="text-app-text-secondary text-[10px] sm:text-xs mb-1">M2M</p>
+            <p className="text-app-text-primary font-bold text-xs sm:text-sm trading-price">{Math.round(balanceData.m2m).toLocaleString()}</p>
           </div>
         </div>
       </div>
@@ -1818,33 +1818,33 @@ const Portfolio = () => {
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
       }}>
-        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-1 sm:px-2 py-2 sm:py-3" style={{
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
         }}>
-          <div className="flex justify-around items-center">
-            {bottomNavItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleTabClick(item.id)}
-                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+        <div className="flex justify-around items-center">
+          {bottomNavItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleTabClick(item.id)}
+                className={`flex flex-col items-center py-1.5 px-2 sm:py-2 sm:px-4 rounded-xl transition-all duration-200 ${
                   item.id === 'portfolio' ? 'bg-app-blue/10' : ''
                 }`}
                 style={{
                   transform: item.id === 'portfolio' ? 'translateY(-2px)' : 'translateY(0)',
                 }}
-              >
-                <item.icon 
-                  className={`w-7 h-7 mb-1 transition-colors ${
+            >
+              <item.icon 
+                  className={`w-5 h-5 sm:w-7 sm:h-7 mb-0.5 sm:mb-1 transition-colors ${
                     item.id === 'portfolio' ? 'text-app-blue' : 'text-app-text-tertiary'
-                  }`}
-                />
-                <span className={`text-xs font-medium transition-colors ${
+                }`} 
+              />
+                <span className={`text-[10px] sm:text-xs font-medium transition-colors ${
                   item.id === 'portfolio' ? 'text-app-blue' : 'text-app-text-tertiary'
-                }`}>
-                  {item.label}
-                </span>
-              </button>
-            ))}
+              }`}>
+                {item.label}
+              </span>
+            </button>
+          ))}
           </div>
         </div>
       </div>

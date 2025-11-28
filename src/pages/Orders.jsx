@@ -793,8 +793,12 @@ const Orders = () => {
       {/* Scrollable Orders List */}
       <div className="flex-1 overflow-y-auto px-2 py-4 pb-24">
         {loading ? (
-          <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-app-blue"></div>
+          <div className="flex flex-col items-center justify-center py-20 px-4">
+            <div className="relative w-12 h-12 mb-4">
+              <div className="absolute inset-0 border-3 border-app-border rounded-full"></div>
+              <div className="absolute inset-0 border-3 border-app-blue border-t-transparent rounded-full animate-spin"></div>
+            </div>
+            <p className="text-app-text-primary text-sm font-medium">Loading orders...</p>
           </div>
         ) : orders.length > 0 ? (
           <div className="space-y-4">
@@ -803,36 +807,36 @@ const Orders = () => {
               if (activeTab === 'sltp') {
                 const scriptParts = order.ScriptName?.split('_') || [order.ScriptName, ''];
                 return (
-                  <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
-                    <div className="flex justify-between items-start mb-3">
-                      <div className="flex items-center space-x-2">
-                        <div>
-                          <h3 className="font-semibold text-app-text-primary">{scriptParts[0]}</h3>
-                          <p className="text-sm text-app-text-secondary">{scriptParts[1]}</p>
+                  <div key={index} className="bg-app-surface rounded-xl p-3 sm:p-4 border border-app-border shadow-app-card">
+                    <div className="flex justify-between items-start mb-3 gap-2">
+                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-semibold text-app-text-primary text-sm sm:text-base truncate">{scriptParts[0]}</h3>
+                          <p className="text-xs sm:text-sm text-app-text-secondary truncate">{scriptParts[1]}</p>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium px-2 py-1 rounded-full bg-app-green/20 text-app-green">
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <span className="text-xs sm:text-sm font-medium px-2 py-1 rounded-full bg-app-green/20 text-app-green whitespace-nowrap">
                           {order.OrderCategory}
                         </span>
                       </div>
                     </div>
                     
-                    <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                       <div>
-                        <p className="text-app-text-secondary">Stop Loss</p>
+                        <p className="text-app-text-secondary text-[10px] sm:text-xs">Stop Loss</p>
                         <p className="font-medium text-app-red">₹{order.SL}</p>
                       </div>
                       <div>
-                        <p className="text-app-text-secondary">Take Profit</p>
+                        <p className="text-app-text-secondary text-[10px] sm:text-xs">Take Profit</p>
                         <p className="font-medium text-app-green">₹{order.TP}</p>
                       </div>
                     </div>
                     
                     <div className="mt-3 pt-3 border-t border-app-border">
-                      <div className="flex justify-between items-center text-sm">
-                        <span className="text-app-text-secondary">{order.DateTime}</span>
-                        <span className="text-app-green px-2 py-1 rounded bg-app-green/20">
+                      <div className="flex justify-between items-center text-xs sm:text-sm gap-2">
+                        <span className="text-app-text-secondary truncate">{order.DateTime}</span>
+                        <span className="text-app-green px-2 py-1 rounded bg-app-green/20 whitespace-nowrap flex-shrink-0">
                           {order.Status}
                         </span>
                       </div>
@@ -875,25 +879,25 @@ const Orders = () => {
               const closedPLValue = parseFloat(order?.P_L ?? order?.profitLoss ?? 0);
               const closedPLDisplay = Number.isNaN(closedPLValue) ? '0.00' : closedPLValue.toFixed(2);
               return (
-                <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
-                  <div className="flex justify-between items-start mb-3">
-                    <div className="flex items-center space-x-2">
+                <div key={index} className="bg-app-surface rounded-xl p-3 sm:p-4 border border-app-border shadow-app-card">
+                  <div className="flex justify-between items-start mb-3 gap-2">
+                    <div className="flex items-center gap-2 flex-1 min-w-0">
                       {getActionIcon(order.OrderCategory)}
-                      <div>
-                        <h3 className="font-semibold text-app-text-primary flex items-center gap-2">
-                          <span>{scriptParts[0]}</span>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-app-text-primary flex items-center gap-2 flex-wrap text-sm sm:text-base">
+                          <span className="truncate">{scriptParts[0]}</span>
                           {activeTab === 'closed' && (
-                            <span className={`text-xs font-semibold trading-price ${closedPLValue >= 0 ? 'text-app-green' : 'text-app-red'}`}>
+                            <span className={`text-xs font-semibold trading-price flex-shrink-0 ${closedPLValue >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                               {closedPLValue >= 0 ? '+' : ''}₹{closedPLDisplay}
                             </span>
                           )}
                         </h3>
-                        <p className="text-sm text-app-text-secondary">{scriptParts[1] || order.ActionType}</p>
+                        <p className="text-xs sm:text-sm text-app-text-secondary truncate">{scriptParts[1] || order.ActionType}</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
                       {getStatusIcon(order.OrderStatus || 'Active')}
-                      <span className={`text-sm font-medium px-2 py-1 rounded-full ${
+                      <span className={`text-xs sm:text-sm font-medium px-2 py-1 rounded-full whitespace-nowrap ${
                         (order.OrderStatus || 'Active')?.toLowerCase() === 'pending' ? 'bg-yellow-900/30 text-yellow-400' :
                         (order.OrderStatus || 'Active')?.toLowerCase() === 'active' ? 'bg-app-green/20 text-app-green' :
                         'bg-app-text-tertiary/20 text-app-text-secondary'
@@ -903,13 +907,13 @@ const Orders = () => {
                     </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm">
                     <div>
-                      <p className="text-app-text-secondary">Order Type</p>
+                      <p className="text-app-text-secondary text-[10px] sm:text-xs">Order Type</p>
                       <p className="font-medium text-app-text-primary">{order.OrderType}</p>
                     </div>
                     <div>
-                      <p className="text-app-text-secondary">Lot Size</p>
+                      <p className="text-app-text-secondary text-[10px] sm:text-xs">Lot Size</p>
                       <p className="font-medium text-app-text-primary">
                         {(() => {
                           // If Lot is "0", 0, or missing, display selectedlotsize instead
@@ -919,7 +923,7 @@ const Orders = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-app-text-secondary">Order Price</p>
+                      <p className="text-app-text-secondary text-[10px] sm:text-xs">Order Price</p>
                       <p className="font-medium text-app-text-primary trading-price">{orderPriceDisplay}</p>
                     </div>
                     {activeTab === 'active' && order.currentPrice !== undefined && (
@@ -977,33 +981,33 @@ const Orders = () => {
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
       }}>
-        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-1 sm:px-2 py-2 sm:py-3" style={{
           boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
         }}>
-          <div className="flex justify-around items-center">
-            {bottomNavItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+        <div className="flex justify-around items-center">
+          {bottomNavItems.map((item) => (
+            <button
+              key={item.id}
+              onClick={() => handleNavClick(item.id)}
+                className={`flex flex-col items-center py-1.5 px-2 sm:py-2 sm:px-4 rounded-xl transition-all duration-200 ${
                   item.id === 'orders' ? 'bg-app-blue/10' : ''
                 }`}
                 style={{
                   transform: item.id === 'orders' ? 'translateY(-2px)' : 'translateY(0)',
                 }}
-              >
-                <item.icon 
-                  className={`w-7 h-7 mb-1 transition-colors ${
+            >
+              <item.icon 
+                  className={`w-5 h-5 sm:w-7 sm:h-7 mb-0.5 sm:mb-1 transition-colors ${
                     item.id === 'orders' ? 'text-app-blue' : 'text-app-text-tertiary'
-                  }`}
-                />
-                <span className={`text-xs font-medium transition-colors ${
+                }`} 
+              />
+                <span className={`text-[10px] sm:text-xs font-medium transition-colors ${
                   item.id === 'orders' ? 'text-app-blue' : 'text-app-text-tertiary'
-                }`}>
-                  {item.label}
-                </span>
-              </button>
-            ))}
+              }`}>
+                {item.label}
+              </span>
+            </button>
+          ))}
           </div>
         </div>
       </div>
