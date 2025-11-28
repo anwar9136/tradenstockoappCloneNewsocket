@@ -1300,11 +1300,11 @@ const MarketWatch = () => {
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
                           <span 
-                            className="text-sm text-white font-semibold"
+                            className="text-base text-white font-semibold"
                             style={{
                               color: '#FFFFFF',
                               fontWeight: 600,
-                              fontSize: '0.875rem',
+                              fontSize: '1rem',
                               fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                               textRendering: 'optimizeLegibility',
                             }}
@@ -1313,12 +1313,12 @@ const MarketWatch = () => {
                           </span>
                           {formattedDate && (
                             <span 
-                              className="text-[10px] px-1.5 py-0.5 rounded"
+                              className="text-[11px] px-1.5 py-0.5 rounded"
                               style={{
                                 background: 'rgba(26, 60, 107, 0.6)',
                                 color: '#FFFFFF',
                                 fontWeight: 500,
-                                fontSize: '0.625rem',
+                                fontSize: '0.6875rem',
                                 fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                                 textRendering: 'optimizeLegibility',
                               }}
@@ -1340,10 +1340,10 @@ const MarketWatch = () => {
                             boxShadow: '0 1px 4px rgba(46, 204, 113, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                           }}
                         >
-                          <span className="text-white text-[11px] whitespace-nowrap block text-center font-semibold" style={{ 
+                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
                             fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                             fontWeight: 600,
-                            fontSize: '0.6875rem',
+                            fontSize: '0.75rem',
                             color: '#FFFFFF',
                             letterSpacing: '-0.01em',
                             fontVariantNumeric: 'tabular-nums',
@@ -1362,10 +1362,10 @@ const MarketWatch = () => {
                             boxShadow: '0 1px 4px rgba(231, 76, 60, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                           }}
                         >
-                          <span className="text-white text-[11px] whitespace-nowrap block text-center font-semibold" style={{ 
+                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
                             fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                             fontWeight: 600,
-                            fontSize: '0.6875rem',
+                            fontSize: '0.75rem',
                             color: '#FFFFFF',
                             letterSpacing: '-0.01em',
                             fontVariantNumeric: 'tabular-nums',
@@ -1380,17 +1380,17 @@ const MarketWatch = () => {
                     {/* Bottom Row: Chg, High, Low, Ltp - Stacked Labels */}
                     <div className="flex items-stretch justify-between gap-3 pt-2 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
                       <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.5625rem',
+                          fontSize: '0.625rem',
                           textRendering: 'optimizeLegibility',
                           letterSpacing: '0.02em',
                         }}>Chg</span>
-                        <span className="text-[11px] font-semibold" style={{ 
+                        <span className="text-xs font-semibold" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 600,
-                          fontSize: '0.6875rem',
+                          fontSize: '0.75rem',
                           color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
                           textRendering: 'optimizeLegibility',
                           fontVariantNumeric: 'tabular-nums',
@@ -1400,17 +1400,17 @@ const MarketWatch = () => {
                       </div>
                       
                       <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.5625rem',
+                          fontSize: '0.625rem',
                           textRendering: 'optimizeLegibility',
                           letterSpacing: '0.02em',
                         }}>High</span>
-                        <span className="text-[11px] text-white font-semibold" style={{ 
+                        <span className="text-xs text-white font-semibold" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 600,
-                          fontSize: '0.6875rem',
+                          fontSize: '0.75rem',
                           textRendering: 'optimizeLegibility',
                           fontVariantNumeric: 'tabular-nums',
                         }}>
@@ -1419,17 +1419,17 @@ const MarketWatch = () => {
                       </div>
                       
                       <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.5625rem',
+                          fontSize: '0.625rem',
                           textRendering: 'optimizeLegibility',
                           letterSpacing: '0.02em',
                         }}>Low</span>
-                        <span className="text-[11px] text-white font-semibold" style={{ 
+                        <span className="text-xs text-white font-semibold" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 600,
-                          fontSize: '0.6875rem',
+                          fontSize: '0.75rem',
                           textRendering: 'optimizeLegibility',
                           fontVariantNumeric: 'tabular-nums',
                         }}>
@@ -1438,17 +1438,17 @@ const MarketWatch = () => {
                       </div>
                       
                       <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[9px] text-gray-400 uppercase" style={{ 
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 500,
-                          fontSize: '0.5625rem',
+                          fontSize: '0.625rem',
                           textRendering: 'optimizeLegibility',
                           letterSpacing: '0.02em',
                         }}>LTP</span>
-                        <span className="text-[11px] text-white font-semibold" style={{ 
+                        <span className="text-xs text-white font-semibold" style={{ 
                           fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 600,
-                          fontSize: '0.6875rem',
+                          fontSize: '0.75rem',
                           textRendering: 'optimizeLegibility',
                           fontVariantNumeric: 'tabular-nums',
                         }}>
