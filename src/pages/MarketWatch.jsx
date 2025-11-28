@@ -892,8 +892,8 @@ const MarketWatch = () => {
         {/* Subtle background gradient overlay */}
       <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at top, rgba(0, 81, 255, 0.03) 0%, transparent 50%)' }}></div>
 
-      {/* Phase 2: Header Section - Modern Clean Header - Fixed on Mobile */}
-      <div className="flex-shrink-0 sticky top-0 z-30" style={{ 
+      {/* Phase 2: Header Section - Modern Clean Header - Fixed on Desktop Only */}
+      <div className="flex-shrink-0 sm:sticky sm:top-0 z-30" style={{ 
         transform: 'translateZ(0)',
       }}>
         <div 
@@ -967,10 +967,10 @@ const MarketWatch = () => {
         </div>
       </div>
 
-      {/* Phase 2: Navigation Tabs - Underline Style - Fixed on Mobile */}
+      {/* Phase 2: Navigation Tabs - Underline Style - Fixed on Desktop Only */}
       <div 
         ref={tabsContainerRef}
-        className="flex-shrink-0 sticky top-0 z-30 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 sm:px-6 py-2.5 border-b"
+        className="flex-shrink-0 sm:sticky sm:top-0 z-30 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 sm:px-6 py-2.5 border-b"
           style={{
           transform: 'translateZ(0)',
           borderColor: 'rgba(255, 255, 255, 0.08)',
@@ -1037,7 +1037,7 @@ const MarketWatch = () => {
       </div>
 
       {/* Phase 2: Market Watch Table - Dominant Glassmorphism Panel */}
-      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-4 sm:pb-4 premium-scrollbar" style={{ 
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-1 sm:pb-4 premium-scrollbar" style={{ 
         transform: 'translateZ(0)', 
         minHeight: 0,
         WebkitOverflowScrolling: 'touch',
