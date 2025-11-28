@@ -619,9 +619,9 @@ export default function OrderTrade() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex flex-col">
-      <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-800 bg-gray-800">
-        <button onClick={() => navigate(-1)} className="text-gray-300 hover:text-white">
+    <div className="min-h-screen bg-app-bg text-app-text-primary flex flex-col">
+      <div className="flex items-center gap-3 px-4 py-3 border-b border-app-border bg-app-surface">
+        <button onClick={() => navigate(-1)} className="text-app-text-secondary hover:text-app-text-primary">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div className="font-semibold">
@@ -633,48 +633,48 @@ export default function OrderTrade() {
       <div className="px-3 pt-3">
         <div ref={containerRef} style={{ width: '100%', height: 260 }} />
         {!chartsReady && (
-          <div className="text-xs text-gray-400 mt-1">Loading chart...</div>
+          <div className="text-xs text-app-text-secondary mt-1">Loading chart...</div>
         )}
       </div>
 
       {/* Account summary */}
-      <div className="px-3 py-2 grid grid-cols-2 gap-2 text-xs bg-gray-800 border-t border-b border-gray-800 mt-3">
+      <div className="px-3 py-2 grid grid-cols-2 gap-2 text-xs bg-app-surface border-t border-b border-app-border mt-3">
         <div className="text-center">
-          <div className="text-gray-300">Ledger Balance</div>
-          <div className="text-white font-semibold">₹{formatPrice(userBalance.ledgerBalance)}</div>
+          <div className="text-app-text-secondary">Ledger Balance</div>
+          <div className="text-app-text-primary font-semibold trading-price">₹{formatPrice(userBalance.ledgerBalance)}</div>
         </div>
         <div className="text-center">
-          <div className="text-gray-300">Margin Available</div>
-          <div className="text-white font-semibold">₹{formatPrice(userBalance.marginAvailable)}</div>
+          <div className="text-app-text-secondary">Margin Available</div>
+          <div className="text-app-text-primary font-semibold trading-price">₹{formatPrice(userBalance.marginAvailable)}</div>
         </div>
       </div>
 
       {/* Market Data Grid */}
-      <div className="px-3 py-3 bg-gray-800 border-b border-gray-700">
+      <div className="px-3 py-3 bg-app-surface border-b border-app-border">
         <div className="grid grid-cols-3 gap-3 text-xs">
           {/* Column 1 */}
           <div className="space-y-2">
             <div>
-              <div className="text-gray-400 mb-0.5">Bid</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Bid</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice(symbol?.sellUSD || symbol?.sell || 0) : formatPrice(symbol?.sell || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">High</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">High</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice((symbol?.highUSD || symbol?.high || 0)) : formatPrice(symbol?.high || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">Close</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Close</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice((symbol?.closeUSD || symbol?.close || 0)) : formatPrice(symbol?.close || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">Change</div>
-              <div className={`font-semibold ${(symbol?.chg || 0) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+              <div className="text-app-text-secondary mb-0.5">Change</div>
+              <div className={`font-semibold trading-price ${(symbol?.chg || 0) >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                 {(symbol?.chg || 0) >= 0 ? '+' : ''}{formatPrice(symbol?.chg || 0)}
               </div>
             </div>
@@ -683,40 +683,40 @@ export default function OrderTrade() {
           {/* Column 2 */}
           <div className="space-y-2">
             <div>
-              <div className="text-gray-400 mb-0.5">Ask</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Ask</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice(symbol?.buyUSD || symbol?.buy || 0) : formatPrice(symbol?.buy || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">Low</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Low</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice((symbol?.lowUSD || symbol?.low || 0)) : formatPrice(symbol?.low || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">OL</div>
-              <div className="text-white font-semibold">{symbol?.oi || 0}</div>
+              <div className="text-app-text-secondary mb-0.5">OL</div>
+              <div className="text-app-text-primary font-semibold trading-price">{symbol?.oi || 0}</div>
             </div>
           </div>
 
           {/* Column 3 */}
           <div className="space-y-2">
             <div>
-              <div className="text-gray-400 mb-0.5">Ltp</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Ltp</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice(symbol?.ltpUSD || symbol?.ltp || 0) : formatPrice(symbol?.ltp || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">Open</div>
-              <div className="text-white font-semibold">
+              <div className="text-app-text-secondary mb-0.5">Open</div>
+              <div className="text-app-text-primary font-semibold trading-price">
                 {isFXSymbol() ? formatFXPrice((symbol?.openUSD || symbol?.open || 0)) : formatPrice(symbol?.open || 0)}
               </div>
             </div>
             <div>
-              <div className="text-gray-400 mb-0.5">Vol</div>
-              <div className="text-white font-semibold">{symbol?.volume || 0}</div>
+              <div className="text-app-text-secondary mb-0.5">Vol</div>
+              <div className="text-app-text-primary font-semibold trading-price">{symbol?.volume || 0}</div>
             </div>
           </div>
         </div>
@@ -724,23 +724,23 @@ export default function OrderTrade() {
 
       {/* Order form */}
       <div className="p-3 flex-1 overflow-y-auto flex flex-col">
-        <div className="flex border-b border-gray-700 mb-3">
+        <div className="flex border-b border-app-border mb-3">
           <button
             onClick={() => setActiveTab('market')}
-            className={`flex-1 py-2 px-2 text-xs font-medium ${activeTab === 'market' ? 'text-white bg-gray-700 border-b-2 border-blue-500' : 'text-gray-400'}`}
+            className={`flex-1 py-2 px-2 text-xs font-medium ${activeTab === 'market' ? 'text-app-text-primary bg-app-bg border-b-2 border-app-blue' : 'text-app-text-secondary'}`}
           >
             Market
           </button>
           <button
             onClick={() => setActiveTab('limit')}
-            className={`flex-1 py-2 px-2 text-xs font-medium ${activeTab === 'limit' ? 'text-white bg-gray-700 border-b-2 border-blue-500' : 'text-gray-400'}`}
+            className={`flex-1 py-2 px-2 text-xs font-medium ${activeTab === 'limit' ? 'text-app-text-primary bg-app-bg border-b-2 border-app-blue' : 'text-app-text-secondary'}`}
           >
             Limit
           </button>
         </div>
 
         <div className="mb-2">
-          <label className="block text-gray-300 text-xs font-medium mb-1">Lot Size</label>
+          <label className="block text-app-text-primary text-xs font-medium mb-1">Lot Size</label>
           <input
             type="number"
             min={symbol?.ExchangeType === 'FOREX' ? '0.01' : '1'}
@@ -788,46 +788,46 @@ export default function OrderTrade() {
                 }
               }
             }}
-            className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full px-2 py-1 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue"
           />
-          <div className="text-gray-400 text-xs mt-1">Margin Required: ₹{formatPrice(calculateMargin())}</div>
+          <div className="text-app-text-secondary text-xs mt-1 trading-price">Margin Required: ₹{formatPrice(calculateMargin())}</div>
         </div>
 
         {activeTab === 'limit' && (
           <div className="mb-2">
-            <label className="block text-gray-300 text-xs font-medium mb-1">Price</label>
+            <label className="block text-app-text-primary text-xs font-medium mb-1">Price</label>
             <input
               type="number"
               step="0.01"
               value={orderData.price}
               onChange={(e) => handleInputChange('price', e.target.value)}
               placeholder="Enter price"
-              className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+              className="w-full px-2 py-1 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue"
             />
           </div>
         )}
 
         <div className="grid grid-cols-2 gap-2 mb-2">
           <div>
-            <label className="block text-gray-300 text-xs font-medium mb-1">Stop Loss (Optional)</label>
-            <input type="number" step="0.01" value={orderData.stopLoss} onChange={(e)=>handleInputChange('stopLoss', e.target.value)} placeholder="SL" className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            <label className="block text-app-text-primary text-xs font-medium mb-1">Stop Loss (Optional)</label>
+            <input type="number" step="0.01" value={orderData.stopLoss} onChange={(e)=>handleInputChange('stopLoss', e.target.value)} placeholder="SL" className="w-full px-2 py-1 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue" />
           </div>
           <div>
-            <label className="block text-gray-300 text-xs font-medium mb-1">Take Profit (Optional)</label>
-            <input type="number" step="0.01" value={orderData.takeProfit} onChange={(e)=>handleInputChange('takeProfit', e.target.value)} placeholder="TP" className="w-full px-2 py-1 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500" />
+            <label className="block text-app-text-primary text-xs font-medium mb-1">Take Profit (Optional)</label>
+            <input type="number" step="0.01" value={orderData.takeProfit} onChange={(e)=>handleInputChange('takeProfit', e.target.value)} placeholder="TP" className="w-full px-2 py-1 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue" />
           </div>
         </div>
 
         {error && (
-          <div className="mb-2 p-2 bg-red-900 border border-red-600 rounded flex items-center">
-            <AlertCircle className="w-4 h-4 text-red-400 mr-1" />
-            <span className="text-red-400 text-xs">{error}</span>
+          <div className="mb-2 p-2 bg-app-red/20 border border-app-red rounded-lg flex items-center">
+            <AlertCircle className="w-4 h-4 text-app-red mr-1" />
+            <span className="text-app-red text-xs">{error}</span>
           </div>
         )}
         {success && (
-          <div className="mb-2 p-2 bg-green-900 border border-green-600 rounded flex items-center">
-            <TrendingUp className="w-4 h-4 text-green-400 mr-1" />
-            <span className="text-green-400 text-xs">{success}</span>
+          <div className="mb-2 p-2 bg-app-green/20 border border-app-green rounded-lg flex items-center">
+            <TrendingUp className="w-4 h-4 text-app-green mr-1" />
+            <span className="text-app-green text-xs">{success}</span>
           </div>
         )}
 
@@ -836,7 +836,7 @@ export default function OrderTrade() {
           <button
             onClick={() => placeOrder('SELL')}
             disabled={orderLoading || loading}
-            className="py-3 px-3 rounded-lg text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-red-600 hover:bg-red-700 text-white shadow-lg hover:shadow-red-600/50 flex items-center justify-center gap-2"
+            className="py-3 px-3 rounded-xl text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-app-red hover:bg-red-600 text-white shadow-app-card flex items-center justify-center gap-2"
           >
             {orderLoading && placingOrderType === 'SELL' ? (
               <>
@@ -849,11 +849,11 @@ export default function OrderTrade() {
                 <div className="text-center">
                   <div className="text-xs opacity-90 mb-0.5">SELL</div>
                   {isFXSymbol() ? (
-                    <div className="text-base font-bold">
+                    <div className="text-base font-bold trading-price">
                       {formatFXPrice(getSellPriceUSD())}
                     </div>
                   ) : (
-                    <div className="text-base font-bold">
+                    <div className="text-base font-bold trading-price">
                       ₹{formatPrice(activeTab === 'market' ? symbol?.sell : orderData.price || symbol?.sell)}
                     </div>
                   )}
@@ -864,7 +864,7 @@ export default function OrderTrade() {
           <button
             onClick={() => placeOrder('BUY')}
             disabled={orderLoading || loading}
-            className="py-3 px-3 rounded-lg text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-green-600 hover:bg-green-700 text-white shadow-lg hover:shadow-green-600/50 flex items-center justify-center gap-2"
+            className="py-3 px-3 rounded-xl text-sm font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed bg-app-green hover:bg-green-600 text-white shadow-app-card flex items-center justify-center gap-2"
           >
             {orderLoading && placingOrderType === 'BUY' ? (
               <>

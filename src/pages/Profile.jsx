@@ -779,31 +779,32 @@ const Profile = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white pb-20">
-      {/* Top Header */}
-      <div className="bg-gray-800 border-b border-gray-700 px-4 py-3">
+    <div className="h-screen bg-app-bg text-app-text-primary flex flex-col overflow-hidden">
+      {/* Top Header - Sticky */}
+      <div className="flex-shrink-0 sticky top-0 z-40 bg-app-surface border-b border-app-border px-4 py-3">
         <div className="flex justify-between items-center">
-          <h1 className="text-lg font-semibold text-white">{user?.ClientName || 'User'}</h1>
-          <Bell className="w-5 h-5 text-gray-400" />
+          <h1 className="text-lg font-semibold text-app-text-primary">{user?.ClientName || 'User'}</h1>
+          <Bell className="w-5 h-5 text-app-text-secondary" />
         </div>
       </div>
 
       {/* KYC Incomplete Alert */}
       {showKycIncompleteAlert && (
-        <div className="bg-red-600 text-white px-2 py-1 text-center font-medium text-xs">
+        <div className="flex-shrink-0 bg-app-red text-white px-2 py-1 text-center font-medium text-xs">
           Please complete your kyc
         </div>
       )}
 
-      <div className="max-w-lg mx-auto px-4 py-3">
+      <div className="flex-1 overflow-y-auto pb-20">
+        <div className="max-w-lg mx-auto px-4 py-3">
         {/* User Info Card */}
-        <div className="bg-gray-800 rounded-lg border border-gray-700 p-4 mb-3">
+        <div className="bg-app-surface rounded-xl border border-app-border p-4 mb-3 shadow-app-card">
           <div className="flex justify-between items-start">
             <div>
-              <div className="text-white font-bold text-base mb-1">{user?.UserId || user?.Refid || 'User ID'}</div>
-              <div className="text-gray-400 text-xs">{user?.EmailId || 'Email'}</div>
+              <div className="text-app-text-primary font-bold text-base mb-1">{user?.UserId || user?.Refid || 'User ID'}</div>
+              <div className="text-app-text-secondary text-xs">{user?.EmailId || 'Email'}</div>
             </div>
-            <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+            <div className="w-10 h-10 bg-app-blue rounded-full flex items-center justify-center">
               <span className="text-white font-semibold text-sm">
                 {user?.ClientName ? user.ClientName.substring(0, 2).toUpperCase() : 'U'}
               </span>
@@ -813,26 +814,26 @@ const Profile = () => {
 
         {/* Balance Cards */}
         <div className="grid grid-cols-3 gap-1.5 mb-4">
-          <div className="bg-gray-800 rounded border border-gray-700 p-2">
-            <div className="text-gray-400 text-[10px] mb-0.5">Ledger</div>
-            <div className="text-xs font-medium text-white">₹{(balanceData.ledgerBalance || 0).toFixed(0)}</div>
+          <div className="bg-app-surface rounded-lg border border-app-border p-2">
+            <div className="text-app-text-secondary text-[10px] mb-0.5">Ledger</div>
+            <div className="text-xs font-medium text-app-text-primary trading-price">₹{(balanceData.ledgerBalance || 0).toFixed(0)}</div>
           </div>
-          <div className="bg-gray-800 rounded border border-gray-700 p-2">
-            <div className="text-gray-400 text-[10px] mb-0.5">Margin</div>
-            <div className="text-xs font-medium text-white">₹{(balanceData.marginAvailable || 0).toFixed(0)}</div>
+          <div className="bg-app-surface rounded-lg border border-app-border p-2">
+            <div className="text-app-text-secondary text-[10px] mb-0.5">Margin</div>
+            <div className="text-xs font-medium text-app-text-primary trading-price">₹{(balanceData.marginAvailable || 0).toFixed(0)}</div>
           </div>
-          <div className="bg-gray-800 rounded border border-gray-700 p-2">
-            <div className="text-gray-400 text-[10px] mb-0.5">M2M</div>
-            <div className="text-xs font-medium text-white">₹{(balanceData.m2m || 0).toFixed(0)}</div>
+          <div className="bg-app-surface rounded-lg border border-app-border p-2">
+            <div className="text-app-text-secondary text-[10px] mb-0.5">M2M</div>
+            <div className="text-xs font-medium text-app-text-primary trading-price">₹{(balanceData.m2m || 0).toFixed(0)}</div>
           </div>
         </div>
 
         {/* Account Menu */}
-        <div className="bg-gray-800 rounded-lg border border-gray-700 mb-4">
-          <div className="px-4 py-3 border-b border-gray-700">
-            <h2 className="text-white text-base font-semibold">Account</h2>
+        <div className="bg-app-surface rounded-xl border border-app-border mb-4 shadow-app-card">
+          <div className="px-4 py-3 border-b border-app-border">
+            <h2 className="text-app-text-primary text-base font-semibold">Account</h2>
           </div>
-          <div className="divide-y divide-gray-700">
+          <div className="divide-y divide-app-border">
             <MenuItem icon={<User className="w-5 h-5" />} label="KYC" onClick={() => { setShowKYCModal(true); fetchKYCStatus(); }} />
             <MenuItem icon={<DollarSign className="w-5 h-5" />} label="Funds" onClick={() => setShowFundDetailsModal(true)} />
             <MenuItem icon={<FileText className="w-5 h-5" />} label="Bill & Invoice" onClick={() => setShowInvoiceBillModal(true)} />
@@ -845,18 +846,42 @@ const Profile = () => {
             <MenuItem icon={<Settings className="w-5 h-5" />} label="Logout" onClick={handleLogout} />
           </div>
         </div>
+        </div>
       </div>
 
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-2 py-2">
-        <div className="flex justify-around items-center max-w-md mx-auto">
-          {bottomNavItems.map((item) => (
-            <button key={item.id} onClick={() => handleTabClick(item.id)} className="flex flex-col items-center py-2 px-3">
-              <item.icon className={`w-6 h-6 mb-1 ${item.id === 'profile' ? 'text-blue-500' : 'text-gray-400'}`} />
-              <span className={`text-xs font-medium ${item.id === 'profile' ? 'text-blue-500' : 'text-gray-400'}`}>
-                {item.label}
-              </span>
-            </button>
-          ))}
+      {/* Bottom Navigation - Glassmorphism */}
+      <div className="fixed bottom-0 left-0 right-0 z-50" style={{
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+      }}>
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        }}>
+          <div className="flex justify-around items-center">
+            {bottomNavItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleTabClick(item.id)}
+                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+                  item.id === 'profile' ? 'bg-app-blue/10' : ''
+                }`}
+                style={{
+                  transform: item.id === 'profile' ? 'translateY(-2px)' : 'translateY(0)',
+                }}
+              >
+                <item.icon 
+                  className={`w-7 h-7 mb-1 transition-colors ${
+                    item.id === 'profile' ? 'text-app-blue' : 'text-app-text-tertiary'
+                  }`}
+                />
+                <span className={`text-xs font-medium transition-colors ${
+                  item.id === 'profile' ? 'text-app-blue' : 'text-app-text-tertiary'
+                }`}>
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -867,8 +892,8 @@ const Profile = () => {
           <PasswordInput label="New Password" value={passwords.new} onChange={(v) => setPasswords({...passwords, new: v})} show={showPasswords.new} toggleShow={() => setShowPasswords({...showPasswords, new: !showPasswords.new})} />
           <PasswordInput label="Confirm New Password" value={passwords.confirm} onChange={(v) => setPasswords({...passwords, confirm: v})} show={showPasswords.confirm} toggleShow={() => setShowPasswords({...showPasswords, confirm: !showPasswords.confirm})} />
           <div className="flex gap-2 mt-4">
-            <button onClick={handleChangePassword} className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded text-sm font-medium">Change Password</button>
-            <button onClick={() => setShowChangePasswordModal(false)} className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 px-3 rounded text-sm font-medium">Cancel</button>
+            <button onClick={handleChangePassword} className="flex-1 bg-app-blue hover:bg-app-blue-hover text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors">Change Password</button>
+            <button onClick={() => setShowChangePasswordModal(false)} className="flex-1 bg-app-bg hover:bg-app-border text-app-text-primary py-2 px-3 rounded-lg text-sm font-medium transition-colors">Cancel</button>
           </div>
         </div>
       </Modal>
@@ -878,17 +903,17 @@ const Profile = () => {
           <Input label="Enter Amount" type="number" value={withdrawData.amount} onChange={(v) => setWithdrawData({...withdrawData, amount: v})} />
           <Textarea label="Enter Remarks" value={withdrawData.remark} onChange={(v) => setWithdrawData({...withdrawData, remark: v})} />
           <div className="flex gap-2 mt-4">
-            <button onClick={handleWithdraw} className="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 px-3 rounded text-sm font-medium">Submit</button>
-            <button onClick={() => setShowWithdrawModal(false)} className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 px-3 rounded text-sm font-medium">Close</button>
+            <button onClick={handleWithdraw} className="flex-1 bg-app-blue hover:bg-app-blue-hover text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors">Submit</button>
+            <button onClick={() => setWithdrawModal(false)} className="flex-1 bg-app-bg hover:bg-app-border text-app-text-primary py-2 px-3 rounded-lg text-sm font-medium transition-colors">Close</button>
           </div>
         </div>
       </Modal>
 
       <Modal show={showFundDetailsModal} onClose={() => setShowFundDetailsModal(false)} title="Transaction History" size="lg">
         <div className="max-h-[70vh] overflow-y-auto scrollbar-hide">
-          <div className="flex justify-between items-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 rounded-lg mb-4 border border-gray-700 shadow-sm">
-            <span className="text-sm font-normal text-gray-400">User Current Balance</span>
-            <span className="text-xs font-semibold text-green-400">₹{(balanceData.ledgerBalance || 0).toLocaleString('en-IN')}</span>
+          <div className="flex justify-between items-center p-4 bg-app-blue/10 rounded-lg mb-4 border border-app-blue/30">
+            <span className="text-sm font-normal text-app-text-secondary">User Current Balance</span>
+            <span className="text-xs font-semibold text-app-green trading-price">₹{(balanceData.ledgerBalance || 0).toLocaleString('en-IN')}</span>
           </div>
           {transactionHistory && transactionHistory.length > 0 ? (
             <div className="space-y-3">
@@ -898,22 +923,22 @@ const Profile = () => {
                 const displayAmount = Math.abs(amount);
                 
                 return (
-                  <div key={idx} className="bg-gray-900 rounded-lg p-4 border border-gray-700 hover:border-gray-600 transition-colors">
+                  <div key={idx} className="bg-app-bg rounded-lg p-4 border border-app-border hover:border-app-blue/30 transition-colors">
                     <div className="grid grid-cols-3 gap-4 items-center">
                       <div className="text-left">
-                        <div className="text-xs font-normal text-gray-400 mb-1">{t.CreatedDate || '-'}</div>
+                        <div className="text-xs font-normal text-app-text-secondary mb-1">{t.CreatedDate || '-'}</div>
                         {t.Notes && t.Notes !== 'None' && (
-                          <div className="text-xs font-normal text-gray-500 mt-1">{t.Notes}</div>
+                          <div className="text-xs font-normal text-app-text-tertiary mt-1">{t.Notes}</div>
                         )}
                       </div>
                       <div className="text-center">
-                        <div className="text-sm font-normal text-gray-300">{t.TransactionType || '-'}</div>
+                        <div className="text-sm font-normal text-app-text-primary">{t.TransactionType || '-'}</div>
                         {t.ScriptName && (
-                          <div className="text-xs font-normal text-gray-500 mt-1">{t.ScriptName}</div>
+                          <div className="text-xs font-normal text-app-text-tertiary mt-1">{t.ScriptName}</div>
                         )}
                       </div>
                       <div className="text-right">
-                        <div className={`text-xs font-semibold ${isNegative ? 'text-red-400' : 'text-green-400'}`}>
+                        <div className={`text-xs font-semibold trading-price ${isNegative ? 'text-app-red' : 'text-app-green'}`}>
                           {isNegative ? '-' : '+'}₹{displayAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </div>
                       </div>
@@ -923,7 +948,125 @@ const Profile = () => {
               })}
             </div>
           ) : (
-            <div className="text-center text-gray-400 p-12 text-sm font-normal">No transactions found</div>
+            <div className="text-center text-app-text-secondary p-12 text-sm font-normal">No transactions found</div>
+          )}
+        </div>
+      </Modal>
+
+      <Modal show={showNotificationModal} onClose={() => setShowNotificationModal(false)} title="Notifications">
+        <div className="space-y-3 max-h-96 overflow-y-auto">
+          {notifications && notifications.length > 0 ? (
+            notifications.map((n, idx) => (
+              <div key={idx} className="bg-app-bg rounded-lg p-2.5 border border-app-border">
+                <div className="text-sm font-medium text-app-text-primary mb-0.5">{n.Title || 'No title'} ({n.CreatedDate || '-'})</div>
+                <div className="text-app-text-secondary text-xs">{n.Message || 'No message'}</div>
+              </div>
+            ))
+          ) : (
+            <div className="text-center text-app-text-secondary p-3 text-sm">No notifications found</div>
+          )}
+        </div>
+      </Modal>
+
+      <Modal show={showPersonalDetailsModal} onClose={() => setShowPersonalDetailsModal(false)} title="Bank Details" size="md">
+        <div className="space-y-4">
+          <div className="flex justify-between items-center mb-3">
+            <h4 className="text-sm font-semibold text-app-text-primary">Bank Information</h4>
+            {!isEditingBank && (
+              <button 
+                onClick={() => setIsEditingBank(true)}
+                className="text-xs text-app-blue hover:text-app-blue-hover"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+          
+          <div className="space-y-2">
+            <div className="flex justify-between items-center py-2 border-b border-app-border">
+              <span className="text-xs text-app-text-secondary">Account Holder:</span>
+              {isEditingBank ? (
+                <input 
+                  type="text"
+                  value={bankDetails.accountHolderName}
+                  onChange={(e) => setBankDetails({...bankDetails, accountHolderName: e.target.value})}
+                  className="flex-1 ml-4 px-2 py-1 text-xs bg-app-bg border border-app-border rounded text-app-text-primary focus:outline-none focus:border-app-blue"
+                />
+              ) : (
+                <span className="text-xs text-app-text-primary">{bankDetails.accountHolderName || '-'}</span>
+              )}
+            </div>
+
+            <div className="flex justify-between items-center py-2 border-b border-app-border">
+              <span className="text-xs text-app-text-secondary">Bank Name:</span>
+              {isEditingBank ? (
+                <input 
+                  type="text"
+                  value={bankDetails.bankName}
+                  onChange={(e) => setBankDetails({...bankDetails, bankName: e.target.value})}
+                  className="flex-1 ml-4 px-2 py-1 text-xs bg-app-bg border border-app-border rounded text-app-text-primary focus:outline-none focus:border-app-blue"
+                />
+              ) : (
+                <span className="text-xs text-app-text-primary">{bankDetails.bankName || '-'}</span>
+              )}
+            </div>
+
+            <div className="flex justify-between items-center py-2 border-b border-app-border">
+              <span className="text-xs text-app-text-secondary">Account No:</span>
+              {isEditingBank ? (
+                <input 
+                  type="text"
+                  value={bankDetails.accountNo}
+                  onChange={(e) => setBankDetails({...bankDetails, accountNo: e.target.value})}
+                  className="flex-1 ml-4 px-2 py-1 text-xs bg-app-bg border border-app-border rounded text-app-text-primary focus:outline-none focus:border-app-blue"
+                />
+              ) : (
+                <span className="text-xs text-app-text-primary">{bankDetails.accountNo || '-'}</span>
+              )}
+            </div>
+            
+            <div className="flex justify-between items-center py-2">
+              <span className="text-xs text-app-text-secondary">IFSC:</span>
+              {isEditingBank ? (
+                <input 
+                  type="text"
+                  value={bankDetails.ifscCode}
+                  onChange={(e) => setBankDetails({...bankDetails, ifscCode: e.target.value.toUpperCase()})}
+                  className="flex-1 ml-4 px-2 py-1 text-xs bg-app-bg border border-app-border rounded text-app-text-primary focus:outline-none focus:border-app-blue"
+                  maxLength={11}
+                />
+              ) : (
+                <span className="text-xs text-app-text-primary">{bankDetails.ifscCode || '-'}</span>
+              )}
+            </div>
+          </div>
+
+          {isEditingBank && (
+            <div className="flex gap-2 mt-4">
+              <button 
+                onClick={handleSaveBankDetails}
+                className="flex-1 bg-app-blue hover:bg-app-blue-hover text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+              >
+                Save
+              </button>
+              <button 
+                onClick={() => {
+                  setIsEditingBank(false);
+                  // Revert bank details
+                  if (personalDetails) {
+                    setBankDetails({
+                      accountHolderName: personalDetails.AccountHolderName || '',
+                      bankName: personalDetails.BankName || '',
+                      accountNo: personalDetails.AccountNo || '',
+                      ifscCode: personalDetails.IFSCCode || ''
+                    });
+                  }
+                }}
+                className="flex-1 bg-app-bg hover:bg-app-border text-app-text-primary py-2 px-3 rounded-lg text-sm font-medium transition-colors"
+              >
+                Cancel
+              </button>
+            </div>
           )}
         </div>
       </Modal>
@@ -1049,31 +1192,31 @@ const Profile = () => {
       <Modal show={showInvoiceBillModal} onClose={() => setShowInvoiceBillModal(false)} title="Bill & Invoice" size="lg">
         {/* Summary Section */}
         {billSummary && (
-          <div className="mb-4 p-4 bg-gray-900 rounded-lg border border-gray-700">
+          <div className="mb-4 p-4 bg-app-bg rounded-lg border border-app-border">
             <div className="flex justify-between items-center mb-3">
-              <h3 className="text-sm font-semibold text-gray-200">Period Summary</h3>
-              <span className="text-xs text-gray-400">
+              <h3 className="text-sm font-semibold text-app-text-primary">Period Summary</h3>
+              <span className="text-xs text-app-text-secondary">
                 {billSummary.PeriodStart || '-'} to {billSummary.PeriodEnd || '-'}
               </span>
             </div>
             <div className="grid grid-cols-2 gap-3 text-xs">
-              <div className="flex justify-between border-b border-gray-700 pb-2">
-                <span className="text-gray-400">Total Trades:</span>
-                <span className="text-white font-medium">{billSummary.TotalTrades || 0}</span>
+              <div className="flex justify-between border-b border-app-border pb-2">
+                <span className="text-app-text-secondary">Total Trades:</span>
+                <span className="text-app-text-primary font-medium">{billSummary.TotalTrades || 0}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-700 pb-2">
-                <span className="text-gray-400">Total Brokerage:</span>
-                <span className="text-white font-medium">₹{parseFloat(billSummary.TotalBrokerage || 0).toFixed(2)}</span>
+              <div className="flex justify-between border-b border-app-border pb-2">
+                <span className="text-app-text-secondary">Total Brokerage:</span>
+                <span className="text-app-text-primary font-medium trading-price">₹{parseFloat(billSummary.TotalBrokerage || 0).toFixed(2)}</span>
               </div>
-              <div className="flex justify-between border-b border-gray-700 pb-2">
-                <span className="text-gray-400">Gross P/L:</span>
-                <span className={`font-medium ${parseFloat(billSummary.GrossPL || 0) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+              <div className="flex justify-between border-b border-app-border pb-2">
+                <span className="text-app-text-secondary">Gross P/L:</span>
+                <span className={`font-medium trading-price ${parseFloat(billSummary.GrossPL || 0) >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                   ₹{parseFloat(billSummary.GrossPL || 0).toFixed(2)}
                 </span>
               </div>
-              <div className="flex justify-between border-b border-gray-700 pb-2">
-                <span className="text-gray-400">Net P/L:</span>
-                <span className={`font-bold text-base ${parseFloat(billSummary.NetPL || 0) >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+              <div className="flex justify-between border-b border-app-border pb-2">
+                <span className="text-app-text-secondary">Net P/L:</span>
+                <span className={`font-bold text-base trading-price ${parseFloat(billSummary.NetPL || 0) >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                   ₹{parseFloat(billSummary.NetPL || 0).toFixed(2)}
                 </span>
               </div>
@@ -1085,40 +1228,40 @@ const Profile = () => {
         {billInfo && billInfo.length > 0 ? (
           <div className="overflow-x-auto max-h-[70vh]">
             <table className="w-full text-xs">
-              <thead className="sticky top-0 bg-gray-900">
-                <tr className="border-b border-gray-700">
-                  <th className="text-left py-2 px-2 text-gray-300">S.No</th>
-                  <th className="text-left py-2 px-2 text-gray-300">Script Name<br /><span className="text-[10px] text-gray-400">Category, Lot</span></th>
-                  <th className="text-center py-2 px-2 text-gray-300">Order Price<br /><span className="text-[10px] text-gray-400">Date & Time</span></th>
-                  <th className="text-center py-2 px-2 text-gray-300">Close Price<br /><span className="text-[10px] text-gray-400">Date & Time</span></th>
-                  <th className="text-right py-2 px-2 text-gray-300">Profit/Loss</th>
-                  <th className="text-right py-2 px-2 text-gray-300">Brokerage</th>
+              <thead className="sticky top-0 bg-app-surface">
+                <tr className="border-b border-app-border">
+                  <th className="text-left py-2 px-2 text-app-text-primary">S.No</th>
+                  <th className="text-left py-2 px-2 text-app-text-primary">Script Name<br /><span className="text-[10px] text-app-text-secondary">Category, Lot</span></th>
+                  <th className="text-center py-2 px-2 text-app-text-primary">Order Price<br /><span className="text-[10px] text-app-text-secondary">Date & Time</span></th>
+                  <th className="text-center py-2 px-2 text-app-text-primary">Close Price<br /><span className="text-[10px] text-app-text-secondary">Date & Time</span></th>
+                  <th className="text-right py-2 px-2 text-app-text-primary">Profit/Loss</th>
+                  <th className="text-right py-2 px-2 text-app-text-primary">Brokerage</th>
                 </tr>
               </thead>
-              <tbody className="text-gray-300">
+              <tbody className="text-app-text-primary">
               {billInfo.map((b, idx) => {
                 const pl = parseFloat(b.P_L || 0);
                 const brokerage = parseFloat(b.Brokerage || 0);
                 
                 return (
-                  <tr key={idx} className="border-b border-gray-700 hover:bg-gray-700/30">
+                  <tr key={idx} className="border-b border-app-border hover:bg-app-bg">
                     <td className="py-2 px-2">{idx + 1}</td>
                     <td className="py-2 px-2">
-                      <div className="font-medium text-white">{b.ScriptName || '-'}</div>
-                      <div className="text-[10px] text-gray-400">{b.OrderCategory || '-'} ({b.Lot || 0})</div>
+                      <div className="font-medium text-app-text-primary">{b.ScriptName || '-'}</div>
+                      <div className="text-[10px] text-app-text-secondary">{b.OrderCategory || '-'} ({b.Lot || 0})</div>
                     </td>
                     <td className="py-2 px-2 text-center">
-                      <div className="font-medium">{formatBillPrice(b.OrderPrice, b)}</div>
-                      <div className="text-[10px] text-gray-400">{b.OrderDate || ''}<br />{b.OrderTime || ''}</div>
+                      <div className="font-medium trading-price">{formatBillPrice(b.OrderPrice, b)}</div>
+                      <div className="text-[10px] text-app-text-secondary">{b.OrderDate || ''}<br />{b.OrderTime || ''}</div>
                     </td>
                     <td className="py-2 px-2 text-center">
-                      <div className="font-medium">{formatBillPrice(b.BroughtBy, b)}</div>
-                      <div className="text-[10px] text-gray-400">{b.ClosedAt || ''}<br />{b.ClosedTime || ''}</div>
+                      <div className="font-medium trading-price">{formatBillPrice(b.BroughtBy, b)}</div>
+                      <div className="text-[10px] text-app-text-secondary">{b.ClosedAt || ''}<br />{b.ClosedTime || ''}</div>
                     </td>
-                    <td className={`py-2 px-2 text-right font-medium ${pl >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                    <td className={`py-2 px-2 text-right font-medium trading-price ${pl >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                       ₹{pl.toFixed(2)}
                     </td>
-                    <td className="py-2 px-2 text-right text-gray-300">₹{brokerage.toFixed(2)}</td>
+                    <td className="py-2 px-2 text-right text-app-text-primary trading-price">₹{brokerage.toFixed(2)}</td>
                   </tr>
                 );
               })}
@@ -1130,18 +1273,18 @@ const Profile = () => {
                 
                 return (
                   <>
-                    <tr className="border-t-2 border-gray-600 bg-gray-800">
-                      <td colSpan="4" className="py-2 px-2 text-center font-semibold text-gray-200">
+                    <tr className="border-t-2 border-app-border bg-app-surface">
+                      <td colSpan="4" className="py-2 px-2 text-center font-semibold text-app-text-primary">
                         Total of Profit & Loss and Brokerage
                       </td>
-                      <td className="py-2 px-2 text-right font-bold text-gray-200">₹{totalPL.toFixed(2)}</td>
-                      <td className="py-2 px-2 text-right font-bold text-gray-200">₹{totalBrokerage.toFixed(2)}</td>
+                      <td className="py-2 px-2 text-right font-bold text-app-text-primary trading-price">₹{totalPL.toFixed(2)}</td>
+                      <td className="py-2 px-2 text-right font-bold text-app-text-primary trading-price">₹{totalBrokerage.toFixed(2)}</td>
                     </tr>
-                    <tr className="bg-gray-900">
-                      <td colSpan="4" className="py-2 px-2 text-center font-semibold text-gray-200">
+                    <tr className="bg-app-bg">
+                      <td colSpan="4" className="py-2 px-2 text-center font-semibold text-app-text-primary">
                         Net Profit & Loss
                       </td>
-                      <td colSpan="2" className={`py-2 px-2 text-right font-bold text-lg ${netPL >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                      <td colSpan="2" className={`py-2 px-2 text-right font-bold text-lg trading-price ${netPL >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                         ₹{netPL.toFixed(2)}
                       </td>
                     </tr>
@@ -1152,7 +1295,7 @@ const Profile = () => {
           </table>
           </div>
         ) : (
-          <div className="text-center text-gray-400 py-8 text-sm">
+          <div className="text-center text-app-text-secondary py-8 text-sm">
             No trades found for the selected period.
           </div>
         )}
@@ -1178,9 +1321,9 @@ const Profile = () => {
                   </a>
                 </div>
                 <div className="text-center mb-3">
-                  <div className="text-gray-400 text-xs mb-1 font-normal">UPI ID</div>
-                  <div className="text-white text-sm font-normal break-all px-2">
-                    <span className="text-blue-400">{depositData.upiId || '-'}</span>
+                  <div className="text-app-text-secondary text-xs mb-1 font-normal">UPI ID</div>
+                  <div className="text-app-text-primary text-sm font-normal break-all px-2">
+                    <span className="text-app-blue">{depositData.upiId || '-'}</span>
                   </div>
                 </div>
                 <button
@@ -1189,60 +1332,60 @@ const Profile = () => {
                       window.location.href = depositData.qrCodeUrl;
                     }
                   }}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 px-2 rounded text-sm font-medium transition-colors flex items-center justify-center gap-1"
+                  className="w-full bg-app-blue hover:bg-app-blue-hover text-white py-2.5 px-2 rounded-lg text-sm font-medium transition-colors flex items-center justify-center gap-1"
                 >
                   <img src={upiIcon} alt="UPI" className="w-[200px] h-6" />
                   Pay via UPI
                 </button>
               </>
             ) : (
-              <div className="text-gray-400 py-20 text-sm font-normal">Loading QR Code...</div>
+              <div className="text-app-text-secondary py-20 text-sm font-normal">Loading QR Code...</div>
             )}
           </div>
 
           {/* Right Side - Form */}
           <div className="space-y-4">
-            <p className="text-gray-400 text-xs mb-4 font-normal leading-relaxed">
+            <p className="text-app-text-secondary text-xs mb-4 font-normal leading-relaxed">
               Please fill the details after payment for payment approval.
             </p>
             
             <div>
-              <label className="block text-gray-400 text-xs mb-1.5 font-normal">Transaction ID</label>
+              <label className="block text-app-text-secondary text-xs mb-1.5 font-normal">Transaction ID</label>
               <input 
                 type="text" 
                 value={paymentData.transactionId}
                 readOnly
-                className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-gray-300 font-normal focus:outline-none focus:border-gray-500"
+                className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-secondary font-normal focus:outline-none"
               />
             </div>
               
             <div>
-              <label className="block text-gray-400 text-xs mb-1.5 font-normal">Enter Amount</label>
+              <label className="block text-app-text-secondary text-xs mb-1.5 font-normal">Enter Amount</label>
               <input 
                 type="number" 
                 value={paymentData.amount}
                 onChange={(e) => setPaymentData({...paymentData, amount: e.target.value})}
                 required
-                className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-white font-normal focus:outline-none focus:border-blue-500"
+                className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-primary font-normal focus:outline-none focus:border-app-blue"
                 placeholder="0.00"
               />
             </div>
               
             <div>
-              <label className="block text-gray-400 text-xs mb-1.5 font-normal">Enter Remarks</label>
+              <label className="block text-app-text-secondary text-xs mb-1.5 font-normal">Enter Remarks</label>
               <textarea 
                 rows={4}
                 value={paymentData.remark}
                 onChange={(e) => setPaymentData({...paymentData, remark: e.target.value})}
                 required
-                className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-white font-normal focus:outline-none focus:border-blue-500 resize-none"
+                className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-primary font-normal focus:outline-none focus:border-app-blue resize-none"
                 placeholder="Enter payment remarks..."
               />
             </div>
               
             {/* Transaction Record Upload */}
             <div>
-              <label className="block text-gray-400 text-xs mb-1.5 font-normal">Upload Transaction Record</label>
+              <label className="block text-app-text-secondary text-xs mb-1.5 font-normal">Upload Transaction Record</label>
               <div className="space-y-2">
                 <div className="flex gap-2">
                   <label className="flex-1 cursor-pointer">
@@ -1254,18 +1397,18 @@ const Profile = () => {
                       onChange={(e) => setUploadFile(e.target.files[0] || null)}
                       className="hidden"
                     />
-                    <div className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-gray-300 font-normal hover:border-gray-500 transition-colors flex items-center justify-between">
+                    <div className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-secondary font-normal hover:border-app-blue/50 transition-colors flex items-center justify-between">
                       <span className="text-xs truncate">
                         {uploadFile ? uploadFile.name : 'Choose file (JPG/PNG/PDF)'}
                       </span>
-                      <span className="text-xs text-blue-400 ml-2">Browse</span>
+                      <span className="text-xs text-app-blue ml-2">Browse</span>
                     </div>
                   </label>
                   <button
                     type="button"
                     onClick={handleUploadTransactionRecord}
                     disabled={uploadTxnLoading || !uploadFile}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white text-xs font-normal rounded transition-colors whitespace-nowrap"
+                    className="px-4 py-2 bg-app-blue hover:bg-app-blue-hover disabled:bg-app-border disabled:cursor-not-allowed text-white text-xs font-normal rounded-lg transition-colors whitespace-nowrap"
                   >
                     {uploadTxnLoading ? 'Uploading...' : 'Upload'}
                   </button>
@@ -1275,29 +1418,22 @@ const Profile = () => {
                     id="uploadTxnMsg"
                     className={`text-xs font-normal ${
                       uploadTxnMessage === 'Uploading...' || uploadTxnMessage.includes('Uploading')
-                        ? 'text-gray-400'
+                        ? 'text-app-text-secondary'
                         : uploadTxnMessage.includes('successfully') || uploadTxnMessage.includes('success')
-                        ? 'text-green-400'
-                        : 'text-red-400'
+                        ? 'text-app-green'
+                        : 'text-app-red'
                     }`}
-                    style={{
-                      color: uploadTxnMessage === 'Uploading...' || uploadTxnMessage.includes('Uploading')
-                        ? '#666'
-                        : uploadTxnMessage.includes('successfully') || uploadTxnMessage.includes('success')
-                        ? '#4ade80'
-                        : '#f87171'
-                    }}
                   >
                     {uploadTxnMessage}
                   </div>
                 )}
-                <p className="text-gray-500 text-xs font-normal">Upload a transaction record / payment screenshot</p>
+                <p className="text-app-text-tertiary text-xs font-normal">Upload a transaction record / payment screenshot</p>
               </div>
             </div>
               
             <button 
               onClick={handleSubmitPayment}
-              className="w-full bg-green-600 hover:bg-green-700 text-white py-2.5 px-4 rounded text-sm font-normal transition-colors mt-2"
+              className="w-full bg-app-blue hover:bg-app-blue-hover text-white py-2.5 px-4 rounded-lg text-sm font-normal transition-colors mt-2"
             >
               Submit Payment
             </button>
@@ -1322,11 +1458,11 @@ const Modal = ({ show, onClose, title, children, size = 'md' }) => {
   if (!show) return null;
   const sizeClass = size === 'lg' ? 'max-w-4xl' : 'max-w-md';
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className={`bg-gray-800 rounded shadow-xl ${sizeClass} max-h-[90vh] overflow-y-auto w-full`}>
-        <div className="sticky top-0 bg-gray-800 border-b border-gray-700 px-4 py-2.5 flex justify-between items-center">
-          <h3 className="text-base font-semibold text-gray-100">{title}</h3>
-          <button onClick={onClose} className="text-gray-400 hover:text-white"><X className="w-5 h-5" /></button>
+    <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+      <div className={`bg-app-surface rounded-xl shadow-app-card border border-app-border ${sizeClass} max-h-[90vh] overflow-y-auto w-full`}>
+        <div className="sticky top-0 bg-app-surface border-b border-app-border px-4 py-2.5 flex justify-between items-center">
+          <h3 className="text-base font-semibold text-app-text-primary">{title}</h3>
+          <button onClick={onClose} className="text-app-text-secondary hover:text-app-text-primary"><X className="w-5 h-5" /></button>
         </div>
         <div className="p-4">{children}</div>
       </div>
@@ -1335,29 +1471,29 @@ const Modal = ({ show, onClose, title, children, size = 'md' }) => {
 };
 
 const MenuItem = ({ icon, label, badge, onClick }) => (
-  <button onClick={onClick} className="w-full px-4 py-3 flex items-center justify-between hover:bg-gray-750 transition-colors">
+  <button onClick={onClick} className="w-full px-4 py-3 flex items-center justify-between hover:bg-app-bg transition-colors">
             <div className="flex items-center">
-      <div className="text-gray-400 mr-3">{icon}</div>
-      <span className="text-white text-sm">{label}</span>
+      <div className="text-app-text-secondary mr-3">{icon}</div>
+      <span className="text-app-text-primary text-sm">{label}</span>
     </div>
     {badge && <span className="text-xs px-2 py-0.5 bg-orange-600 text-white rounded">{badge}</span>}
   </button>
 );
 
 const Input = ({ label, type = 'text', value, onChange, readOnly = false }) => (
-  <div className="mb-3"><label className="block text-xs text-gray-400 mb-1">{label}</label><input type={type} value={value} onChange={(e) => onChange(e.target.value)} readOnly={readOnly} className={`w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-blue-500 ${readOnly ? 'cursor-not-allowed opacity-70' : ''}`} /></div>
+  <div className="mb-3"><label className="block text-xs text-app-text-secondary mb-1">{label}</label><input type={type} value={value} onChange={(e) => onChange(e.target.value)} readOnly={readOnly} className={`w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-primary focus:outline-none focus:border-app-blue ${readOnly ? 'cursor-not-allowed opacity-70' : ''}`} /></div>
 );
 
 const Textarea = ({ label, value, onChange }) => (
-  <div className="mb-3"><label className="block text-xs text-gray-400 mb-1">{label}</label><textarea value={value} onChange={(e) => onChange(e.target.value)} rows="3" className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-blue-500" /></div>
+  <div className="mb-3"><label className="block text-xs text-app-text-secondary mb-1">{label}</label><textarea value={value} onChange={(e) => onChange(e.target.value)} rows="3" className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-primary focus:outline-none focus:border-app-blue" /></div>
 );
 
 const PasswordInput = ({ label, value, onChange, show, toggleShow }) => (
-  <div className="mb-3"><label className="block text-xs text-gray-400 mb-1">{label}</label><div className="relative"><input type={show ? 'text' : 'password'} value={value} onChange={(e) => onChange(e.target.value)} className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-white focus:outline-none focus:border-blue-500" /><button type="button" onClick={toggleShow} className="absolute right-2 top-2 text-gray-400">{show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}</button></div></div>
+  <div className="mb-3"><label className="block text-xs text-app-text-secondary mb-1">{label}</label><div className="relative"><input type={show ? 'text' : 'password'} value={value} onChange={(e) => onChange(e.target.value)} className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-primary focus:outline-none focus:border-app-blue" /><button type="button" onClick={toggleShow} className="absolute right-2 top-2 text-app-text-secondary">{show ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}</button></div></div>
 );
 
 const DetailRow = ({ label, value }) => (
-  <div className="mb-2"><div className="text-gray-400 text-xs mb-0.5">{label}</div><div className="text-gray-100 text-sm">{value || '-'}</div></div>
+  <div className="mb-2"><div className="text-app-text-secondary text-xs mb-0.5">{label}</div><div className="text-app-text-primary text-sm">{value || '-'}</div></div>
 );
 
 const UserTradeProfileContent = ({ profileData }) => {
@@ -1611,7 +1747,7 @@ const KYCContent = ({ user, kycData, onUpload, uploadMessage, loading }) => {
   // Show loading state
   if (loading) {
     return (
-      <div className="text-center p-8 text-gray-400">Loading KYC status...</div>
+      <div className="text-center p-8 text-app-text-secondary">Loading KYC status...</div>
     );
   }
 
@@ -1621,26 +1757,26 @@ const KYCContent = ({ user, kycData, onUpload, uploadMessage, loading }) => {
         <div className="space-y-4">
         <div className="text-center">
           <div className="mb-4">
-            <div className="text-xs text-gray-400 mb-2">Aadhaar Image</div>
+            <div className="text-xs text-app-text-secondary mb-2">Aadhaar Image</div>
             <img 
               src={`data:image/png;base64,${kycData.aadhaar_image}`} 
               alt="Aadhaar" 
-              className="max-w-full max-h-48 mx-auto rounded border border-gray-700"
+              className="max-w-full max-h-48 mx-auto rounded border border-app-border"
             />
           </div>
           <div className="mb-4">
-            <div className="text-xs text-gray-400 mb-2">PAN Image</div>
+            <div className="text-xs text-app-text-secondary mb-2">PAN Image</div>
             <img 
               src={`data:image/png;base64,${kycData.pan_image}`} 
               alt="PAN" 
-              className="max-w-full max-h-48 mx-auto rounded border border-gray-700"
+              className="max-w-full max-h-48 mx-auto rounded border border-app-border"
             />
           </div>
           <div className="mt-6">
-            <div className="text-sm text-gray-400 mb-1">Approval Status</div>
+            <div className="text-sm text-app-text-secondary mb-1">Approval Status</div>
             <div className={`text-base font-semibold ${
-              kycData.approval_status === 'approved' ? 'text-green-400' : 
-              kycData.approval_status === 'pending' ? 'text-orange-400' : 'text-red-400'
+              kycData.approval_status === 'approved' ? 'text-app-green' : 
+              kycData.approval_status === 'pending' ? 'text-orange-400' : 'text-app-red'
             }`}>
               {kycData.approval_status.charAt(0).toUpperCase() + kycData.approval_status.slice(1)}
             </div>
@@ -1654,33 +1790,33 @@ const KYCContent = ({ user, kycData, onUpload, uploadMessage, loading }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-xs text-gray-400 mb-2">Aadhaar Image (max 2MB, images only)</label>
+        <label className="block text-xs text-app-text-secondary mb-2">Aadhaar Image (max 2MB, images only)</label>
         <input 
           type="file" 
           accept="image/*"
           onChange={(e) => handleFileChange('aadhaar', e.target.files[0])}
-          className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-gray-300 focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-secondary focus:outline-none focus:border-app-blue"
         />
         </div>
       <div>
-        <label className="block text-xs text-gray-400 mb-2">PAN Image (max 2MB, images only)</label>
+        <label className="block text-xs text-app-text-secondary mb-2">PAN Image (max 2MB, images only)</label>
         <input 
           type="file" 
           accept="image/*"
           onChange={(e) => handleFileChange('pan', e.target.files[0])}
-          className="w-full px-3 py-2 text-sm bg-gray-700 border border-gray-600 rounded text-gray-300 focus:outline-none focus:border-blue-500"
+          className="w-full px-3 py-2 text-sm bg-app-bg border border-app-border rounded-lg text-app-text-secondary focus:outline-none focus:border-app-blue"
         />
       </div>
       {uploadMessage && (
         <div className={`text-sm p-2 rounded ${
-          uploadMessage.includes('success') ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'
+          uploadMessage.includes('success') ? 'bg-app-green/20 text-app-green' : 'bg-app-red/20 text-app-red'
         }`}>
           {uploadMessage}
     </div>
       )}
       <button 
         type="submit" 
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-3 rounded text-sm font-medium"
+        className="w-full bg-app-blue hover:bg-app-blue-hover text-white py-2 px-3 rounded-lg text-sm font-medium transition-colors"
       >
         Submit KYC
       </button>

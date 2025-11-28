@@ -1685,25 +1685,25 @@ const Portfolio = () => {
     return (
       <div className="space-y-3">
         {activeOrders.map((order, index) => (
-          <div key={index} className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+          <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
             <div className="flex justify-between items-start mb-2">
               <div>
-                <h4 className="text-white font-semibold">{order.scriptName}</h4>
-                <p className="text-gray-400 text-sm">{order.exchange}</p>
+                <h4 className="text-app-text-primary font-semibold">{order.scriptName}</h4>
+                <p className="text-app-text-secondary text-sm">{order.exchange}</p>
                 {order.isStopLossOrder && (
                   <p className="text-orange-400 text-xs font-medium">Stop Loss Order</p>
                 )}
               </div>
               <div className="text-right">
-                <div className={`font-semibold ${order.OrderCategory === 'SELL' ? 'text-red-400' : 'text-green-400'}`}>
+                <div className={`font-semibold ${order.OrderCategory === 'SELL' ? 'text-app-red' : 'text-app-green'}`}>
                   {order.orderCategoryDisplay} {(() => {
                     // If Lot is "0", 0, or missing, display selectedlotsize instead
                     const lotValue = order.Lot === "0" || order.Lot === 0 || !order.Lot ? order.selectedlotsize : order.Lot;
                     return lotValue || order.selectedlotsize || '0';
                   })()} @ {order.isFX ? '' : '₹'}{order.isFX ? (order.orderPriceUSD ? parseFloat(order.orderPriceUSD).toFixed(5) : '0.00000') : (order.OrderPrice ? parseFloat(order.OrderPrice).toFixed(2) : '0.00')}
                 </div>
-                <div className={`text-sm font-medium ${
-                  order.awaitingFxRate ? 'text-gray-400' : (order.profitLoss || 0) >= 0 ? 'text-green-400' : 'text-red-400'
+                <div className={`text-sm font-medium trading-price ${
+                  order.awaitingFxRate ? 'text-app-text-secondary' : (order.profitLoss || 0) >= 0 ? 'text-app-green' : 'text-app-red'
                 }`}>
                   {order.awaitingFxRate
                     ? 'Updating...'
@@ -1715,23 +1715,23 @@ const Portfolio = () => {
             
             {/* SL/TP Information */}
             {(order.stopLossPrice || order.takeProfitPrice) && (
-              <div className="mb-2 p-2 bg-gray-700 rounded text-xs">
+              <div className="mb-2 p-2 bg-app-bg rounded text-xs">
                 {order.stopLossPrice && (
-                  <div className="text-red-400">
-                    SL: <span className="text-white font-medium">{order.stopLossPrice}</span>
+                  <div className="text-app-red">
+                    SL: <span className="text-app-text-primary font-medium">{order.stopLossPrice}</span>
                   </div>
                 )}
                 {order.takeProfitPrice && (
-                  <div className="text-green-400">
-                    TP: <span className="text-white font-medium">{order.takeProfitPrice}</span>
+                  <div className="text-app-green">
+                    TP: <span className="text-app-text-primary font-medium">{order.takeProfitPrice}</span>
                   </div>
                 )}
               </div>
             )}
             
             <div className="flex justify-between items-center">
-              <div className="text-sm text-gray-400">
-                CMP: <span className="text-white font-medium">
+              <div className="text-sm text-app-text-secondary">
+                CMP: <span className="text-app-text-primary font-medium trading-price">
                   {order.awaitingFxRate && order.isFX
                     ? 'Updating...'
                     : (
@@ -1745,15 +1745,15 @@ const Portfolio = () => {
               <div className="flex space-x-2">
                 <button
                   onClick={() => handleSLTPClick(order)}
-                  className="bg-yellow-600 hover:bg-yellow-700 text-white px-3 py-1 rounded text-sm font-medium"
+                  className="bg-app-blue hover:bg-app-blue-hover text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
                 >
                   SL/TP
                 </button>
                 <button
                   onClick={() => closeTrade(order)}
-                  className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm font-medium"
+                  className="bg-app-red hover:bg-red-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium transition-colors"
                 >
-                  Close Trade
+                  Close
                 </button>
               </div>
             </div>
@@ -1776,32 +1776,32 @@ const Portfolio = () => {
   }
 
   return (
-    <div className="h-screen bg-gray-800 flex flex-col">
-      <div className="text-center mt-3 mb-1 text-blue-400 text-md font-semibold"> Active positions</div>
+    <div className="h-screen bg-app-bg flex flex-col">
+      <div className="text-center mt-3 mb-1 text-app-blue text-md font-semibold"> Active positions</div>
       {/* Top Navigation */}
-      <div className="flex-shrink-0 pt-3 bg-gray-800">
+      <div className="flex-shrink-0 pt-3 bg-app-bg">
       </div>
 
       {/* Balance Summary */}
-      <div className="flex-shrink-0 bg-gray-900 rounded-t-2xl border-b border-gray-700 px-4 py-4">
+      <div className="flex-shrink-0 bg-app-surface rounded-t-2xl border-b border-app-border px-4 py-4">
         <div className="grid grid-cols-4 gap-4">
           <div className="text-center">
-            <p className="text-gray-400 text-md mb-1">Balance</p>
-            <p className="text-white font-bold text-xs">{balanceData.ledgerBalance.toLocaleString()}</p>
+            <p className="text-app-text-secondary text-md mb-1">Balance</p>
+            <p className="text-app-text-primary font-bold text-xs trading-price">{balanceData.ledgerBalance.toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-md mb-1">Margin</p>
-            <p className="text-white font-bold text-xs">{Math.round(balanceData.marginAvailable).toLocaleString()}</p>
+            <p className="text-app-text-secondary text-md mb-1">Margin</p>
+            <p className="text-app-text-primary font-bold text-xs trading-price">{Math.round(balanceData.marginAvailable).toLocaleString()}</p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-md mb-1">P/L</p>
-            <p className={`font-bold text-xs ${balanceData.activePL >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+            <p className="text-app-text-secondary text-md mb-1">P/L</p>
+            <p className={`font-bold text-xs trading-price ${balanceData.activePL >= 0 ? 'text-app-green' : 'text-app-red'}`}>
               {balanceData.activePL >= 0 ? '+' : ''}{balanceData.activePL.toFixed(2)}
             </p>
           </div>
           <div className="text-center">
-            <p className="text-gray-400 text-md mb-1">M2M</p>
-            <p className="text-white font-bold text-xs">{Math.round(balanceData.m2m).toLocaleString()}</p>
+            <p className="text-app-text-secondary text-md mb-1">M2M</p>
+            <p className="text-app-text-primary font-bold text-xs trading-price">{Math.round(balanceData.m2m).toLocaleString()}</p>
           </div>
         </div>
       </div>
@@ -1809,57 +1809,69 @@ const Portfolio = () => {
 
 
       {/* Content Area */}
-      <div className="flex-1 bg-gray-900 overflow-y-auto px-2 py-2 pb-24">
+      <div className="flex-1 bg-app-bg overflow-y-auto px-2 py-2 pb-24">
         {renderActiveOrders()}
       </div>
 
-      {/* Bottom Navigation */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-1 py-2">
-        <div className="flex justify-around items-center">
-          {bottomNavItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleTabClick(item.id)}
-              className="flex flex-col items-center py-2"
-            >
-              <item.icon 
-                className={`w-6 h-6 mb-1 ${
-                  item.id === 'portfolio' ? 'text-blue-500' : 'text-gray-400'
-                }`} 
-              />
-              <span className={`text-xs font-medium ${
-                item.id === 'portfolio' ? 'text-blue-500' : 'text-gray-400'
-              }`}>
-                {item.label}
-              </span>
-            </button>
-          ))}
+      {/* Bottom Navigation - Glassmorphism */}
+      <div className="fixed bottom-0 left-0 right-0 z-50" style={{
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+      }}>
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        }}>
+          <div className="flex justify-around items-center">
+            {bottomNavItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleTabClick(item.id)}
+                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+                  item.id === 'portfolio' ? 'bg-app-blue/10' : ''
+                }`}
+                style={{
+                  transform: item.id === 'portfolio' ? 'translateY(-2px)' : 'translateY(0)',
+                }}
+              >
+                <item.icon 
+                  className={`w-7 h-7 mb-1 transition-colors ${
+                    item.id === 'portfolio' ? 'text-app-blue' : 'text-app-text-tertiary'
+                  }`}
+                />
+                <span className={`text-xs font-medium transition-colors ${
+                  item.id === 'portfolio' ? 'text-app-blue' : 'text-app-text-tertiary'
+                }`}>
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* SL/TP Modal */}
       {showSLTPModal && selectedOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-gray-800 rounded-lg p-6 w-80 max-w-sm mx-4">
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-app-surface rounded-xl p-6 w-80 max-w-sm mx-4 border border-app-border shadow-app-card">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-white font-bold text-lg">Set SL/TP</h3>
+              <h3 className="text-app-text-primary font-bold text-lg">Set SL/TP</h3>
               <button
                 onClick={closeSLTPModal}
-                className="text-gray-400 hover:text-white"
+                className="text-app-text-secondary hover:text-app-text-primary transition-colors"
               >
                 <X className="w-6 h-6" />
               </button>
             </div>
             
             <div className="mb-4">
-              <p className="text-gray-300 text-sm mb-2">
+              <p className="text-app-text-primary text-sm mb-2">
                 {selectedOrder.scriptName} - {selectedOrder.orderCategoryDisplay}
               </p>
             </div>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-1">
+                <label className="block text-app-text-primary text-sm font-medium mb-1">
                   Stop Loss (SL)
                 </label>
                 <input
@@ -1868,12 +1880,12 @@ const Portfolio = () => {
                   value={slValue}
                   onChange={(e) => setSLValue(e.target.value)}
                   placeholder="Enter SL price"
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue"
                 />
               </div>
               
               <div>
-                <label className="block text-gray-300 text-sm font-medium mb-1">
+                <label className="block text-app-text-primary text-sm font-medium mb-1">
                   Take Profit (TP)
                 </label>
                 <input
@@ -1882,7 +1894,7 @@ const Portfolio = () => {
                   value={tpValue}
                   onChange={(e) => setTPValue(e.target.value)}
                   placeholder="Enter TP price"
-                  className="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded text-white text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full px-3 py-2 bg-app-bg border border-app-border rounded-lg text-app-text-primary text-sm focus:outline-none focus:ring-1 focus:ring-app-blue"
                 />
               </div>
             </div>
@@ -1890,13 +1902,13 @@ const Portfolio = () => {
             <div className="flex space-x-3 mt-6">
               <button
                 onClick={closeSLTPModal}
-                className="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded text-sm font-medium"
+                className="flex-1 bg-app-bg hover:bg-app-border text-app-text-primary py-2.5 rounded-lg text-sm font-medium transition-colors"
               >
                 Cancel
               </button>
               <button
                 onClick={handleSLTPSubmit}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm font-medium"
+                className="flex-1 bg-app-blue hover:bg-app-blue-hover text-white py-2.5 rounded-lg text-sm font-medium transition-colors"
               >
                 Set SL/TP
               </button>

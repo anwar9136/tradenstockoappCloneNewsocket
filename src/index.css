@@ -2,6 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern Trading App Theme - Global Styles */
+:root {
+  --app-bg: #000000;
+  --app-surface: #1C1C1E;
+  --app-border: #2C2C2E;
+  --app-blue: #0051FF;
+  --app-blue-hover: #0046E0;
+  --app-green: #00C853;
+  --app-red: #FF3B30;
+  --app-text-primary: #FFFFFF;
+  --app-text-secondary: #A8A8A8;
+  --app-text-tertiary: #6E6E73;
+}
+
+@layer base {
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Number formatting for trading prices */
+  .trading-price {
+    font-feature-settings: 'tnum';
+    font-variant-numeric: tabular-nums;
+  }
+}
+
 @layer base {
   * {
     @apply border-gray-200;

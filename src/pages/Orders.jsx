@@ -718,27 +718,27 @@ const Orders = () => {
 
   const getStatusIcon = (status) => {
     if (!status) {
-      return <CheckCircle className="w-4 h-4 text-green-500" />; // Default to active icon
+      return <CheckCircle className="w-4 h-4 text-app-green" />; // Default to active icon
     }
     switch (status.toLowerCase()) {
       case 'pending':
-        return <Clock className="w-4 h-4 text-yellow-500" />;
+        return <Clock className="w-4 h-4 text-yellow-400" />;
       case 'active':
-        return <CheckCircle className="w-4 h-4 text-green-500" />;
+        return <CheckCircle className="w-4 h-4 text-app-green" />;
       case 'closed':
-        return <XCircle className="w-4 h-4 text-gray-500" />;
+        return <XCircle className="w-4 h-4 text-app-text-secondary" />;
       default:
-        return <FileText className="w-4 h-4 text-blue-500" />;
+        return <FileText className="w-4 h-4 text-app-blue" />;
     }
   };
 
   const getActionIcon = (action) => {
     if (!action) {
-      return <TrendingUp className="w-4 h-4 text-green-500" />; // Default to buy icon
+      return <TrendingUp className="w-4 h-4 text-app-green" />; // Default to buy icon
     }
     return action.toLowerCase() === 'buy' ? 
-      <TrendingUp className="w-4 h-4 text-green-500" /> : 
-      <TrendingDown className="w-4 h-4 text-red-500" />;
+      <TrendingUp className="w-4 h-4 text-app-green" /> : 
+      <TrendingDown className="w-4 h-4 text-app-red" />;
   };
 
   const handleTabClick = (tabId) => {
@@ -765,24 +765,24 @@ const Orders = () => {
   };
 
   return (
-    <div className="h-screen bg-gray-900 flex flex-col">
+    <div className="h-screen bg-app-bg flex flex-col">
       {/* Fixed Header */}
-      <div className="flex-shrink-0 bg-gray-800 border-b border-gray-700">
+      <div className="flex-shrink-0 bg-app-surface border-b border-app-border">
         <div className="px-2 py-2">
-          <h1 className="text-md font-bold text-white">Orders</h1>
+          <h1 className="text-md font-bold text-app-text-primary">Orders</h1>
         </div>
       </div>
 
       {/* Fixed Tabs */}
-      <div className="flex-shrink-0 flex bg-gray-800 border-b border-gray-700">
+      <div className="flex-shrink-0 flex bg-app-surface border-b border-app-border">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`flex-1 py-2 px-2 text-sm font-medium transition-colors ${
               activeTab === tab.id
-                ? 'text-white bg-gray-700 border-b-2 border-blue-500'
-                : 'text-gray-400 hover:text-gray-300 hover:bg-gray-750'
+                ? 'text-app-text-primary bg-app-bg border-b-2 border-app-blue'
+                : 'text-app-text-secondary hover:text-app-text-primary'
             }`}
           >
             {tab.label}
@@ -794,7 +794,7 @@ const Orders = () => {
       <div className="flex-1 overflow-y-auto px-2 py-4 pb-24">
         {loading ? (
           <div className="flex justify-center items-center py-12">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-app-blue"></div>
           </div>
         ) : orders.length > 0 ? (
           <div className="space-y-4">
@@ -803,16 +803,16 @@ const Orders = () => {
               if (activeTab === 'sltp') {
                 const scriptParts = order.ScriptName?.split('_') || [order.ScriptName, ''];
                 return (
-                  <div key={index} className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                  <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
                     <div className="flex justify-between items-start mb-3">
                       <div className="flex items-center space-x-2">
                         <div>
-                          <h3 className="font-semibold text-white">{scriptParts[0]}</h3>
-                          <p className="text-sm text-gray-400">{scriptParts[1]}</p>
+                          <h3 className="font-semibold text-app-text-primary">{scriptParts[0]}</h3>
+                          <p className="text-sm text-app-text-secondary">{scriptParts[1]}</p>
                         </div>
                       </div>
                       <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium px-2 py-1 rounded-full bg-green-900 text-green-300">
+                        <span className="text-sm font-medium px-2 py-1 rounded-full bg-app-green/20 text-app-green">
                           {order.OrderCategory}
                         </span>
                       </div>
@@ -820,19 +820,19 @@ const Orders = () => {
                     
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
-                        <p className="text-gray-400">Stop Loss</p>
-                        <p className="font-medium text-red-400">₹{order.SL}</p>
+                        <p className="text-app-text-secondary">Stop Loss</p>
+                        <p className="font-medium text-app-red">₹{order.SL}</p>
                       </div>
                       <div>
-                        <p className="text-gray-400">Take Profit</p>
-                        <p className="font-medium text-green-400">₹{order.TP}</p>
+                        <p className="text-app-text-secondary">Take Profit</p>
+                        <p className="font-medium text-app-green">₹{order.TP}</p>
                       </div>
                     </div>
                     
-                    <div className="mt-3 pt-3 border-t border-gray-700">
+                    <div className="mt-3 pt-3 border-t border-app-border">
                       <div className="flex justify-between items-center text-sm">
-                        <span className="text-gray-400">{order.DateTime}</span>
-                        <span className="text-green-400 px-2 py-1 rounded bg-green-900">
+                        <span className="text-app-text-secondary">{order.DateTime}</span>
+                        <span className="text-app-green px-2 py-1 rounded bg-app-green/20">
                           {order.Status}
                         </span>
                       </div>
@@ -875,28 +875,28 @@ const Orders = () => {
               const closedPLValue = parseFloat(order?.P_L ?? order?.profitLoss ?? 0);
               const closedPLDisplay = Number.isNaN(closedPLValue) ? '0.00' : closedPLValue.toFixed(2);
               return (
-                <div key={index} className="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                <div key={index} className="bg-app-surface rounded-xl p-4 border border-app-border shadow-app-card">
                   <div className="flex justify-between items-start mb-3">
                     <div className="flex items-center space-x-2">
                       {getActionIcon(order.OrderCategory)}
                       <div>
-                        <h3 className="font-semibold text-white flex items-center gap-2">
+                        <h3 className="font-semibold text-app-text-primary flex items-center gap-2">
                           <span>{scriptParts[0]}</span>
                           {activeTab === 'closed' && (
-                            <span className={`text-xs font-semibold ${closedPLValue >= 0 ? 'text-green-400' : 'text-red-400'}`}>
+                            <span className={`text-xs font-semibold trading-price ${closedPLValue >= 0 ? 'text-app-green' : 'text-app-red'}`}>
                               {closedPLValue >= 0 ? '+' : ''}₹{closedPLDisplay}
                             </span>
                           )}
                         </h3>
-                        <p className="text-sm text-gray-400">{scriptParts[1] || order.ActionType}</p>
+                        <p className="text-sm text-app-text-secondary">{scriptParts[1] || order.ActionType}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       {getStatusIcon(order.OrderStatus || 'Active')}
                       <span className={`text-sm font-medium px-2 py-1 rounded-full ${
-                        (order.OrderStatus || 'Active')?.toLowerCase() === 'pending' ? 'bg-yellow-900 text-yellow-300' :
-                        (order.OrderStatus || 'Active')?.toLowerCase() === 'active' ? 'bg-green-900 text-green-300' :
-                        'bg-gray-700 text-gray-300'
+                        (order.OrderStatus || 'Active')?.toLowerCase() === 'pending' ? 'bg-yellow-900/30 text-yellow-400' :
+                        (order.OrderStatus || 'Active')?.toLowerCase() === 'active' ? 'bg-app-green/20 text-app-green' :
+                        'bg-app-text-tertiary/20 text-app-text-secondary'
                       }`}>
                         {order.OrderStatus || 'Active'}
                       </span>
@@ -905,12 +905,12 @@ const Orders = () => {
                   
                   <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <p className="text-gray-400">Order Type</p>
-                      <p className="font-medium text-white">{order.OrderType}</p>
+                      <p className="text-app-text-secondary">Order Type</p>
+                      <p className="font-medium text-app-text-primary">{order.OrderType}</p>
                     </div>
                     <div>
-                      <p className="text-gray-400">Lot Size</p>
-                      <p className="font-medium text-white">
+                      <p className="text-app-text-secondary">Lot Size</p>
+                      <p className="font-medium text-app-text-primary">
                         {(() => {
                           // If Lot is "0", 0, or missing, display selectedlotsize instead
                           const lotValue = order.Lot === "0" || order.Lot === 0 || !order.Lot ? order.selectedlotsize : order.Lot;
@@ -919,32 +919,32 @@ const Orders = () => {
                       </p>
                     </div>
                     <div>
-                      <p className="text-gray-400">Order Price</p>
-                      <p className="font-medium text-white">{orderPriceDisplay}</p>
+                      <p className="text-app-text-secondary">Order Price</p>
+                      <p className="font-medium text-app-text-primary trading-price">{orderPriceDisplay}</p>
                     </div>
                     {activeTab === 'active' && order.currentPrice !== undefined && (
                       <div>
-                        <p className="text-gray-400">Current Price</p>
-                        <p className={`font-medium ${order.awaitingFxRate && isFxOrder ? 'text-gray-400' : 'text-white'}`}>
+                        <p className="text-app-text-secondary">Current Price</p>
+                        <p className={`font-medium trading-price ${order.awaitingFxRate && isFxOrder ? 'text-app-text-secondary' : 'text-app-text-primary'}`}>
                           {currentPriceDisplay}
                         </p>
                       </div>
                     )}
                     <div>
-                      <p className="text-gray-400">Margin Used</p>
-                      <p className="font-medium text-white">
+                      <p className="text-app-text-secondary">Margin Used</p>
+                      <p className="font-medium text-app-text-primary trading-price">
                         ₹{order.MarginUsed ? parseFloat(order.MarginUsed).toFixed(2) : '0.00'}
                       </p>
                     </div>
                     {activeTab === 'active' && order.profitLoss !== undefined && (
                       <div>
-                        <p className="text-gray-400">Profit/Loss</p>
-                        <p className={`font-medium ${
+                        <p className="text-app-text-secondary">Profit/Loss</p>
+                        <p className={`font-medium trading-price ${
                           order.awaitingFxRate && isFxOrder
-                            ? 'text-gray-400'
+                            ? 'text-app-text-secondary'
                             : (order.profitLoss || 0) >= 0
-                              ? 'text-green-500'
-                              : 'text-red-500'
+                              ? 'text-app-green'
+                              : 'text-app-red'
                         }`}>
                           {profitLossDisplay}
                         </p>
@@ -952,12 +952,12 @@ const Orders = () => {
                     )}
                   </div>
                   
-                  <div className="mt-3 pt-3 border-t border-gray-700">
+                  <div className="mt-3 pt-3 border-t border-app-border">
                     <div className="flex justify-between items-center text-sm">
-                      <span className="text-gray-400">
+                      <span className="text-app-text-secondary">
                         {order.OrderDate} at {order.OrderTime}
                       </span>
-                      <span className="text-gray-400">Order ID: {order.Id}</span>
+                      <span className="text-app-text-tertiary">Order ID: {order.Id}</span>
                     </div>
                   </div>
                 </div>
@@ -966,33 +966,45 @@ const Orders = () => {
           </div>
         ) : (
           <div className="text-center py-12">
-            <FileText className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-            <p className="text-gray-400">No orders found</p>
+            <FileText className="w-12 h-12 text-app-text-tertiary mx-auto mb-4" />
+            <p className="text-app-text-secondary">No orders found</p>
           </div>
         )}
       </div>
 
-      {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-1 py-2">
-        <div className="flex justify-around items-center">
-          {bottomNavItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleNavClick(item.id)}
-              className="flex flex-col items-center py-2"
-            >
-              <item.icon 
-                className={`w-6 h-6 mb-1 ${
-                  item.id === 'orders' ? 'text-blue-500' : 'text-gray-400'
-                }`} 
-              />
-              <span className={`text-xs font-medium ${
-                item.id === 'orders' ? 'text-blue-500' : 'text-gray-400'
-              }`}>
-                {item.label}
-              </span>
-            </button>
-          ))}
+      {/* Bottom Navigation Bar - Glassmorphism */}
+      <div className="fixed bottom-0 left-0 right-0 z-50" style={{
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+      }}>
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        }}>
+          <div className="flex justify-around items-center">
+            {bottomNavItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleNavClick(item.id)}
+                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+                  item.id === 'orders' ? 'bg-app-blue/10' : ''
+                }`}
+                style={{
+                  transform: item.id === 'orders' ? 'translateY(-2px)' : 'translateY(0)',
+                }}
+              >
+                <item.icon 
+                  className={`w-7 h-7 mb-1 transition-colors ${
+                    item.id === 'orders' ? 'text-app-blue' : 'text-app-text-tertiary'
+                  }`}
+                />
+                <span className={`text-xs font-medium transition-colors ${
+                  item.id === 'orders' ? 'text-app-blue' : 'text-app-text-tertiary'
+                }`}>
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

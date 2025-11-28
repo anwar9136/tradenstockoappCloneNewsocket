@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LogIn, UserPlus, HelpCircle, Settings, TrendingUp, ArrowUp } from 'lucide-react';
+import { LogIn, UserPlus, TrendingUp, ArrowUp } from 'lucide-react';
 import logo from '../assets/logo.svg';
 
 const Welcome = () => {
@@ -118,21 +118,13 @@ const Welcome = () => {
             <img src={logo} alt="TradeNstocko Logo" className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 rounded-lg object-contain" />
             <span className="text-white font-semibold text-sm sm:text-base md:text-lg tracking-tight">Tradenstocko</span>
           </div>
-          <div className="flex items-center space-x-2 sm:space-x-3 md:space-x-4">
-            <button className="text-slate-400 hover:text-blue-400 transition-colors" aria-label="Help">
-              <HelpCircle className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-            <button className="text-slate-400 hover:text-blue-400 transition-colors" aria-label="Settings">
-              <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
-            </button>
-          </div>
         </div>
       </header>
 
       {/* Main Content - Vertical Stack on Mobile */}
-      <main className="relative z-10 pt-20 sm:pt-20 md:pt-24 lg:pt-32 pb-4 sm:pb-20 md:pb-24 px-4 sm:px-6 mobile-no-scroll" style={{ minHeight: '100dvh' }}>
+      <main className="relative z-10 pt-20 sm:pt-20 md:pt-24 lg:pt-32 pb-2 sm:pb-20 md:pb-24 px-4 sm:px-6 mobile-no-scroll" style={{ minHeight: '100dvh' }}>
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-4 sm:gap-8 md:gap-10 lg:gap-12 items-center lg:items-start">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-0 sm:gap-8 md:gap-10 lg:gap-12 items-center lg:items-start">
             {/* Hero Text Section - Center on Mobile, Left on Desktop */}
             <div 
               className={`w-full text-center lg:text-left transition-all duration-1000 mobile-order-1 lg:order-none ${
@@ -176,6 +168,8 @@ const Welcome = () => {
                   Experience institutional-grade execution with the simplicity of a modern app.
                 </p>
               </div>
+
+              
               
               {/* Action Buttons - Inside text section on Desktop, separate on Mobile */}
               <div className="w-full mobile-order-3 lg:order-none lg:mt-6 hidden lg:block">
@@ -207,12 +201,11 @@ const Welcome = () => {
 
             {/* 3D Floating Smartphone Mockup - Middle on Mobile, Right on Desktop */}
             <div 
-              className={`relative flex items-center justify-center transition-all duration-1000 delay-300 phone-container w-full lg:w-auto mobile-order-2 lg:order-none phone-mobile-spacing ${
+              className={`relative flex items-center justify-center transition-all duration-1000 delay-300 phone-container w-full lg:w-auto mobile-order-2 lg:order-none ${
                 isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
               }`}
               style={{
                 marginBottom: '0',
-                marginTop: '0',
               }}
             >
               <div 
@@ -271,10 +264,10 @@ const Welcome = () => {
                         {/* Header */}
                         <div className="mb-6">
                           <div className="text-slate-400 text-xs mb-2">Portfolio Value</div>
-                          <div className="text-white text-xl sm:text-2xl lg:text-3xl font-bold mb-1 mobile-amount">₹42,305.00</div>
-                          <div className="text-green-400 text-xs sm:text-sm font-semibold flex items-center mobile-change">
-                            <ArrowUp className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
-                            +₹1,234.56 (+3.0%)
+                          <div className="text-white text-3xl font-bold mb-1">$42,305.00</div>
+                          <div className="text-green-400 text-sm font-semibold flex items-center">
+                            <ArrowUp className="w-4 h-4 mr-1" />
+                            +$1,234.56 (+3.0%)
                           </div>
                         </div>
 
@@ -447,7 +440,7 @@ const Welcome = () => {
         }
         @media (min-width: 1024px) {
           .phone-scale-wrapper {
-            transform: scale(0.75) translateY(-95px);
+            transform: scale(0.75) translateY(-80px);
           }
           .phone-float {
             animation: phoneFloat 6s ease-in-out infinite;
@@ -457,12 +450,22 @@ const Welcome = () => {
           .phone-float {
             animation: phoneFloatMobile 6s ease-in-out infinite;
           }
-          .phone-mobile-spacing {
+        }
+        .perspective-1000 {
+          perspective: 1000px;
+        }
+        @media (max-width: 1023px) {
+          .visual-mobile-spacing {
             margin-top: -32px !important;
             margin-bottom: -32px !important;
           }
           .mobile-buttons-spacing {
-            margin-top: -20px !important;
+            margin-top: -50px !important;
+            padding-top: 20px !important;
+          }
+          .phone-container {
+            margin-top: -50px !important;
+            margin-bottom: -30px !important;
           }
           .mobile-no-scroll {
             height: 100dvh;
@@ -492,9 +495,6 @@ const Welcome = () => {
         @keyframes scroll {
           0% { transform: translateX(0); }
           100% { transform: translateX(-33.333%); }
-        }
-        .perspective-1000 {
-          perspective: 1000px;
         }
         .mobile-order-1 {
           order: 1;

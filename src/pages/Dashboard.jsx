@@ -103,7 +103,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-app-bg">
 
       {/* Main Content - Show MarketWatch when on home tab */}
       <div className="flex-1 pb-20">
@@ -111,32 +111,44 @@ const Dashboard = () => {
           <MarketWatch />
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p className="text-gray-500">Select a tab from bottom navigation</p>
+            <p className="text-app-text-secondary">Select a tab from bottom navigation</p>
           </div>
         )}
       </div>
 
-      {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 px-1 py-2 z-50">
-        <div className="flex justify-around items-center">
-          {bottomNavItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => handleTabClick(item.id)}
-              className="flex flex-col items-center py-2"
-            >
-              <item.icon 
-                className={`w-6 h-6 mb-1 ${
-                  item.id === activeTab ? 'text-blue-500' : 'text-gray-400'
-                }`} 
-              />
-              <span className={`text-xs font-medium ${
-                item.id === activeTab ? 'text-blue-500' : 'text-gray-400'
-              }`}>
-                {item.label}
-              </span>
-            </button>
-          ))}
+      {/* Bottom Navigation Bar - Glassmorphism */}
+      <div className="fixed bottom-0 left-0 right-0 z-50" style={{
+        backdropFilter: 'blur(20px)',
+        WebkitBackdropFilter: 'blur(20px)',
+      }}>
+        <div className="bg-app-surface/80 border-t border-app-border/50 px-2 py-3" style={{
+          boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+        }}>
+          <div className="flex justify-around items-center">
+            {bottomNavItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => handleTabClick(item.id)}
+                className={`flex flex-col items-center py-2 px-4 rounded-xl transition-all duration-200 ${
+                  item.id === activeTab ? 'bg-app-blue/10' : ''
+                }`}
+                style={{
+                  transform: item.id === activeTab ? 'translateY(-2px)' : 'translateY(0)',
+                }}
+              >
+                <item.icon 
+                  className={`w-7 h-7 mb-1 transition-colors ${
+                    item.id === activeTab ? 'text-app-blue' : 'text-app-text-tertiary'
+                  }`}
+                />
+                <span className={`text-xs font-medium transition-colors ${
+                  item.id === activeTab ? 'text-app-blue' : 'text-app-text-tertiary'
+                }`}>
+                  {item.label}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

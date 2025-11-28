@@ -837,104 +837,82 @@ const MarketWatch = () => {
         return symbolName.toLowerCase().includes(filterQuery.toLowerCase());
       });
 
-  return (
-    <div className="h-screen relative overflow-hidden flex flex-col" style={{ background: 'radial-gradient(ellipse at center, rgba(15, 23, 42, 0.98) 0%, rgba(2, 6, 23, 1) 60%, rgba(1, 3, 15, 1) 100%)' }}>
-      {/* Phase 1: Immersive Deep Background - Radial Galactic Gradient */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        {/* Deep Blue-to-Black Radial Gradient - Brightens towards center */}
-        <div 
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[2000px] h-[2000px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(15, 23, 42, 0.6) 0%, rgba(8, 15, 30, 0.8) 30%, rgba(2, 6, 23, 0.95) 60%, rgba(1, 3, 15, 1) 100%)',
-          }}
-        ></div>
-        
-        {/* Ambient Diffused Lighting - Cool-toned ambient light source */}
-        <div 
-          className="absolute top-0 left-1/2 transform -translate-x-1/2 w-[1600px] h-[1600px] rounded-full blur-[300px]"
-          style={{
-            background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, rgba(6, 182, 212, 0.05) 30%, transparent 70%)',
-            opacity: 0.6,
-          }}
-        ></div>
+  const renderModalLoader = (label, subtext = 'This takes only a moment') => {
+    const labelText = (label || '').toUpperCase();
+    return (
+      <div className="py-14 text-center">
+        <div className="relative mx-auto w-12 h-12">
+          <div className="absolute inset-0 rounded-full border border-white/10" />
+          <div
+            className="absolute inset-1 rounded-full border border-transparent border-t-cyan-400/80 border-r-cyan-400/20"
+            style={{ animation: 'premiumSpin 1.05s cubic-bezier(0.66, 0, 0.34, 1) infinite' }}
+          />
+          <div
+            className="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-500/25 to-transparent"
+            style={{ animation: 'softPulse 2.6s ease-in-out infinite' }}
+          />
+        </div>
+        <p className="mt-7 text-[0.7rem] uppercase tracking-[0.4em] text-slate-300/80">
+          {labelText}
+        </p>
+        <p className="mt-3 text-xs text-slate-400/80">{subtext}</p>
+        <div className="mt-5 h-px w-16 mx-auto overflow-hidden rounded-full bg-white/5">
+          <div
+            className="h-full w-1/2 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent"
+            style={{ animation: 'lineShimmer 2.4s ease-in-out infinite' }}
+          />
+        </div>
       </div>
+    );
+  };
 
-      {/* Ultra-Fine Animated Grid Overlay - Barely Visible with Parallax/Shimmer */}
-      <div 
-        className="fixed inset-0 pointer-events-none z-0 premium-grid-overlay"
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(30, 41, 59, 0.15) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(30, 41, 59, 0.15) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-          opacity: 0.25,
-          mixBlendMode: 'overlay',
-        }}
-      ></div>
+  return (
+    <>
+      <style>{`
+        @keyframes premiumSpin {
+          to { transform: rotate(360deg); }
+        }
+        @keyframes softPulse {
+          0% { opacity: 0.2; transform: scale(0.92); }
+          50% { opacity: 0.65; transform: scale(1); }
+          100% { opacity: 0.2; transform: scale(0.92); }
+        }
+        @keyframes lineShimmer {
+          0% { transform: translateX(-60%); opacity: 0; }
+          50% { transform: translateX(10%); opacity: 0.8; }
+          100% { transform: translateX(80%); opacity: 0; }
+        }
+        @keyframes loaderGlow {
+          0% { opacity: 0.15; transform: scale(0.98); }
+          50% { opacity: 0.35; transform: scale(1.02); }
+          100% { opacity: 0.15; transform: scale(0.98); }
+        }
+      `}</style>
+      <div className="h-screen relative flex flex-col bg-app-bg overflow-hidden">
+        {/* Subtle background gradient overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at top, rgba(0, 81, 255, 0.03) 0%, transparent 50%)' }}></div>
 
-      {/* Phase 2: Header Section - Frosted Glass Panel with Edge Highlights - Fixed on Mobile */}
-      <div className="flex-shrink-0 relative z-30 sticky top-0" style={{ 
+      {/* Phase 2: Header Section - Modern Clean Header - Fixed on Mobile */}
+      <div className="flex-shrink-0 sticky top-0 z-30" style={{ 
         transform: 'translateZ(0)',
-        position: 'sticky',
-        top: 0,
-        willChange: 'transform',
       }}>
         <div 
-          className="backdrop-blur-[15px] relative"
-          style={{
-            background: 'rgba(0, 0, 0, 0.4)',
-            boxShadow: '0 0 5px rgba(74, 144, 226, 0.3) inset, 0 2px 10px rgba(0, 0, 0, 0.6), 0 1px 0 rgba(255, 255, 255, 0.05) inset',
-            borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-          }}
+          className="backdrop-blur-md relative bg-app-surface/80 border-b border-app-border"
         >
-          {/* Fine Edge Highlight - Top and Bottom */}
-          <div 
-            className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none"
-            style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(74, 144, 226, 0.4) 20%, rgba(74, 144, 226, 0.5) 50%, rgba(74, 144, 226, 0.4) 80%, transparent 100%)',
-              boxShadow: '0 0 8px rgba(74, 144, 226, 0.3)',
-            }}
-          ></div>
-          <div 
-            className="absolute bottom-0 left-0 right-0 h-[1px] pointer-events-none"
-            style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(74, 144, 226, 0.2) 20%, rgba(74, 144, 226, 0.3) 50%, rgba(74, 144, 226, 0.2) 80%, transparent 100%)',
-            }}
-          ></div>
           
-          <div className="px-4 sm:px-6 py-3 sm:py-4 relative">
+          <div className="px-4 sm:px-6 py-2 sm:py-2.5 relative">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
               <div className="flex items-center justify-between sm:justify-start gap-3">
                 <div className="flex-1 sm:flex-initial">
-                  {/* MarketWatch Title - Crystal Clear with Carved Effect */}
+                  {/* MarketWatch Title - Clean Modern */}
                   <h1 
-                    className="text-xl sm:text-2xl relative"
-                    style={{
-                      background: 'linear-gradient(to right, #F0F5FF, #E0EFFF)',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent',
-                      backgroundClip: 'text',
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 700,
-                      letterSpacing: '-0.02em',
-                      textShadow: '0 1px 2px rgba(0, 0, 0, 0.7)',
-                      textRendering: 'optimizeLegibility',
-                    }}
+                    className="text-xl sm:text-2xl font-bold text-app-text-primary"
                   >
                     MarketWatch
                   </h1>
-                  {/* Real-time market data Subtitle - Refined Spacing */}
+                  {/* Real-time market data Subtitle */}
                   <p 
-                    className="text-xs sm:text-sm hidden sm:block mt-1.5" 
-                    style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      color: '#B0B0B0',
-                      letterSpacing: '0.05em',
-                      fontWeight: 400,
-                      fontSize: '0.75rem',
-                      textRendering: 'optimizeLegibility',
-                    }}
+                    className="text-xs sm:text-sm hidden sm:block mt-1 text-app-text-secondary"
                   >
                     Real-time market data
                   </p>
@@ -942,31 +920,17 @@ const MarketWatch = () => {
               </div>
               <div className="w-full sm:flex-1 sm:max-w-md">
                 <div className="relative">
-                  {/* Search Icon - Sharp, Minimalist, Pure White */}
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white pointer-events-none z-10" style={{ opacity: 0.9 }} />
-                  {/* Search Bar - Pronounced Glass Cylinder (Capsule Shape) */}
+                  {/* Search Icon */}
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-app-text-tertiary pointer-events-none z-10" />
+                  {/* Search Bar - Modern Rounded */}
                   <input
                     type="text"
                     placeholder="Search by symbol..."
                     value={filterQuery}
                     onChange={(e) => setFilterQuery(e.target.value)}
-                    className="w-full pl-11 pr-12 py-2.5 rounded-full text-sm text-white focus:outline-none transition-all"
+                    className="w-full pl-11 pr-12 py-2.5 rounded-xl text-sm text-app-text-primary bg-app-bg border border-app-border focus:outline-none focus:border-app-blue transition-all"
                     style={{
-                      backdropFilter: 'blur(10px)',
-                      background: 'rgba(255, 255, 255, 0.08)',
-                      border: '1px solid rgba(255, 255, 255, 0.15)',
-                      boxShadow: 'inset 0px 2px 4px 0px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset',
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 400,
-                      textRendering: 'optimizeLegibility',
-                    }}
-                    onFocus={(e) => {
-                      e.target.style.border = '1px solid #4A90E2';
-                      e.target.style.boxShadow = 'inset 0px 2px 4px 0px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(74, 144, 226, 0.3), 0 0 8px rgba(74, 144, 226, 0.2)';
-                    }}
-                    onBlur={(e) => {
-                      e.target.style.border = '1px solid rgba(255, 255, 255, 0.15)';
-                      e.target.style.boxShadow = 'inset 0px 2px 4px 0px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(255, 255, 255, 0.05) inset';
                     }}
                   />
                   <style>{`
@@ -974,7 +938,7 @@ const MarketWatch = () => {
                       color: rgba(200, 200, 200, 0.7) !important;
                       font-weight: 300 !important;
                       font-size: 0.875rem !important;
-                      font-style: italic !important;
+                      
                     }
                   `}</style>
                   {/* Plus Button - Glowing Orb Effect with Soft Pulsating Glow */}
@@ -1006,16 +970,15 @@ const MarketWatch = () => {
       {/* Phase 2: Navigation Tabs - Underline Style - Fixed on Mobile */}
       <div 
         ref={tabsContainerRef}
-        className="flex-shrink-0 relative z-30 sticky top-0 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 sm:px-6 py-3 border-b"
-        style={{ 
+        className="flex-shrink-0 sticky top-0 z-30 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 sm:px-6 py-2.5 border-b"
+          style={{
           transform: 'translateZ(0)',
           borderColor: 'rgba(255, 255, 255, 0.08)',
-          willChange: 'transform',
           background: 'rgba(2, 6, 23, 0.95)',
           backdropFilter: 'blur(20px)',
         }}
       >
-        <div className="flex gap-4 sm:gap-6 items-center min-w-max">
+        <div className="flex gap-4 sm:gap-6 items-center justify-center min-w-max">
           {(() => {
             // Don't reorder tabs, show them in original order
             return tabs.map((tab) => (
@@ -1075,23 +1038,19 @@ const MarketWatch = () => {
       </div>
 
       {/* Phase 2: Market Watch Table - Dominant Glassmorphism Panel */}
-      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-24 premium-scrollbar" style={{ 
+      <div ref={scrollContainerRef} className="flex-1 overflow-y-auto relative z-10 px-3 sm:px-6 pb-20 premium-scrollbar" style={{ 
         transform: 'translateZ(0)', 
         minHeight: 0,
         WebkitOverflowScrolling: 'touch',
         overscrollBehavior: 'contain',
       }}>
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="text-center">
-              <div 
-                className="animate-spin rounded-full h-10 w-10 border-2 border-cyan-500 border-t-transparent mx-auto mb-3"
-                style={{
-                  boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)',
-                }}
-              ></div>
-              <p className="text-white text-sm font-medium" style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}>Loading market data...</p>
+          <div className="flex flex-col items-center justify-center py-20 px-4">
+            <div className="relative w-12 h-12 mb-4">
+              <div className="absolute inset-0 border-3 border-app-border rounded-full"></div>
+              <div className="absolute inset-0 border-3 border-app-blue border-t-transparent rounded-full animate-spin"></div>
             </div>
+            <p className="text-app-text-primary text-sm font-medium">Loading market data...</p>
           </div>
         ) : filteredSymbols.length > 0 ? (
           <div 
@@ -1174,7 +1133,9 @@ const MarketWatch = () => {
                 if (closeUSD > 0 && ltpUSD > 0) {
                   // Calculate change from close for percentage calculation
                   const changeFromCloseUSD = ltpUSD - closeUSD;
-                  changePercent = ((changeFromCloseUSD / closeUSD) * 100).toFixed(2);
+                  const calculatedPercent = ((changeFromCloseUSD / closeUSD) * 100);
+                  // Validate percentage - if unreasonably large (>50%), show 0.00
+                  changePercent = (Math.abs(calculatedPercent) <= 50) ? calculatedPercent.toFixed(2) : '0.00';
                 } else {
                   // If close price not available, cannot calculate accurate percentage
                   changePercent = '0.00';
@@ -1197,7 +1158,9 @@ const MarketWatch = () => {
                 if (closePrice > 0 && ltpValue > 0) {
                   // Calculate change from close for percentage calculation
                   const changeFromClose = ltpValue - closePrice;
-                  changePercent = ((changeFromClose / closePrice) * 100).toFixed(2);
+                  const calculatedPercent = ((changeFromClose / closePrice) * 100);
+                  // Validate percentage - if unreasonably large (>50%), show 0.00
+                  changePercent = (Math.abs(calculatedPercent) <= 50) ? calculatedPercent.toFixed(2) : '0.00';
                 } else if (chgFromWS !== 0 && closePrice === 0) {
                   // Fallback: if WebSocket provides chg (which is change from close) but close is 0,
                   // derive close price: close = ltp - chg, then calculate percentage
@@ -1255,8 +1218,16 @@ const MarketWatch = () => {
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.closeUSD || symbol.close || 0);
                 
+                // Validate change value - very strict validation
+                const absChg = Math.abs(chgPrice);
+                // Must have valid close price to calculate percentage properly
+                const hasValidClose = closePrice > 0 && ltpPrice > 0;
+                const isReasonableAbsolute = absChg < 50; // USD change shouldn't exceed 50
+                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
+                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                
                 ltpDisplay = ltpPrice > 0 ? formatFXPrice(ltpPrice, exchangeType, symbolName) : '-';
-                chgDisplay = chgPrice !== 0 ? (chgPrice > 0 ? '+' : '') + formatFXPrice(chgPrice, exchangeType, symbolName) : '-';
+                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + formatFXPrice(chgPrice, exchangeType, symbolName) : '-';
                 highDisplay = highPrice > 0 ? formatFXPrice(highPrice, exchangeType, symbolName) : '-';
                 lowDisplay = lowPrice > 0 ? formatFXPrice(lowPrice, exchangeType, symbolName) : '-';
                 openDisplay = openPrice > 0 ? formatFXPrice(openPrice, exchangeType, symbolName) : '-';
@@ -1269,8 +1240,16 @@ const MarketWatch = () => {
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.close || 0);
                 
+                // Validate change value - very strict validation
+                const absChg = Math.abs(chgPrice);
+                // Must have valid close price to calculate percentage properly
+                const hasValidClose = closePrice > 0 && ltpPrice > 0;
+                const isReasonableAbsolute = absChg < 500; // INR change shouldn't exceed 500
+                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
+                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                
                 ltpDisplay = ltpPrice > 0 ? ltpPrice.toString() : '-';
-                chgDisplay = chgPrice !== 0 ? (chgPrice > 0 ? '+' : '') + chgPrice.toString() : '-';
+                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + chgPrice.toString() : '-';
                 highDisplay = highPrice > 0 ? highPrice.toString() : '-';
                 lowDisplay = lowPrice > 0 ? lowPrice.toString() : '-';
                 openDisplay = openPrice > 0 ? openPrice.toString() : '-';
@@ -1474,111 +1453,111 @@ const MarketWatch = () => {
                   
                   {/* Desktop Layout - Grid */}
                   <div className="hidden sm:contents">
-                    {/* SYMBOLS Column - Premium Typography */}
-                    <div className="flex items-center min-w-0 relative z-10">
+                  {/* SYMBOLS Column - Premium Typography */}
+                  <div className="flex items-center min-w-0 relative z-10">
                       <div className="overflow-hidden w-full" style={{ 
-                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                        textRendering: 'optimizeLegibility',
-                      }}>
+                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                      textRendering: 'optimizeLegibility',
+                    }}>
                         <div className="flex items-center gap-1 flex-wrap">
-                          <span 
+                        <span 
                             className="text-sm text-white font-semibold"
+                          style={{
+                            color: '#FFFFFF',
+                            fontWeight: 600,
+                            fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                            textRendering: 'optimizeLegibility',
+                          }}
+                        >
+                          {symbolDisplay}
+                        </span>
+                        {formattedDate && (
+                          <span 
+                              className="text-xs px-2 py-0.5 rounded-full transition-all duration-200"
                             style={{
+                              background: '#1A3C6B',
                               color: '#FFFFFF',
-                              fontWeight: 600,
+                              fontWeight: 500,
+                              fontSize: '0.625rem',
+                              boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
                               fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                               textRendering: 'optimizeLegibility',
                             }}
                           >
-                            {symbolDisplay}
+                            {formattedDate}
                           </span>
-                          {formattedDate && (
-                            <span 
-                              className="text-xs px-2 py-0.5 rounded-full transition-all duration-200"
-                              style={{
-                                background: '#1A3C6B',
-                                color: '#FFFFFF',
-                                fontWeight: 500,
-                                fontSize: '0.625rem',
-                                boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
-                                fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                                textRendering: 'optimizeLegibility',
-                              }}
-                            >
-                              {formattedDate}
-                            </span>
-                          )}
-                        </div>
-                        <div className="mt-1 flex items-center gap-1.5">
-                          <span className="text-[10px] pr-1" style={{ 
-                            fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                            fontWeight: 400,
-                            color: '#8090A0',
-                            fontSize: '0.65rem',
-                            textRendering: 'optimizeLegibility',
-                          }}>{symbol.ExchangeType}</span>
-                          <span className="text-[10px]" style={{ 
-                            fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                            fontWeight: 400,
-                            color: '#8090A0',
-                            fontSize: '0.65rem',
-                            textRendering: 'optimizeLegibility',
-                          }}>Lot: {symbol.Lotsize}</span>
-                        </div>
+                        )}
+                      </div>
+                      <div className="mt-1 flex items-center gap-1.5">
+                        <span className="text-[10px] pr-1" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 400,
+                          color: '#8090A0',
+                          fontSize: '0.65rem',
+                          textRendering: 'optimizeLegibility',
+                        }}>{symbol.ExchangeType}</span>
+                        <span className="text-[10px]" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 400,
+                          color: '#8090A0',
+                          fontSize: '0.65rem',
+                          textRendering: 'optimizeLegibility',
+                        }}>Lot: {symbol.Lotsize}</span>
                       </div>
                     </div>
-                    
+                  </div>
+                  
                     {/* ASK Column - Green Button */}
-                    <div className="text-center flex items-center justify-center relative z-10">
-                      <div 
-                        className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
-                        style={{
+                  <div className="text-center flex items-center justify-center relative z-10">
+                    <div 
+                      className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
+                      style={{
                           background: 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)',
                           border: '1px solid rgba(255, 255, 255, 0.15)',
                           boxShadow: '0 2px 10px rgba(46, 204, 113, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                         }}
                       >
                         <span className="text-white text-xs whitespace-nowrap block text-center font-bold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 700,
-                          color: '#FFFFFF',
-                          letterSpacing: '-0.01em',
-                          fontVariantNumeric: 'tabular-nums',
-                          textRendering: 'optimizeLegibility',
+                        color: '#FFFFFF',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
                           textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                        }}>
-                          {askDisplay}
-                        </span>
-                      </div>
+                      }}>
+                        {askDisplay}
+                      </span>
                     </div>
-                    
+                  </div>
+                  
                     {/* BID Column - Red Button */}
-                    <div className="text-center flex items-center justify-center relative z-10">
-                      <div 
-                        className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
-                        style={{
+                  <div className="text-center flex items-center justify-center relative z-10">
+                    <div 
+                      className="px-2 py-2 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
+                      style={{
                           background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 100%)',
                           border: '1px solid rgba(255, 255, 255, 0.15)',
                           boxShadow: '0 2px 10px rgba(231, 76, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
                         }}
                       >
                         <span className="text-white text-xs whitespace-nowrap block text-center font-bold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                           fontWeight: 700,
-                          color: '#FFFFFF',
-                          letterSpacing: '-0.01em',
-                          fontVariantNumeric: 'tabular-nums',
-                          textRendering: 'optimizeLegibility',
+                        color: '#FFFFFF',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
                           textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                        }}>
-                          {bidDisplay}
-                        </span>
-                      </div>
+                      }}>
+                        {bidDisplay}
+                      </span>
                     </div>
+                  </div>
                   
                   {/* LTP Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1592,7 +1571,7 @@ const MarketWatch = () => {
                   
                   {/* CHG Column - Professional Text with Color - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
@@ -1606,7 +1585,7 @@ const MarketWatch = () => {
                   
                   {/* HIGH Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1620,7 +1599,7 @@ const MarketWatch = () => {
                   
                   {/* LOW Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1634,7 +1613,7 @@ const MarketWatch = () => {
                   
                   {/* OPEN Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1648,7 +1627,7 @@ const MarketWatch = () => {
                   
                   {/* CLOSE Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1662,7 +1641,7 @@ const MarketWatch = () => {
                   
                   {/* OL (Open Interest) Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1676,7 +1655,7 @@ const MarketWatch = () => {
                   
                   {/* VOLUME Column - Professional Text - Hidden on Mobile */}
                   <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-[11px] sm:text-xs whitespace-nowrap truncate" style={{ 
+                    <span className="text-white text-xs whitespace-nowrap truncate" style={{ 
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                       fontWeight: 500,
                       color: '#E0E0E0',
@@ -1880,21 +1859,9 @@ const MarketWatch = () => {
             
             <div className="flex-1 overflow-y-auto -mx-2 px-2 relative z-10">
               {modalLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-10 w-10 border-2 border-cyan-500 border-t-transparent mx-auto mb-4" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)' }}></div>
-                  <p className="text-slate-400 text-sm font-medium" style={{ 
-                    fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                    textRendering: 'optimizeLegibility',
-                  }}>Loading suggestions...</p>
-                </div>
+                renderModalLoader('Loading suggestions', 'Curating the best matches')
               ) : searchLoading ? (
-                <div className="text-center py-12">
-                  <div className="animate-spin rounded-full h-10 w-10 border-2 border-cyan-500 border-t-transparent mx-auto mb-4" style={{ boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)' }}></div>
-                  <p className="text-slate-400 text-sm font-medium" style={{ 
-                    fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                    textRendering: 'optimizeLegibility',
-                  }}>Searching...</p>
-                </div>
+                renderModalLoader('Searching', 'Looking across all instruments')
               ) : searchResults.length > 0 ? (
                 <div className="space-y-2">
                   {searchResults.map((symbol) => {
@@ -2159,7 +2126,8 @@ const MarketWatch = () => {
         }
       `}</style>
     </div>
-  );
+  </>
+);
 };
 
 export default MarketWatch;
