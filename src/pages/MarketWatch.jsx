@@ -888,49 +888,68 @@ const MarketWatch = () => {
           100% { opacity: 0.15; transform: scale(0.98); }
         }
       `}</style>
-      <div className="min-h-screen sm:h-screen relative flex flex-col bg-app-bg sm:overflow-hidden">
-        {/* Subtle background gradient overlay */}
-      <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at top, rgba(0, 81, 255, 0.03) 0%, transparent 50%)' }}></div>
+      <div className="min-h-screen sm:h-screen relative flex flex-col sm:overflow-hidden" style={{ background: '#080C12' }}>
+        {/* Premium background with subtle gradient overlay */}
+      <div className="fixed inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse at top, rgba(59, 130, 246, 0.05) 0%, transparent 50%)' }}></div>
 
       {/* Phase 2: Header Section - Modern Clean Header - Fixed on Desktop Only */}
       <div className="flex-shrink-0 sm:sticky sm:top-0 z-30" style={{ 
         transform: 'translateZ(0)',
       }}>
         <div 
-          className="backdrop-blur-md relative bg-app-surface/80 border-b border-app-border"
+          className="backdrop-blur-xl relative border-b"
+          style={{
+            background: 'rgba(15, 20, 25, 0.7)',
+            borderColor: 'rgba(148, 163, 184, 0.1)',
+            backdropFilter: 'blur(20px)',
+          }}
         >
           
-          <div className="px-4 sm:px-6 py-2 sm:py-2.5 relative">
+          <div className="px-4 sm:px-8 py-4 sm:py-5 relative">
             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 sm:gap-4">
               <div className="flex items-center justify-between sm:justify-start gap-3">
                 <div className="flex-1 sm:flex-initial">
-                  {/* MarketWatch Title - Clean Modern */}
+                  {/* MarketWatch Title - Premium Gradient */}
                   <h1 
-                    className="text-xl sm:text-2xl font-bold text-app-text-primary"
+                    className="text-2xl sm:text-3xl font-extrabold"
+                    style={{
+                      background: 'linear-gradient(to right, #3B82F6, #8B5CF6)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                      filter: 'drop-shadow(0 0 20px rgba(59, 130, 246, 0.3))',
+                    }}
                   >
                     MarketWatch
                   </h1>
-                  {/* Real-time market data Subtitle */}
-                  <p 
-                    className="text-xs sm:text-sm hidden sm:block mt-1 text-app-text-secondary"
-                  >
-                    Real-time market data
-                  </p>
                 </div>
               </div>
-              <div className="w-full sm:flex-1 sm:max-w-md">
+              <div className="w-full sm:flex-1 sm:max-w-md lg:max-w-lg">
                 <div className="relative">
                   {/* Search Icon */}
-                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-app-text-tertiary pointer-events-none z-10" />
-                  {/* Search Bar - Modern Rounded */}
+                  <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 w-4 h-4 pointer-events-none z-10" style={{ color: '#64748B' }} />
+                  {/* Search Bar - Premium Glassmorphic */}
                   <input
                     type="text"
                     placeholder="Search by symbol..."
                     value={filterQuery}
                     onChange={(e) => setFilterQuery(e.target.value)}
-                    className="w-full pl-11 pr-12 py-2.5 rounded-xl text-sm text-app-text-primary bg-app-bg border border-app-border focus:outline-none focus:border-app-blue transition-all"
+                    className="w-full pl-11 pr-12 rounded-xl text-sm transition-all duration-200"
                     style={{
+                      height: '44px',
                       fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                      background: 'rgba(51, 65, 85, 0.6)',
+                      backdropFilter: 'blur(12px)',
+                      border: '1px solid rgba(148, 163, 184, 0.2)',
+                      color: '#FFFFFF',
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = '#3B82F6';
+                      e.target.style.boxShadow = '0 0 0 4px rgba(59, 130, 246, 0.2)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'rgba(148, 163, 184, 0.2)';
+                      e.target.style.boxShadow = 'none';
                     }}
                   />
                   <style>{`
@@ -941,24 +960,24 @@ const MarketWatch = () => {
                       
                     }
                   `}</style>
-                  {/* Plus Button - Glowing Orb Effect with Soft Pulsating Glow */}
+                  {/* Plus Button - Premium Blue */}
                   <button
                     onClick={handleSearchModalOpen}
-                    className="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full transition-all duration-200 flex-shrink-0 flex items-center justify-center"
+                    className="absolute right-2 top-1/2 transform -translate-y-1/2 w-9 h-9 rounded-full transition-all duration-150 flex-shrink-0 flex items-center justify-center active:scale-95"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(59, 130, 246, 1), rgba(14, 116, 144, 1))',
-                      boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                      background: '#3B82F6',
+                      boxShadow: '0 2px 8px rgba(59, 130, 246, 0.4)',
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3)';
+                      e.currentTarget.style.background = '#2563EB';
                       e.currentTarget.style.transform = 'translateY(-50%) scale(1.05)';
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.boxShadow = '0 2px 8px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)';
+                      e.currentTarget.style.background = '#3B82F6';
                       e.currentTarget.style.transform = 'translateY(-50%) scale(1)';
                     }}
                   >
-                    <Plus className="w-4 h-4 text-white" />
+                    <Plus className="w-5 h-5 text-white" />
                   </button>
                 </div>
               </div>
@@ -967,14 +986,15 @@ const MarketWatch = () => {
         </div>
       </div>
 
-      {/* Phase 2: Navigation Tabs - Underline Style - Fixed on Desktop Only */}
+      {/* Phase 2: Navigation Tabs - Premium Glassmorphic Style - Fixed on Desktop Only */}
       <div 
         ref={tabsContainerRef}
-        className="flex-shrink-0 sm:sticky sm:top-0 z-30 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] px-4 sm:px-6 py-2.5 border-b"
+        className="flex-shrink-0 sm:sticky sm:top-0 z-30 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] px-4 sm:px-8 border-b"
           style={{
+          height: '56px',
           transform: 'translateZ(0)',
-          borderColor: 'rgba(255, 255, 255, 0.08)',
-          background: 'rgba(2, 6, 23, 0.95)',
+          borderColor: 'rgba(148, 163, 184, 0.1)',
+          background: 'rgba(15, 20, 25, 0.8)',
           backdropFilter: 'blur(20px)',
         }}
       >
@@ -990,32 +1010,36 @@ const MarketWatch = () => {
                   }
                 }}
                 onClick={() => handleTabChange(tab.id)}
-                className={`relative flex-shrink-0 py-2.5 px-2 sm:px-3 text-xs sm:text-sm transition-all duration-200 whitespace-nowrap ${
+                className={`relative flex-shrink-0 px-6 py-4 text-sm font-medium transition-all duration-200 whitespace-nowrap rounded-t-lg ${
                   activeTab === tab.id ? '' : ''
                 }`}
                 style={{
                   fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                   textRendering: 'optimizeLegibility',
                   ...(activeTab === tab.id ? {
-                    // Active Tab - White text with underline
-                    color: '#FFFFFF',
+                    // Active Tab - Blue with subtle background
+                    color: '#3B82F6',
                     fontWeight: 600,
-                    letterSpacing: '-0.01em',
+                    background: 'rgba(59, 130, 246, 0.1)',
+                    borderBottom: '2px solid #3B82F6',
                   } : {
-                    // Inactive Tab - Muted color
-                    color: 'rgba(180, 190, 200, 0.7)',
-                    fontWeight: 400,
+                    // Inactive Tab - Gray text
+                    color: '#94A3B8',
+                    fontWeight: 500,
+                    background: 'transparent',
                   })
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== tab.id) {
-                    e.currentTarget.style.color = 'rgba(255, 255, 255, 0.9)';
-                    e.currentTarget.style.transition = 'all 0.15s ease-out';
+                    e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                    e.currentTarget.style.color = '#FFFFFF';
+                    e.currentTarget.style.transition = 'all 0.2s ease-out';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (activeTab !== tab.id) {
-                    e.currentTarget.style.color = 'rgba(180, 190, 200, 0.7)';
+                    e.currentTarget.style.background = 'transparent';
+                    e.currentTarget.style.color = '#94A3B8';
                   }
                 }}
               >
@@ -1052,58 +1076,699 @@ const MarketWatch = () => {
             <p className="text-app-text-primary text-sm font-medium">Loading market data...</p>
           </div>
         ) : filteredSymbols.length > 0 ? (
-          <div 
-            className="rounded-xl sm:rounded-2xl backdrop-blur-[25px] mt-3 sm:mt-4 overflow-hidden relative"
-            style={{
-              background: 'rgba(255, 255, 255, 0.04)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
-              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6)',
-            }}
-          >
-            {/* Noise Texture Overlay */}
-            <div 
-              className="absolute inset-0 pointer-events-none rounded-2xl"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
-                opacity: 0.03,
-                mixBlendMode: 'overlay',
-                borderRadius: '1rem',
-              }}
-            ></div>
-            {/* Table Headers - Desktop Only (Mobile uses card layout) */}
-            <div 
-              className="hidden sm:block sticky top-0 z-20 px-4 py-3.5 border-b"
-              style={{
-                background: 'rgba(0, 0, 0, 0.4)',
-                backdropFilter: 'blur(20px)',
-                borderColor: 'rgba(255, 255, 255, 0.08)',
-                boxShadow: '0 2px 12px rgba(0, 0, 0, 0.4)',
-              }}
-            >
-              {/* Desktop: All columns */}
-              <div className="grid grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] gap-2 text-sm uppercase relative z-10" style={{ 
-                fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                fontWeight: 600,
-                letterSpacing: '0.05em',
-                color: '#FFFFFF',
-                textTransform: 'uppercase',
-                textRendering: 'optimizeLegibility',
-              }}>
-                <div className="text-left">SYMBOLS</div>
-                <div className="text-center">ASK</div>
-                <div className="text-center">BID</div>
-                <div className="text-center">LTP</div>
-                <div className="text-center">CHG</div>
-                <div className="text-center">HIGH</div>
-                <div className="text-center">LOW</div>
-                <div className="text-center">OPEN</div>
-                <div className="text-center">CLOSE</div>
-                <div className="text-center">OL</div>
-                <div className="text-center">VOL</div>
+          <>
+            {/* Desktop Only: Premium Glassmorphism Container */}
+            <div className="hidden sm:block px-8 mt-6">
+              <div 
+                className="rounded-xl backdrop-blur-sm overflow-hidden relative"
+                style={{
+                  background: 'rgba(26, 31, 40, 0.5)',
+                  border: '1px solid rgba(148, 163, 184, 0.1)',
+                  boxShadow: '0 20px 60px rgba(0, 0, 0, 0.7)',
+                  padding: '24px',
+                }}
+              >
+                {/* Noise Texture Overlay */}
+                <div 
+                  className="absolute inset-0 pointer-events-none rounded-2xl"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulance type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`,
+                    opacity: 0.03,
+                    mixBlendMode: 'overlay',
+                    borderRadius: '1rem',
+                  }}
+                ></div>
+                {/* Table Headers - Desktop Only - Premium Style */}
+                <div 
+                  className="sticky top-0 z-20 py-3 px-5 border-b"
+                  style={{
+                    background: 'rgba(51, 65, 85, 0.3)',
+                    backdropFilter: 'blur(20px)',
+                    borderColor: 'rgba(148, 163, 184, 0.2)',
+                  }}
+                >
+                  <div className="grid grid-cols-[1.5fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] gap-4 relative z-10" style={{ 
+                    fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    letterSpacing: '0.1em',
+                    color: '#64748B',
+                    textTransform: 'uppercase',
+                    textRendering: 'optimizeLegibility',
+                  }}>
+                    <div className="text-left">SYMBOLS</div>
+                    <div className="text-center">ASK</div>
+                    <div className="text-center">BID</div>
+                    <div className="text-center">LTP</div>
+                    <div className="text-center">CHG</div>
+                    <div className="text-center">HIGH</div>
+                    <div className="text-center">LOW</div>
+                    <div className="text-center">OPEN</div>
+                    <div className="text-center">CLOSE</div>
+                    <div className="text-center">OL</div>
+                    <div className="text-center">VOL</div>
+                  </div>
+                </div>
+                
+                <div className="bg-transparent relative z-10">
+                {filteredSymbols.map((symbol) => {
+              // Check if this is a Crypto/Forex/Commodity tab (FX tabs)
+              const isFXTab = ['CRYPTO', 'FOREX', 'COMMODITY'].includes(activeTab);
+              
+              let changeValue, ltpValue, prevLtpValue, changePercent;
+              
+              if (isFXTab) {
+                // For FX symbols, use USD prices for percentage calculation
+                const ltpUSD = parseFloat(symbol.ltpUSD || 0);
+                // Get close price in USD (convert from INR close if needed, or use stored closeUSD)
+                const closeINR = parseFloat(symbol.close || 0);
+                const storedCloseUSD = parseFloat(symbol.closeUSD || 0);
+                const closeUSD = storedCloseUSD > 0 ? storedCloseUSD : (closeINR > 0 && usdToInrRate > 0 ? closeINR / usdToInrRate : 0);
+                
+                // For display: show intraday change (from previous tick) - this is what chgUSD represents
+                const prevLtpUSD = parseFloat(symbol.prevLtpUSD || 0);
+                // Use chgUSD if available (intraday change), otherwise calculate from prevLtp
+                const chgUSDValue = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : 0);
+                changeValue = chgUSDValue !== 0 ? chgUSDValue : (prevLtpUSD > 0 ? (ltpUSD - prevLtpUSD) : 0);
+                
+                ltpValue = ltpUSD;
+                prevLtpValue = prevLtpUSD || ltpUSD;
+                
+                // For percentage: ALWAYS use close price as base (standard trading calculation)
+                // Percentage = ((Current Price - Close Price) / Close Price) * 100
+                if (closeUSD > 0 && ltpUSD > 0) {
+                  // Calculate change from close for percentage calculation
+                  const changeFromCloseUSD = ltpUSD - closeUSD;
+                  const calculatedPercent = ((changeFromCloseUSD / closeUSD) * 100);
+                  // Validate percentage - if unreasonably large (>50%), show 0.00
+                  changePercent = (Math.abs(calculatedPercent) <= 50) ? calculatedPercent.toFixed(2) : '0.00';
+                } else {
+                  // If close price not available, cannot calculate accurate percentage
+                  changePercent = '0.00';
+                }
+              } else {
+                // For MCX/NSE/OPT, use INR prices
+                ltpValue = parseFloat(symbol.ltp || 0);
+                const closePrice = parseFloat(symbol.close || 0);
+                const prevLtp = parseFloat(symbol.prevLtp || 0);
+                
+                // For display: use chg from WebSocket (this is change from close for MCX/NSE)
+                // If chg is 0 or not available, calculate from prevLtp for intraday change display
+                const chgFromWS = parseFloat(symbol.chg || 0);
+                changeValue = chgFromWS !== 0 ? chgFromWS : (prevLtp > 0 ? (ltpValue - prevLtp) : 0);
+                
+                prevLtpValue = prevLtp || ltpValue;
+                
+                // For percentage: ALWAYS use close price as base (standard trading calculation)
+                // Percentage = ((Current Price - Close Price) / Close Price) * 100
+                if (closePrice > 0 && ltpValue > 0) {
+                  // Calculate change from close for percentage calculation
+                  const changeFromClose = ltpValue - closePrice;
+                  const calculatedPercent = ((changeFromClose / closePrice) * 100);
+                  // Validate percentage - if unreasonably large (>50%), show 0.00
+                  changePercent = (Math.abs(calculatedPercent) <= 50) ? calculatedPercent.toFixed(2) : '0.00';
+                } else if (chgFromWS !== 0 && closePrice === 0) {
+                  // Fallback: if WebSocket provides chg (which is change from close) but close is 0,
+                  // derive close price: close = ltp - chg, then calculate percentage
+                  const derivedClose = chgFromWS;
+                  if (derivedClose > 0) {
+                    changePercent = chgFromWS
+                  } else {
+                    changePercent = '0.00';
+                  }
+                } else {
+                  // If close price not available and can't derive it, cannot calculate accurate percentage
+                  changePercent = '0.00';
+                }
+              }
+              
+              const isPositive = changeValue >= 0;
+              const changeColor = isPositive ? 'text-emerald-400' : 'text-red-400';
+              
+              // Format prices based on exchange type
+              let bidDisplay, askDisplay;
+              const symbolNameParts = symbol.SymbolName?.split('_') || [];
+              // Format symbol name with slash for crypto/forex/commodity
+              const symbolDisplay = formatSymbolWithSlash(symbolNameParts[0] || 'N/A', symbol.ExchangeType || activeTab);
+              
+              // Extract and format date for MCX, NSE, OPT tabs
+              const showDate = ['MCX', 'NSE', 'OPT'].includes(activeTab);
+              const datePart = showDate && symbolNameParts.length > 1 ? symbolNameParts[1] : null;
+              const formattedDate = datePart ? parseAndFormatDate(datePart) : null;
+              
+              if (isFXTab) {
+                const exchangeType = symbol.ExchangeType || activeTab;
+                const symbolName = symbol.SymbolName || '';
+                const bidPrice = parseFloat(symbol.sellUSD || symbol.sell || 0);
+                const askPrice = parseFloat(symbol.buyUSD || symbol.buy || 0);
+                bidDisplay = bidPrice > 0 ? formatFXPrice(bidPrice, exchangeType, symbolName) : '-';
+                askDisplay = askPrice > 0 ? formatFXPrice(askPrice, exchangeType, symbolName) : '-';
+              } else {
+                // MCX/NSE/OPTIONS: Show raw prices without rounding
+                const bidPrice = parseFloat(symbol.sell || 0);
+                const askPrice = parseFloat(symbol.buy || 0);
+                bidDisplay = bidPrice > 0 ? bidPrice.toString() : '-';
+                askDisplay = askPrice > 0 ? askPrice.toString() : '-';
+              }
+              
+              // Format additional values
+              let ltpDisplay, chgDisplay, highDisplay, lowDisplay, openDisplay, closeDisplay, oiDisplay, volumeDisplay;
+              
+              if (isFXTab) {
+                const exchangeType = symbol.ExchangeType || activeTab;
+                const symbolName = symbol.SymbolName || '';
+                const ltpPrice = parseFloat(symbol.ltpUSD || symbol.ltp || 0);
+                const chgPrice = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : symbol.chg || 0);
+                const highPrice = parseFloat(symbol.high || 0);
+                const lowPrice = parseFloat(symbol.low || 0);
+                const openPrice = parseFloat(symbol.open || 0);
+                const closePrice = parseFloat(symbol.closeUSD || symbol.close || 0);
+                
+                // Validate change value - very strict validation
+                const absChg = Math.abs(chgPrice);
+                // Must have valid close price to calculate percentage properly
+                const hasValidClose = closePrice > 0 && ltpPrice > 0;
+                const isReasonableAbsolute = absChg < 50; // USD change shouldn't exceed 50
+                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
+                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                
+                ltpDisplay = ltpPrice > 0 ? formatFXPrice(ltpPrice, exchangeType, symbolName) : '-';
+                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + formatFXPrice(chgPrice, exchangeType, symbolName) : '-';
+                highDisplay = highPrice > 0 ? formatFXPrice(highPrice, exchangeType, symbolName) : '-';
+                lowDisplay = lowPrice > 0 ? formatFXPrice(lowPrice, exchangeType, symbolName) : '-';
+                openDisplay = openPrice > 0 ? formatFXPrice(openPrice, exchangeType, symbolName) : '-';
+                closeDisplay = closePrice > 0 ? formatFXPrice(closePrice, exchangeType, symbolName) : '-';
+              } else {
+                const ltpPrice = parseFloat(symbol.ltp || 0);
+                const chgPrice = parseFloat(symbol.chg || 0);
+                const highPrice = parseFloat(symbol.high || 0);
+                const lowPrice = parseFloat(symbol.low || 0);
+                const openPrice = parseFloat(symbol.open || 0);
+                const closePrice = parseFloat(symbol.close || 0);
+                
+                // Validate change value - very strict validation
+                const absChg = Math.abs(chgPrice);
+                // Must have valid close price to calculate percentage properly
+                const hasValidClose = closePrice > 0 && ltpPrice > 0;
+                const isReasonableAbsolute = absChg < 500; // INR change shouldn't exceed 500
+                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
+                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                
+                ltpDisplay = ltpPrice > 0 ? ltpPrice.toString() : '-';
+                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + chgPrice.toString() : '-';
+                highDisplay = highPrice > 0 ? highPrice.toString() : '-';
+                lowDisplay = lowPrice > 0 ? lowPrice.toString() : '-';
+                openDisplay = openPrice > 0 ? openPrice.toString() : '-';
+                closeDisplay = closePrice > 0 ? closePrice.toString() : '-';
+              }
+              
+              const oiValue = parseFloat(symbol.oi || 0);
+              const volumeValue = parseFloat(symbol.volume || 0);
+              oiDisplay = oiValue > 0 ? oiValue.toLocaleString() : '-';
+              volumeDisplay = volumeValue > 0 ? volumeValue.toLocaleString() : '-';
+              
+              // Determine color for CHG based on positive/negative - Premium Emerald/Rose
+              const chgColor = parseFloat(symbol.chg || 0) >= 0 
+                ? 'linear-gradient(to bottom right, #059669, #10B981)' 
+                : 'linear-gradient(to bottom right, #DC2626, #EF4444)';
+              
+              // Premium table layout for all exchanges
+              const rowIndex = filteredSymbols.indexOf(symbol);
+              return (
+                <div
+                  key={symbol.SymbolToken}
+                  className="mb-3 sm:mb-0 rounded-xl sm:rounded-none bg-app-surface/40 border sm:border-0 sm:border-b sm:grid sm:grid-cols-[1.5fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] sm:gap-4 px-4 sm:px-5 py-4 transition-all duration-200 cursor-pointer group touch-manipulation relative"
+                  onClick={() => handleSymbolClick(symbol)}
+                  style={{
+                    fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                    minHeight: window.innerWidth >= 640 ? '64px' : 'auto',
+                    borderColor: 'rgba(148, 163, 184, 0.1)',
+                    textRendering: 'optimizeLegibility',
+                    boxShadow: window.innerWidth < 640 ? '0 2px 8px rgba(0, 0, 0, 0.3)' : 'none',
+                    background: window.innerWidth >= 640 && rowIndex % 2 === 1 ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (window.innerWidth >= 640) {
+                      e.currentTarget.style.background = 'rgba(59, 130, 246, 0.05)';
+                      e.currentTarget.style.transform = 'translateY(-2px)';
+                      e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.2)';
+                      e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)';
+                      e.currentTarget.style.zIndex = '10';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (window.innerWidth >= 640) {
+                      e.currentTarget.style.background = rowIndex % 2 === 1 ? 'rgba(255, 255, 255, 0.02)' : 'transparent';
+                      e.currentTarget.style.transform = 'translateY(0)';
+                      e.currentTarget.style.boxShadow = 'none';
+                      e.currentTarget.style.borderColor = 'rgba(148, 163, 184, 0.1)';
+                      e.currentTarget.style.zIndex = 'auto';
+                    } else {
+                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                    }
+                  }}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.background = 'rgba(59, 130, 246, 0.12)';
+                  }}
+                  onTouchEnd={(e) => {
+                    setTimeout(() => {
+                      if (window.innerWidth >= 640) {
+                        e.currentTarget.style.background = rowIndex % 2 === 1 ? 'rgba(255, 255, 255, 0.02)' : 'transparent';
+                      } else {
+                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+                      }
+                    }, 150);
+                  }}
+                >
+                  {/* Mobile Layout - Card Style */}
+                  <div className="sm:hidden space-y-3">
+                    {/* Top Row: Symbol, Ask, Bid */}
+                    <div className="flex items-start justify-between gap-3">
+                      {/* Symbol Section */}
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap mb-1">
+                          <span 
+                            className="text-base text-white font-semibold"
+                            style={{
+                              color: '#FFFFFF',
+                              fontWeight: 600,
+                              fontSize: '1rem',
+                              fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                              textRendering: 'optimizeLegibility',
+                            }}
+                          >
+                            {symbolDisplay}
+                          </span>
+                          {formattedDate && (
+                            <span 
+                              className="text-[11px] px-1.5 py-0.5 rounded"
+                              style={{
+                                background: 'rgba(26, 60, 107, 0.6)',
+                                color: '#FFFFFF',
+                                fontWeight: 500,
+                                fontSize: '0.6875rem',
+                                fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                                textRendering: 'optimizeLegibility',
+                              }}
+                            >
+                              {formattedDate}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                      
+                      {/* Ask and Bid Buttons - Premium Emerald/Rose */}
+                      <div className="flex items-center gap-1.5 flex-shrink-0">
+                        {/* ASK Button - Emerald */}
+                        <div 
+                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
+                          style={{
+                            background: 'linear-gradient(135deg, #10B981 0%, #059669 100%)',
+                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            boxShadow: '0 1px 4px rgba(16, 185, 129, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                          }}
+                        >
+                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
+                            fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                            fontWeight: 600,
+                            fontSize: '0.75rem',
+                            color: '#FFFFFF',
+                            letterSpacing: '-0.01em',
+                            fontVariantNumeric: 'tabular-nums',
+                            textRendering: 'optimizeLegibility',
+                          }}>
+                            {askDisplay}
+                          </span>
+                        </div>
+                        
+                        {/* BID Button - Rose */}
+                        <div 
+                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
+                          style={{
+                            background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                            border: '1px solid rgba(255, 255, 255, 0.15)',
+                            boxShadow: '0 1px 4px rgba(239, 68, 68, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                          }}
+                        >
+                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
+                            fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                            fontWeight: 600,
+                            fontSize: '0.75rem',
+                            color: '#FFFFFF',
+                            letterSpacing: '-0.01em',
+                            fontVariantNumeric: 'tabular-nums',
+                            textRendering: 'optimizeLegibility',
+                          }}>
+                            {bidDisplay}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Bottom Row: Chg, High, Low, Ltp - Stacked Labels */}
+                    <div className="flex items-stretch justify-between gap-3 pt-2 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 500,
+                          fontSize: '0.625rem',
+                          textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>Chg</span>
+                        <span className="text-xs font-semibold" style={{ 
+                          fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          color: parseFloat(symbol.chg || 0) >= 0 ? '#10B981' : '#EF4444',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
+                        }}>
+                          {chgDisplay}
+                        </span>
+                      </div>
+                      
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 500,
+                          fontSize: '0.625rem',
+                          textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>High</span>
+                        <span className="text-xs text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
+                        }}>
+                          {highDisplay}
+                        </span>
+                      </div>
+                      
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 500,
+                          fontSize: '0.625rem',
+                          textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>Low</span>
+                        <span className="text-xs text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
+                        }}>
+                          {lowDisplay}
+                        </span>
+                      </div>
+                      
+                      <div className="flex flex-col items-center gap-0.5">
+                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 500,
+                          fontSize: '0.625rem',
+                          textRendering: 'optimizeLegibility',
+                          letterSpacing: '0.02em',
+                        }}>LTP</span>
+                        <span className="text-xs text-white font-semibold" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 600,
+                          fontSize: '0.75rem',
+                          textRendering: 'optimizeLegibility',
+                          fontVariantNumeric: 'tabular-nums',
+                        }}>
+                          {ltpDisplay}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Desktop Layout - Grid */}
+                  <div className="hidden sm:contents">
+                  {/* SYMBOLS Column - Premium Typography */}
+                  <div className="flex items-center min-w-0 relative z-10">
+                      <div className="overflow-hidden w-full" style={{ 
+                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                        <div className="flex items-center gap-2 flex-wrap">
+                        <span 
+                            className="text-base text-white font-semibold"
+                          style={{
+                            color: '#FFFFFF',
+                            fontWeight: 600,
+                            fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                            textRendering: 'optimizeLegibility',
+                          }}
+                        >
+                          {symbolDisplay}
+                        </span>
+                        {formattedDate && (
+                          <span 
+                              className="text-xs px-2 py-1 rounded-full transition-all duration-200"
+                            style={{
+                              background: '#1A3C6B',
+                              color: '#FFFFFF',
+                              fontWeight: 500,
+                              fontSize: '0.6875rem',
+                              boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
+                              fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                              textRendering: 'optimizeLegibility',
+                            }}
+                          >
+                            {formattedDate}
+                          </span>
+                        )}
+                      </div>
+                      <div className="mt-1.5 flex items-center gap-2">
+                        <span className="text-xs pr-1" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 400,
+                          color: '#8090A0',
+                          fontSize: '0.75rem',
+                          textRendering: 'optimizeLegibility',
+                        }}>{symbol.ExchangeType}</span>
+                        <span className="text-xs" style={{ 
+                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                          fontWeight: 400,
+                          color: '#8090A0',
+                          fontSize: '0.75rem',
+                          textRendering: 'optimizeLegibility',
+                        }}>Lot: {symbol.Lotsize}</span>
+                      </div>
+                    </div>
+                  </div>
+                  
+                    {/* ASK Column - Subtle Emerald Outlined Button (70% smaller) */}
+                  <div className="text-center flex items-center justify-center relative z-10">
+                    <div 
+                      className="px-3 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center"
+                      style={{
+                        background: 'transparent',
+                        border: '1px solid rgba(16, 185, 129, 0.3)',
+                        width: '80px',
+                        height: '32px',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(16, 185, 129, 0.1)';
+                        e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+                      }}
+                    >
+                      <span className="text-sm whitespace-nowrap block text-center font-medium" style={{ 
+                        fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                        color: '#10B981',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
+                      }}>
+                        {askDisplay}
+                      </span>
+                    </div>
+                  </div>
+                  
+                    {/* BID Column - Subtle Rose Outlined Button (70% smaller) */}
+                  <div className="text-center flex items-center justify-center relative z-10">
+                    <div 
+                      className="px-3 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center"
+                      style={{
+                        background: 'transparent',
+                        border: '1px solid rgba(239, 68, 68, 0.3)',
+                        width: '80px',
+                        height: '32px',
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)';
+                        e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.5)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                      }}
+                    >
+                      <span className="text-sm whitespace-nowrap block text-center font-medium" style={{ 
+                        fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                        color: '#EF4444',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
+                      }}>
+                        {bidDisplay}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* LTP Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#FFFFFF',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {ltpDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* CHG Column - Colored Background with Monospace - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <div 
+                      className="px-3 py-2 rounded-lg"
+                      style={{
+                        background: parseFloat(symbol.chg || 0) >= 0 
+                          ? 'rgba(16, 185, 129, 0.12)' 
+                          : 'rgba(239, 68, 68, 0.12)',
+                        borderLeft: parseFloat(symbol.chg || 0) >= 0 
+                          ? '4px solid #10B981' 
+                          : '4px solid #EF4444',
+                      }}
+                    >
+                      <span className="text-sm whitespace-nowrap font-semibold flex items-center gap-1" style={{ 
+                        fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                        color: parseFloat(symbol.chg || 0) >= 0 ? '#10B981' : '#EF4444',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
+                      }}>
+                        <span>{parseFloat(symbol.chg || 0) >= 0 ? '↑' : '↓'}</span>
+                        {chgDisplay}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* HIGH Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#94A3B8',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {highDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* LOW Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#94A3B8',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {lowDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* OPEN Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#94A3B8',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {openDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* CLOSE Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#94A3B8',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {closeDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* OL (Open Interest) Column - Monospace Numbers - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <span className="text-sm whitespace-nowrap truncate" style={{ 
+                      fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                      fontWeight: 500,
+                      color: '#94A3B8',
+                      letterSpacing: '-0.01em',
+                      fontVariantNumeric: 'tabular-nums',
+                      textRendering: 'optimizeLegibility',
+                    }}>
+                      {oiDisplay}
+                    </span>
+                  </div>
+                  
+                  {/* VOLUME Column - Monospace Numbers with Visual Bar - Hidden on Mobile */}
+                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
+                    <div className="flex flex-col items-center w-full">
+                      <span className="text-sm whitespace-nowrap truncate mb-1" style={{ 
+                        fontFamily: "'SF Mono', 'Consolas', 'Monaco', 'Courier New', monospace",
+                        fontWeight: 600,
+                        color: '#FFFFFF',
+                        letterSpacing: '-0.01em',
+                        fontVariantNumeric: 'tabular-nums',
+                        textRendering: 'optimizeLegibility',
+                      }}>
+                        {volumeDisplay}
+                      </span>
+                      {/* Volume Bar Visualization */}
+                      <div className="w-full h-1 rounded-full" style={{ background: '#334155' }}>
+                        <div 
+                          className="h-1 rounded-full transition-all duration-300" 
+                          style={{ 
+                            width: `${Math.min(100, (parseFloat(symbol.volume || 0) / Math.max(...filteredSymbols.map(s => parseFloat(s.volume || 0)))) * 100)}%`,
+                            background: '#3B82F6'
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              );
+            })}
+                </div>
               </div>
             </div>
             
-            <div className="bg-transparent relative z-10 py-3 sm:py-0">
+            {/* Mobile Only: Distinct Cards Without Container */}
+            <div className="sm:hidden mt-3 py-3">
             {filteredSymbols.map((symbol) => {
               // Check if this is a Crypto/Forex/Commodity tab (FX tabs)
               const isFXTab = ['CRYPTO', 'FOREX', 'COMMODITY'].includes(activeTab);
@@ -1260,60 +1925,38 @@ const MarketWatch = () => {
               oiDisplay = oiValue > 0 ? oiValue.toLocaleString() : '-';
               volumeDisplay = volumeValue > 0 ? volumeValue.toLocaleString() : '-';
               
-              // Determine color for CHG based on positive/negative
+              // Determine color for CHG based on positive/negative - Premium Emerald/Rose
               const chgColor = parseFloat(symbol.chg || 0) >= 0 
-                ? 'linear-gradient(to bottom right, #27AE60, #2ECC71)' 
-                : 'linear-gradient(to bottom right, #C0392B, #E74C3C)';
-              
+                ? 'linear-gradient(to bottom right, #059669, #10B981)' 
+                : 'linear-gradient(to bottom right, #DC2626, #EF4444)';
+
               // Premium table layout for all exchanges
               return (
                 <div
                   key={symbol.SymbolToken}
-                  className="mb-3 sm:mb-0 rounded-xl sm:rounded-none bg-app-surface/40 sm:bg-transparent border sm:border-0 sm:border-b sm:grid sm:grid-cols-[1.5fr_0.9fr_0.9fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.8fr_0.7fr_0.8fr] sm:gap-2 px-4 sm:px-4 py-4 sm:py-4 transition-all duration-150 cursor-pointer group touch-manipulation relative"
+                  className="mb-3 rounded-xl bg-app-surface/40 border px-4 py-4 transition-all duration-150 cursor-pointer touch-manipulation relative"
                   onClick={() => handleSymbolClick(symbol)}
                   style={{
                     fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                     borderColor: 'rgba(255, 255, 255, 0.08)',
                     textRendering: 'optimizeLegibility',
-                    boxShadow: window.innerWidth < 640 ? '0 2px 8px rgba(0, 0, 0, 0.3)' : 'none',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(74, 144, 226, 0.08)';
-                  }}
-                  onMouseLeave={(e) => {
-                    if (window.innerWidth >= 640) {
-                      e.currentTarget.style.background = '';
-                    } else {
-                      e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
-                    }
-                  }}
-                  onTouchStart={(e) => {
-                    e.currentTarget.style.background = 'rgba(74, 144, 226, 0.12)';
-                  }}
-                  onTouchEnd={(e) => {
-                    setTimeout(() => {
-                      if (window.innerWidth >= 640) {
-                        e.currentTarget.style.background = '';
-                      } else {
-                        e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
-                      }
-                    }, 150);
+                    boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                   }}
                 >
                   {/* Mobile Layout - Card Style */}
-                  <div className="sm:hidden space-y-3">
+                  <div className="space-y-3">
                     {/* Top Row: Symbol, Ask, Bid */}
                     <div className="flex items-start justify-between gap-3">
                       {/* Symbol Section */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap mb-1">
-                          <span 
-                            className="text-base text-white font-semibold"
+                          <span
+                            className="font-bold text-sm truncate"
                             style={{
-                              color: '#FFFFFF',
-                              fontWeight: 600,
-                              fontSize: '1rem',
                               fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+                              fontWeight: 700,
+                              color: '#FFFFFF',
+                              fontSize: '14px',
                               textRendering: 'optimizeLegibility',
                             }}
                           >
@@ -1321,372 +1964,103 @@ const MarketWatch = () => {
                           </span>
                           {formattedDate && (
                             <span 
-                              className="text-[11px] px-1.5 py-0.5 rounded"
+                              className="text-[10px] px-2 py-0.5 rounded"
                               style={{
-                                background: 'rgba(26, 60, 107, 0.6)',
-                                color: '#FFFFFF',
-                                fontWeight: 500,
-                                fontSize: '0.6875rem',
+                                background: 'linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2))',
+                                border: '1px solid rgba(59, 130, 246, 0.3)',
+                                color: '#60A5FA',
                                 fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                                textRendering: 'optimizeLegibility',
+                                fontWeight: 500,
                               }}
                             >
                               {formattedDate}
                             </span>
                           )}
                         </div>
+                        <div className="flex items-center gap-2 mt-1.5">
+                          <span className="text-xs text-slate-400" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontWeight: 400 }}>
+                            {symbol.ExchangeType || activeTab}
+                          </span>
+                          <span className="text-slate-600">•</span>
+                          <span className="text-xs text-slate-400" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontWeight: 400 }}>
+                            Lot: {symbol.LotSize || 'N/A'}
+                          </span>
+                        </div>
                       </div>
                       
-                      {/* Ask and Bid Buttons */}
-                      <div className="flex items-center gap-1.5 flex-shrink-0">
-                        {/* ASK Button */}
-                        <div 
-                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
+                      {/* Ask/Bid Buttons */}
+                      <div className="flex gap-2 flex-shrink-0">
+                        <button 
+                          className="px-3 py-2.5 rounded-lg font-semibold text-[11px] transition-all touch-manipulation"
                           style={{
-                            background: 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
-                            boxShadow: '0 1px 4px rgba(46, 204, 113, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                          }}
-                        >
-                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
+                            background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                            color: 'white',
+                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                             fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                             fontWeight: 600,
-                            fontSize: '0.75rem',
-                            color: '#FFFFFF',
-                            letterSpacing: '-0.01em',
-                            fontVariantNumeric: 'tabular-nums',
-                            textRendering: 'optimizeLegibility',
-                          }}>
-                            {askDisplay}
-                          </span>
-                        </div>
-                        
-                        {/* BID Button */}
-                        <div 
-                          className="px-2 py-1.5 rounded-md transition-all duration-200 relative overflow-hidden flex items-center justify-center min-w-[65px]"
-                          style={{
-                            background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 100%)',
-                            border: '1px solid rgba(255, 255, 255, 0.15)',
-                            boxShadow: '0 1px 4px rgba(231, 76, 60, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Handle ASK action
                           }}
                         >
-                          <span className="text-white text-xs whitespace-nowrap block text-center font-semibold" style={{ 
+                          <div className="text-[9px] opacity-80 mb-0.5">ASK</div>
+                          <div className="text-[11px]">{askDisplay}</div>
+                        </button>
+                        <button 
+                          className="px-3 py-2.5 rounded-lg font-semibold text-[11px] transition-all touch-manipulation"
+                          style={{
+                            background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                            color: 'white',
+                            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
                             fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                             fontWeight: 600,
-                            fontSize: '0.75rem',
-                            color: '#FFFFFF',
-                            letterSpacing: '-0.01em',
-                            fontVariantNumeric: 'tabular-nums',
-                            textRendering: 'optimizeLegibility',
-                          }}>
-                            {bidDisplay}
-                          </span>
-                        </div>
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            // Handle BID action
+                          }}
+                        >
+                          <div className="text-[9px] opacity-80 mb-0.5">BID</div>
+                          <div className="text-[11px]">{bidDisplay}</div>
+                        </button>
                       </div>
                     </div>
                     
-                    {/* Bottom Row: Chg, High, Low, Ltp - Stacked Labels */}
-                    <div className="flex items-stretch justify-between gap-3 pt-2 border-t" style={{ borderColor: 'rgba(255, 255, 255, 0.08)' }}>
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 500,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                          letterSpacing: '0.02em',
-                        }}>Chg</span>
-                        <span className="text-xs font-semibold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
-                          textRendering: 'optimizeLegibility',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}>
-                          {chgDisplay}
-                        </span>
-                      </div>
-                      
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 500,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                          letterSpacing: '0.02em',
-                        }}>High</span>
-                        <span className="text-xs text-white font-semibold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          textRendering: 'optimizeLegibility',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}>
-                          {highDisplay}
-                        </span>
-                      </div>
-                      
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 500,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                          letterSpacing: '0.02em',
-                        }}>Low</span>
-                        <span className="text-xs text-white font-semibold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          textRendering: 'optimizeLegibility',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}>
-                          {lowDisplay}
-                        </span>
-                      </div>
-                      
-                      <div className="flex flex-col items-center gap-0.5">
-                        <span className="text-[10px] text-gray-400 uppercase" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 500,
-                          fontSize: '0.625rem',
-                          textRendering: 'optimizeLegibility',
-                          letterSpacing: '0.02em',
-                        }}>LTP</span>
-                        <span className="text-xs text-white font-semibold" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          textRendering: 'optimizeLegibility',
-                          fontVariantNumeric: 'tabular-nums',
-                        }}>
+                    {/* Bottom Row: Stats */}
+                    <div className="grid grid-cols-4 gap-2">
+                      <div>
+                        <div className="text-[10px] text-slate-500 mb-0.5" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}>LTP</div>
+                        <div className="text-xs text-white font-semibold" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontVariantNumeric: 'tabular-nums' }}>
                           {ltpDisplay}
-                        </span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-slate-500 mb-0.5" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}>CHG</div>
+                        <div className={`text-xs font-semibold flex flex-col items-start ${changeColor}`} style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontVariantNumeric: 'tabular-nums' }}>
+                          <span>{chgDisplay}</span>
+                          <span className="text-[10px] mt-0.5">({changePercent}%)</span>
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-slate-500 mb-0.5" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}>HIGH</div>
+                        <div className="text-xs text-white font-semibold" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontVariantNumeric: 'tabular-nums' }}>
+                          {highDisplay}
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-slate-500 mb-0.5" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" }}>LOW</div>
+                        <div className="text-xs text-white font-semibold" style={{ fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif", fontVariantNumeric: 'tabular-nums' }}>
+                          {lowDisplay}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  
-                  {/* Desktop Layout - Grid */}
-                  <div className="hidden sm:contents">
-                  {/* SYMBOLS Column - Premium Typography */}
-                  <div className="flex items-center min-w-0 relative z-10">
-                      <div className="overflow-hidden w-full" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                        <div className="flex items-center gap-2 flex-wrap">
-                        <span 
-                            className="text-base text-white font-semibold"
-                          style={{
-                            color: '#FFFFFF',
-                            fontWeight: 600,
-                            fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                            textRendering: 'optimizeLegibility',
-                          }}
-                        >
-                          {symbolDisplay}
-                        </span>
-                        {formattedDate && (
-                          <span 
-                              className="text-xs px-2 py-1 rounded-full transition-all duration-200"
-                            style={{
-                              background: '#1A3C6B',
-                              color: '#FFFFFF',
-                              fontWeight: 500,
-                              fontSize: '0.6875rem',
-                              boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4), inset 0 -1px 1px rgba(255, 255, 255, 0.1)',
-                              fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                              textRendering: 'optimizeLegibility',
-                            }}
-                          >
-                            {formattedDate}
-                          </span>
-                        )}
-                      </div>
-                      <div className="mt-1.5 flex items-center gap-2">
-                        <span className="text-xs pr-1" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          color: '#8090A0',
-                          fontSize: '0.75rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>{symbol.ExchangeType}</span>
-                        <span className="text-xs" style={{ 
-                          fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 400,
-                          color: '#8090A0',
-                          fontSize: '0.75rem',
-                          textRendering: 'optimizeLegibility',
-                        }}>Lot: {symbol.Lotsize}</span>
-                      </div>
-                    </div>
-                  </div>
-                  
-                    {/* ASK Column - Green Button */}
-                  <div className="text-center flex items-center justify-center relative z-10">
-                    <div 
-                      className="px-3 py-2.5 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
-                      style={{
-                          background: 'linear-gradient(135deg, #2ECC71 0%, #27AE60 100%)',
-                          border: '1px solid rgba(255, 255, 255, 0.15)',
-                          boxShadow: '0 2px 10px rgba(46, 204, 113, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                        }}
-                      >
-                        <span className="text-white text-sm whitespace-nowrap block text-center font-bold" style={{ 
-                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 700,
-                        color: '#FFFFFF',
-                        letterSpacing: '-0.01em',
-                        fontVariantNumeric: 'tabular-nums',
-                        textRendering: 'optimizeLegibility',
-                          textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                      }}>
-                        {askDisplay}
-                      </span>
-                    </div>
-                  </div>
-                  
-                    {/* BID Column - Red Button */}
-                  <div className="text-center flex items-center justify-center relative z-10">
-                    <div 
-                      className="px-3 py-2.5 rounded-lg transition-all duration-200 relative overflow-hidden w-full flex items-center justify-center"
-                      style={{
-                          background: 'linear-gradient(135deg, #E74C3C 0%, #C0392B 100%)',
-                          border: '1px solid rgba(255, 255, 255, 0.15)',
-                          boxShadow: '0 2px 10px rgba(231, 76, 60, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)',
-                        }}
-                      >
-                        <span className="text-white text-sm whitespace-nowrap block text-center font-bold" style={{ 
-                        fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                          fontWeight: 700,
-                        color: '#FFFFFF',
-                        letterSpacing: '-0.01em',
-                        fontVariantNumeric: 'tabular-nums',
-                        textRendering: 'optimizeLegibility',
-                          textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
-                      }}>
-                        {bidDisplay}
-                      </span>
-                    </div>
-                  </div>
-                  
-                  {/* LTP Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {ltpDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* CHG Column - Professional Text with Color - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: parseFloat(symbol.chg || 0) >= 0 ? '#2ECC71' : '#E74C3C',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {chgDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* HIGH Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {highDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* LOW Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {lowDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* OPEN Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {openDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* CLOSE Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {closeDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* OL (Open Interest) Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {oiDisplay}
-                    </span>
-                  </div>
-                  
-                  {/* VOLUME Column - Professional Text - Hidden on Mobile */}
-                  <div className="hidden sm:flex text-center items-center justify-center relative z-10">
-                    <span className="text-white text-sm whitespace-nowrap truncate" style={{ 
-                      fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
-                      fontWeight: 500,
-                      color: '#E0E0E0',
-                      letterSpacing: '-0.01em',
-                      fontVariantNumeric: 'tabular-nums',
-                      textRendering: 'optimizeLegibility',
-                    }}>
-                      {volumeDisplay}
-                    </span>
-                  </div>
                   </div>
                 </div>
               );
             })}
             </div>
-          </div>
+          </>
         ) : currentSymbols.length > 0 ? (
           <div className="flex flex-col items-center justify-center py-12 sm:py-16 text-center px-4 mt-8">
             <div className="relative mb-4 sm:mb-6">

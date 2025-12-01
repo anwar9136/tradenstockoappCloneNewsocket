@@ -264,10 +264,10 @@ const Welcome = () => {
                         {/* Header */}
                         <div className="mb-6">
                           <div className="text-slate-400 text-xs mb-2">Portfolio Value</div>
-                          <div className="text-white text-3xl font-bold mb-1">$42,305.00</div>
-                          <div className="text-green-400 text-sm font-semibold flex items-center">
-                            <ArrowUp className="w-4 h-4 mr-1" />
-                            +$1,234.56 (+3.0%)
+                          <div className="text-white text-2xl font-bold mb-1 mobile-amount">₹42,305.00</div>
+                          <div className="text-green-400 text-xs font-semibold flex items-center mobile-change">
+                            <ArrowUp className="w-3 h-3 mr-1" />
+                            +₹1,234.56 (+3.0%)
                           </div>
                         </div>
 
