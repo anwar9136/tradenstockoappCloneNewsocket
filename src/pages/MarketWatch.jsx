@@ -1758,9 +1758,9 @@ const MarketWatch = () => {
                        {symbolDisplay.charAt(0)}
                      </div>
                      <div className="flex-1 min-w-0">
-                       <div className="flex items-center gap-2 flex-wrap">
+                       <div className="flex items-center gap-1.5">
                          <div 
-                           className="text-base font-bold text-white truncate"
+                           className="text-base font-bold text-white truncate flex-shrink"
                            style={{
                              fontFamily: "'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
                            }}
@@ -1769,13 +1769,14 @@ const MarketWatch = () => {
                          </div>
                          {formattedDate && (
                            <span 
-                             className="text-xs px-2 py-0.5 rounded-full"
+                             className="px-1.5 py-0.5 rounded-full flex-shrink-0"
                              style={{
                                background: '#1A3C6B',
                                color: '#FFFFFF',
                                fontWeight: 500,
-                               fontSize: '0.7rem',
+                               fontSize: '0.6rem',
                                boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.4)',
+                               whiteSpace: 'nowrap',
                              }}
                            >
                              {formattedDate}
