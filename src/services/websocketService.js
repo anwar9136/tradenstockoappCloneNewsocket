@@ -102,7 +102,7 @@ class WebSocketService {
     }
 
     this.isConnecting = true;
-    const uri = "wss://ws.tradewingss.com/api/webapiwebsoc";
+    const uri = "wss://www.indsocket.tradenstocko.com:8084/ws";
     
     console.log(`Attempting MCX/NSE WebSocket connection (attempt ${this.reconnectAttempts + 1})...`);
     
