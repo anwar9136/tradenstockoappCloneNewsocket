@@ -196,16 +196,29 @@ const MarketWatch = () => {
                 updated = true;
                 updateCountRef.current++;
                 
+                // Calculate change percentage ourselves instead of using server value
+                // This prevents showing incorrect large values on initial updates
+                const closePrice = parseFloat(result.close_) || token.close || 0;
+                let calculatedChange = 0;
+                if (closePrice > 0 && newLtp > 0) {
+                  // Calculate percentage change: ((current - close) / close) * 100
+                  calculatedChange = ((newLtp - closePrice) / closePrice) * 100;
+                  // Validate that change is reasonable (within ±20%)
+                  if (Math.abs(calculatedChange) > 20) {
+                    calculatedChange = 0; // Reset to 0 if unreasonable
+                  }
+                }
+                
                 return {
                   ...token,
                   buy: newBuy,
                   sell: newSell,
                   ltp: newLtp,
-                  chg: parseFloat(result.change) || 0,
+                  chg: calculatedChange,
                   high: parseFloat(result.high_) || 0,
                   low: parseFloat(result.low_) || 0,
                   open: parseFloat(result.open_) || token.open || 0,
-                  close: parseFloat(result.close_) || token.close || 0, // Preserve close price
+                  close: closePrice, // Update close price
                   oi: result.oi || 0,
                   volume: result.volume || 0,
                   prevBuy: token.buy || newBuy,
@@ -280,12 +293,30 @@ const MarketWatch = () => {
             // Calculate LTP in USD (midpoint of best bid/ask)
             const ltpUSD = bestBidPriceUSD && bestAskPriceUSD ? (bestBidPriceUSD + bestAskPriceUSD) / 2 : (bestBidPriceUSD || bestAskPriceUSD || 0);
             
-            // Calculate change (difference from previous LTP in INR and USD)
-            // Use the stored previous LTP, not the current one
-            const prevLtp = token.ltp || 0;
-            const prevLtpUSD = token.ltpUSD || 0;
-            const change = prevLtp > 0 ? ltp - prevLtp : 0;
-            const changeUSD = prevLtpUSD > 0 ? ltpUSD - prevLtpUSD : 0;
+            // Calculate change percentage based on close price (not previous LTP)
+            // This prevents showing incorrect large values on updates
+            const closePrice = token.close || 0;
+            const closePriceUSD = token.closeUSD || 0;
+            
+            let calculatedChange = 0;
+            let calculatedChangeUSD = 0;
+            
+            // Calculate percentage change: ((current - close) / close) * 100
+            if (closePrice > 0 && ltp > 0) {
+              calculatedChange = ((ltp - closePrice) / closePrice) * 100;
+              // Validate reasonable change (within ±20%)
+              if (Math.abs(calculatedChange) > 20) {
+                calculatedChange = 0;
+              }
+            }
+            
+            if (closePriceUSD > 0 && ltpUSD > 0) {
+              calculatedChangeUSD = ((ltpUSD - closePriceUSD) / closePriceUSD) * 100;
+              // Validate reasonable change (within ±20%)
+              if (Math.abs(calculatedChangeUSD) > 20) {
+                calculatedChangeUSD = 0;
+              }
+            }
             
             // Only update if values actually changed
             if (token.buy !== bestAskPrice || token.sell !== bestBidPrice || token.ltp !== ltp ||
@@ -301,8 +332,8 @@ const MarketWatch = () => {
                 buyUSD: bestAskPriceUSD,
                 sellUSD: bestBidPriceUSD,
                 ltpUSD: ltpUSD,
-                chg: change,
-                chgUSD: changeUSD,
+                chg: calculatedChange,
+                chgUSD: calculatedChangeUSD,
                 high: high,
                 low: low,
                 open: token.open || 0, // Preserve open price
@@ -402,6 +433,37 @@ const MarketWatch = () => {
           closeUSD = close / usdToInrRate;
         }
         
+        // Calculate change percentage properly for both FX and MCX/NSE
+        let calculatedChange = 0;
+        let calculatedChangeUSD = 0;
+        
+        if (isFXSymbol) {
+          // For FX: Calculate based on USD prices
+          if (closeUSD > 0 && ltpUSD > 0) {
+            calculatedChangeUSD = ((ltpUSD - closeUSD) / closeUSD) * 100;
+            // Validate reasonable change (within ±20%)
+            if (Math.abs(calculatedChangeUSD) > 20) {
+              calculatedChangeUSD = 0;
+            }
+          }
+          // Also calculate INR change
+          if (close > 0 && ltp > 0) {
+            calculatedChange = ((ltp - close) / close) * 100;
+            if (Math.abs(calculatedChange) > 20) {
+              calculatedChange = 0;
+            }
+          }
+        } else {
+          // For MCX/NSE: Calculate based on INR prices
+          if (close > 0 && ltp > 0) {
+            calculatedChange = ((ltp - close) / close) * 100;
+            // Validate reasonable change (within ±20%)
+            if (Math.abs(calculatedChange) > 20) {
+              calculatedChange = 0;
+            }
+          }
+        }
+        
         return {
           SymbolToken: token.SymbolToken?.toString(),
           SymbolName: token.SymbolName,
@@ -411,8 +473,8 @@ const MarketWatch = () => {
           sell: parseFloat(token.sell || 0),
           ltp: ltp,
           ltpUSD: ltpUSD,
-          chg: parseFloat(token.chg || 0),
-          chgUSD: parseFloat(token.chgUSD || 0),
+          chg: calculatedChange,
+          chgUSD: calculatedChangeUSD,
           high: parseFloat(token.high || 0),
           low: parseFloat(token.low || 0),
           open: parseFloat(token.opn || token.open || 0),
@@ -1214,44 +1276,40 @@ const MarketWatch = () => {
                 const exchangeType = symbol.ExchangeType || activeTab;
                 const symbolName = symbol.SymbolName || '';
                 const ltpPrice = parseFloat(symbol.ltpUSD || symbol.ltp || 0);
-                const chgPrice = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : symbol.chg || 0);
+                const chgPercent = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : symbol.chg || 0); // Now a percentage value
                 const highPrice = parseFloat(symbol.high || 0);
                 const lowPrice = parseFloat(symbol.low || 0);
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.closeUSD || symbol.close || 0);
                 
-                // Validate change value - very strict validation
-                const absChg = Math.abs(chgPrice);
-                // Must have valid close price to calculate percentage properly
-                const hasValidClose = closePrice > 0 && ltpPrice > 0;
-                const isReasonableAbsolute = absChg < 50; // USD change shouldn't exceed 50
-                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
-                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                // Validate change percentage - chgPercent is already a percentage (e.g., 2.5 means 2.5%)
+                const absChgPercent = Math.abs(chgPercent);
+                const hasValidData = closePrice > 0 && ltpPrice > 0;
+                const isReasonablePercent = absChgPercent <= 20; // Change should be within ±20%
+                const isReasonableChange = hasValidData && isReasonablePercent && chgPercent !== 0;
                 
                 ltpDisplay = ltpPrice > 0 ? formatFXPrice(ltpPrice, exchangeType, symbolName) : '-';
-                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + formatFXPrice(chgPrice, exchangeType, symbolName) : '-';
+                chgDisplay = isReasonableChange ? (chgPercent > 0 ? '+' : '') + chgPercent.toFixed(2) + '%' : '-';
                 highDisplay = highPrice > 0 ? formatFXPrice(highPrice, exchangeType, symbolName) : '-';
                 lowDisplay = lowPrice > 0 ? formatFXPrice(lowPrice, exchangeType, symbolName) : '-';
                 openDisplay = openPrice > 0 ? formatFXPrice(openPrice, exchangeType, symbolName) : '-';
                 closeDisplay = closePrice > 0 ? formatFXPrice(closePrice, exchangeType, symbolName) : '-';
               } else {
                 const ltpPrice = parseFloat(symbol.ltp || 0);
-                const chgPrice = parseFloat(symbol.chg || 0);
+                const chgPercent = parseFloat(symbol.chg || 0); // Now a percentage value
                 const highPrice = parseFloat(symbol.high || 0);
                 const lowPrice = parseFloat(symbol.low || 0);
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.close || 0);
                 
-                // Validate change value - very strict validation
-                const absChg = Math.abs(chgPrice);
-                // Must have valid close price to calculate percentage properly
-                const hasValidClose = closePrice > 0 && ltpPrice > 0;
-                const isReasonableAbsolute = absChg < 500; // INR change shouldn't exceed 500
-                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
-                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                // Validate change percentage - chgPercent is already a percentage (e.g., 2.5 means 2.5%)
+                const absChgPercent = Math.abs(chgPercent);
+                const hasValidData = closePrice > 0 && ltpPrice > 0;
+                const isReasonablePercent = absChgPercent <= 20; // Change should be within ±20%
+                const isReasonableChange = hasValidData && isReasonablePercent && chgPercent !== 0;
                 
                 ltpDisplay = ltpPrice > 0 ? ltpPrice.toString() : '-';
-                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + chgPrice.toString() : '-';
+                chgDisplay = isReasonableChange ? (chgPercent > 0 ? '+' : '') + chgPercent.toFixed(2) + '%' : '-';
                 highDisplay = highPrice > 0 ? highPrice.toString() : '-';
                 lowDisplay = lowPrice > 0 ? lowPrice.toString() : '-';
                 openDisplay = openPrice > 0 ? openPrice.toString() : '-';
@@ -1679,44 +1737,40 @@ const MarketWatch = () => {
                 const exchangeType = symbol.ExchangeType || activeTab;
                 const symbolName = symbol.SymbolName || '';
                 const ltpPrice = parseFloat(symbol.ltpUSD || symbol.ltp || 0);
-                const chgPrice = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : symbol.chg || 0);
+                const chgPercent = parseFloat(symbol.chgUSD !== undefined ? symbol.chgUSD : symbol.chg || 0); // Now a percentage value
                 const highPrice = parseFloat(symbol.high || 0);
                 const lowPrice = parseFloat(symbol.low || 0);
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.closeUSD || symbol.close || 0);
                 
-                // Validate change value - very strict validation
-                const absChg = Math.abs(chgPrice);
-                // Must have valid close price to calculate percentage properly
-                const hasValidClose = closePrice > 0 && ltpPrice > 0;
-                const isReasonableAbsolute = absChg < 50; // USD change shouldn't exceed 50
-                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
-                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                // Validate change percentage - chgPercent is already a percentage (e.g., 2.5 means 2.5%)
+                const absChgPercent = Math.abs(chgPercent);
+                const hasValidData = closePrice > 0 && ltpPrice > 0;
+                const isReasonablePercent = absChgPercent <= 20; // Change should be within ±20%
+                const isReasonableChange = hasValidData && isReasonablePercent && chgPercent !== 0;
                 
                 ltpDisplay = ltpPrice > 0 ? formatFXPrice(ltpPrice, exchangeType, symbolName) : '-';
-                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + formatFXPrice(chgPrice, exchangeType, symbolName) : '-';
+                chgDisplay = isReasonableChange ? (chgPercent > 0 ? '+' : '') + chgPercent.toFixed(2) + '%' : '-';
                 highDisplay = highPrice > 0 ? formatFXPrice(highPrice, exchangeType, symbolName) : '-';
                 lowDisplay = lowPrice > 0 ? formatFXPrice(lowPrice, exchangeType, symbolName) : '-';
                 openDisplay = openPrice > 0 ? formatFXPrice(openPrice, exchangeType, symbolName) : '-';
                 closeDisplay = closePrice > 0 ? formatFXPrice(closePrice, exchangeType, symbolName) : '-';
               } else {
                 const ltpPrice = parseFloat(symbol.ltp || 0);
-                const chgPrice = parseFloat(symbol.chg || 0);
+                const chgPercent = parseFloat(symbol.chg || 0); // Now a percentage value
                 const highPrice = parseFloat(symbol.high || 0);
                 const lowPrice = parseFloat(symbol.low || 0);
                 const openPrice = parseFloat(symbol.open || 0);
                 const closePrice = parseFloat(symbol.close || 0);
                 
-                // Validate change value - very strict validation
-                const absChg = Math.abs(chgPrice);
-                // Must have valid close price to calculate percentage properly
-                const hasValidClose = closePrice > 0 && ltpPrice > 0;
-                const isReasonableAbsolute = absChg < 500; // INR change shouldn't exceed 500
-                const isReasonablePercent = hasValidClose ? (absChg / closePrice) < 0.1 : false; // <10% change from close
-                const isReasonableChange = hasValidClose && isReasonableAbsolute && isReasonablePercent;
+                // Validate change percentage - chgPercent is already a percentage (e.g., 2.5 means 2.5%)
+                const absChgPercent = Math.abs(chgPercent);
+                const hasValidData = closePrice > 0 && ltpPrice > 0;
+                const isReasonablePercent = absChgPercent <= 20; // Change should be within ±20%
+                const isReasonableChange = hasValidData && isReasonablePercent && chgPercent !== 0;
                 
                 ltpDisplay = ltpPrice > 0 ? ltpPrice.toString() : '-';
-                chgDisplay = (chgPrice !== 0 && isReasonableChange) ? (chgPrice > 0 ? '+' : '') + chgPrice.toString() : '-';
+                chgDisplay = isReasonableChange ? (chgPercent > 0 ? '+' : '') + chgPercent.toFixed(2) + '%' : '-';
                 highDisplay = highPrice > 0 ? highPrice.toString() : '-';
                 lowDisplay = lowPrice > 0 ? lowPrice.toString() : '-';
                 openDisplay = openPrice > 0 ? openPrice.toString() : '-';
